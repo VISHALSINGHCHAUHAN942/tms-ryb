@@ -1,0 +1,40 @@
+  <!-- <div class="right-side">
+      <mat-icon>home</mat-icon>
+      <mat-icon>analytics</mat-icon>
+      <mat-icon matBadge="15" matBadgeColor="warn">notifications</mat-icon>  
+      <mat-icon>settings</mat-icon>
+      <mat-icon>account_circles</mat-icon>
+  </div> -->
+
+ <mat-toolbar class="navbar">
+  <div class="left-side">
+    <a href="home.html">
+      <img src="../../../assets/img/favicon.ico" alt="Logo" class="logo" />
+    </a>
+    <span class="logo-text">SenseLive - TMS</span>
+  </div>
+
+  <div class="menu-icon" (click)="dashService.toggleMenu()">
+  	<button mat-mini-fab color="basic" aria-label="menu">
+    	<mat-icon>menu</mat-icon>
+	</button>
+  </div>
+
+  <div class="right-side" [class.show-menu]="dashService.showMenu">
+    <button mat-mini-fab color="basic" aria-label="home">
+      <mat-icon>home</mat-icon>
+    </button>
+    <button mat-mini-fab color="basic" aria-label="data_usage">
+      <mat-icon>analytics</mat-icon>
+    </button>
+    <button mat-mini-fab color="basic" aria-label="notifications">
+      <mat-icon matBadge="15" matBadgeColor="warn">notifications</mat-icon>
+    </button>
+    <button mat-mini-fab color="basic" aria-label="settings">
+      <mat-icon>settings</mat-icon>
+    </button>
+    <button mat-mini-fab color="basic" aria-label="account_circles">
+      <mat-icon>account_circles</mat-icon>
+    </button>
+  </div>
+</mat-toolbar>

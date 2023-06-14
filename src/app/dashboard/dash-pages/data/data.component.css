@@ -1,0 +1,54 @@
+.data-charts{
+	height: 38vh;
+	width: 100%;
+}
+
+.chart-container {
+  height: 35vh; /* Adjust the height of the chart container as needed */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#donutChart {
+  width: 100%; /* Adjust the width of the chart element as needed */
+  max-width: 100%; /* Set a maximum width to limit the chart size */
+  margin: 0 auto; /* Center the chart horizontally within the container */
+}
+
+.filter-button {
+  position: fixed;
+  bottom: 50px;
+  right: 25px;
+  background-color: #3F51B5;
+  color: whitesmoke;
+}
+
+
+@media(max-width:425px){
+	.data{
+		padding-top: 75px;
+		padding-bottom: 20px;
+	}
+}
+
+@media(min-width:425px) and (max-width:576px){
+	.data{
+		padding-top: 75px;
+		padding-bottom: 20px;
+	}
+}
+
+@media(min-width:576px) and (max-width:1024px){
+	.data{
+		padding-top: 75px;
+		padding-bottom: 20px;
+	}
+}
+
+@media(min-width:1024px) and (max-width:1440px){
+	.data{
+		padding-top: 75px;
+		padding-bottom: 20px;
+	}
+}

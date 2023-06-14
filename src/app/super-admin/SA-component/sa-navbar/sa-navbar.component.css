@@ -1,0 +1,56 @@
+.navbar {
+  background-color: #dc2a38; 
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  color: whitesmoke;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.logo {
+  width: auto;
+  height: 50px;
+}
+
+.logo-text{
+  font-size: 1.3rem;
+  margin-left: 10px;
+}
+
+.menu-item{
+  color: whitesmoke;
+}
+
+.right-side {
+  display: flex;
+  gap: 10px;
+}
+
+.menu-icon {
+  display: none;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .right-side {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 6px;
+    flex-direction: column;
+    color: whitesmoke;
+    padding: 10px;
+  }
+
+  .right-side.show-menu {
+    display: flex;
+  }
+
+  .menu-icon {
+    display: block;
+  }
+  .right-side button{
+    background-color: #dc2a38;
+  }
+}

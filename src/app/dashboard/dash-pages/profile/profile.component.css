@@ -1,0 +1,49 @@
+.title-card {
+  background-color: rgba(63, 81, 181, 0.5);
+  backdrop-filter: blur(5px);
+  height: 75%;
+  font-weight: 600;
+}
+
+
+.prs-card{
+	height: 70vh;
+	width: 100%;
+	background-color: rgba(63, 81, 181, 0.5);
+  	backdrop-filter: blur(5px);
+}
+
+.cmn-card{
+	height: 33.5vh;
+	width: 100%;
+	background-color: rgba(63, 81, 181, 0.5);
+  	backdrop-filter: blur(5px);
+}
+
+@media(max-width:425px){
+	.profile{
+		padding-top: 75px;
+		padding-bottom: 20px;
+	}
+}
+
+@media(min-width:425px) and (max-width:576px){
+	.profile{
+		padding-top: 75px;
+		padding-bottom: 20px;
+	}
+}
+
+@media(min-width:576px) and (max-width:1024px){
+	.profile{
+		padding-top: 75px;
+		padding-bottom: 20px;
+	}
+}
+
+@media(min-width:1024px) and (max-width:1440px){
+	.profile{
+		padding-top: 75px;
+		padding-bottom: 20px;
+	}
+}

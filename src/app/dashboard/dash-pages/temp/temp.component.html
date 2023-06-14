@@ -1,0 +1,67 @@
+<!-- <section class="cards container-fluid">
+  <div class="row">
+    <div class="col-lg-3 col-md-6 col-sm-12 mb-3" *ngFor="let device of devices">
+      <mat-card>
+        <mat-card-content>
+        	<div class="row">
+        		<div class="col-6">
+        			<div class="device-name">{{ device.name}}</div>
+        		</div>
+        		<div class="col-6 card-title-right">
+        			<div class="device-time">{{ device.time}}</div>
+        		</div>
+        	</div>
+        	<div class="row">
+        		<div class="col-6">
+        		</div>
+        		<div class="col-6">
+        		</div>
+        	</div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</section>
+ -->
+ <section class="cards container-fluid">
+  <div class="row">
+    <div class="col-lg-4 col-md-6 col-sm-12 mb-3" *ngFor="let device of devices">
+      <div class="row">
+        <div class="col-10">
+          <mat-card>
+            <mat-card-content>
+              <div class="row">
+                <div class="col-8">
+                  <div class="device-name">{{ device.name}}</div>
+                </div>
+                <div class="col-4 card-title-right">
+                  <div class="device-time">{{ device.time}}</div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6 d-flex">
+                  <img src="../../../../assets/img/tm.gif" class="card-img">
+                  <div class="image-text">{{ device.temperature }} &deg;C</div>
+                </div>
+                <div class="col-6 d-flex">
+                  <img src="../../../../assets/img/hm.gif" class="card-img">
+                  <div class="image-text">{{ device.humidity }}%</div>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+        <div class="col-2">
+          <div class="d-flex flex-column align-items-left">
+            <button mat-mini-fab color="warn" class="mb-2 card-buttons">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-mini-fab color="" class="mb-2 card-buttons">
+              <mat-icon>notifications_active</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
