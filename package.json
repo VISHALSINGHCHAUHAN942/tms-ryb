@@ -23,6 +23,7 @@
     "@types/highcharts": "^7.0.0",
     "bootstrap": "^5.0.0",
     "highcharts": "^11.1.0",
+    "ngx-material-timepicker": "^13.0.3",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"

@@ -6,5 +6,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent {
-  user: string = "Kaushal";
+  fname: string = "Kaushal";
+  lname: string = "Pohekar";
+  companyEmail: string = "Sense@live.com";
+  personalEmail: string = "kaushal@senselive.com";
+  companyName: string = "Senselive Technologies";
+  location: string = "Nagpur";
+  designation: string = "CEO";
+  contactNo: string = "123456789";
+  hide = true;
 }

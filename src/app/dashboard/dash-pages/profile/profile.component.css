@@ -1,5 +1,5 @@
 .title-card {
-  background-color: rgba(63, 81, 181, 0.5);
+  border-left: 20px solid #3F51B5;
   backdrop-filter: blur(5px);
   height: 75%;
   font-weight: 600;
@@ -7,23 +7,88 @@
 
 
 .prs-card{
-	height: 70vh;
+	border-bottom: 20px solid #3F51B5;
+	height: auto;
 	width: 100%;
-	background-color: rgba(63, 81, 181, 0.5);
   	backdrop-filter: blur(5px);
 }
 
 .cmn-card{
-	height: 33.5vh;
+	height: auto;
 	width: 100%;
-	background-color: rgba(63, 81, 181, 0.5);
   	backdrop-filter: blur(5px);
+}
+.cmn-card-left{
+	border-left: 20px solid #3F51B5;
+}
+
+.cmn-card-right{
+	border-right: 20px solid #3F51B5;
+}
+
+.profile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.user-container {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: whitesmoke;
+  overflow: hidden;
+}
+
+.circle-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.form-field{
+	width: 100%;
+}
+
+.profile-title{
+	color: #3F51B5;
+	font-size: 20px;
+}
+
+.profile-info{
+	font-size: 16px;
+	font-weight: 550;
+	color: grey;
+}
+
+.minimized-button {
+	width: 30px;
+	height: 30px;
+	align-items: center;
+	justify-content: center;
+	padding: 0;
+}
+
+.minimized-button .mat-button-wrapper {
+	line-height: 30px;
+}
+
+.minimized-button .mat-icon {
+	font-size: 20px;
 }
 
 @media(max-width:425px){
 	.profile{
 		padding-top: 75px;
 		padding-bottom: 20px;
+	}
+	.title-card-head{
+		font-size: 13px;
+	}
+	.user-container {
+	  width: 100px;
+	  height: 100px;
 	}
 }
 
@@ -32,6 +97,13 @@
 		padding-top: 75px;
 		padding-bottom: 20px;
 	}
+	.title-card-head{
+		font-size: 15px;
+	}
+	.user-container {
+	  width: 125px;
+	  height: 125px;
+	}
 }
 
 @media(min-width:576px) and (max-width:1024px){
@@ -39,11 +111,17 @@
 		padding-top: 75px;
 		padding-bottom: 20px;
 	}
+	.title-card-head{
+		font-size: 15px;
+	}
 }
 
 @media(min-width:1024px) and (max-width:1440px){
 	.profile{
 		padding-top: 75px;
 		padding-bottom: 20px;
+	}
+	.title-card-head{
+		font-size: 15px;
 	}
 }

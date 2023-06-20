@@ -13,4 +13,10 @@ export class NavbarComponent {
   public toggleMenu() {
     this.dashService.toggleMenu();
   }
+
+  /*public notifications: string[] = [
+    'Notification 1',
+    'Notification 2',
+    'Notification 3'
+  ];*/
 }

@@ -1,29 +1,4 @@
-<!-- <section class="cards container-fluid">
-  <div class="row">
-    <div class="col-lg-3 col-md-6 col-sm-12 mb-3" *ngFor="let device of devices">
-      <mat-card>
-        <mat-card-content>
-        	<div class="row">
-        		<div class="col-6">
-        			<div class="device-name">{{ device.name}}</div>
-        		</div>
-        		<div class="col-6 card-title-right">
-        			<div class="device-time">{{ device.time}}</div>
-        		</div>
-        	</div>
-        	<div class="row">
-        		<div class="col-6">
-        		</div>
-        		<div class="col-6">
-        		</div>
-        	</div>
-        </mat-card-content>
-      </mat-card>
-    </div>
-  </div>
-</section>
- -->
- <section class="cards container-fluid">
+<section class="cards container-fluid">
   <div class="row">
     <div class="col-lg-4 col-md-6 col-sm-12 mb-3" *ngFor="let device of devices">
       <div class="row">
@@ -53,10 +28,10 @@
         </div>
         <div class="col-2">
           <div class="d-flex flex-column align-items-left">
-            <button mat-mini-fab color="warn" class="mb-2 card-buttons">
+            <button mat-mini-fab color="warn" class="mb-2 card-buttons" (click)="openEditDeviceDialog(device)">
               <mat-icon>edit</mat-icon>
             </button>
-            <button mat-mini-fab color="" class="mb-2 card-buttons">
+            <button mat-mini-fab color="" class="mb-2 card-buttons" (click)="openTriggerDeviceDialog(device)">
               <mat-icon>notifications_active</mat-icon>
             </button>
           </div>

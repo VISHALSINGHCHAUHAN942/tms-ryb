@@ -8,6 +8,8 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { TempComponent } from './dash-pages/temp/temp.component';
 import { DataComponent } from './dash-pages/data/data.component';
 import { ProfileComponent } from './dash-pages/profile/profile.component';
+import { EditDeviceComponent } from './dash-component/edit-device/edit-device.component';
+import { TriggerDeviceComponent } from './dash-component/trigger-device/trigger-device.component';
 
 import {MatIconModule} from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -17,6 +19,17 @@ import {MatCardModule} from '@angular/material/card'
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatDividerModule} from '@angular/material/divider';
+import {FormControl, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FilterComponent } from './dash-component/filter/filter.component';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+import {MatMenuModule} from '@angular/material/menu';
+import { MatListModule } from '@angular/material/list';
+
 
 @NgModule({
   declarations: [
@@ -25,7 +38,10 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     DashLayoutComponent,
     TempComponent,
     DataComponent,
-    ProfileComponent
+    ProfileComponent,
+    EditDeviceComponent,
+    TriggerDeviceComponent,
+    FilterComponent
   ],
   imports: [
     CommonModule,
@@ -37,7 +53,17 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatCardModule,
     MatSelectModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatDialogModule,
+    MatDividerModule,
+    ReactiveFormsModule,
+    MatRadioModule,
+    FormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    NgxMaterialTimepickerModule,
+    MatMenuModule,
+    MatListModule
   ]
 })
 export class DashboardModule { }

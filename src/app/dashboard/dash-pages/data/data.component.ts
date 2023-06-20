@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import * as Highcharts from 'highcharts';
 import HighchartsMore from 'highcharts/highcharts-more';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { FilterComponent } from '../../dash-component/filter/filter.component';
 HighchartsMore(Highcharts);
 
 @Component({
@@ -9,6 +11,8 @@ HighchartsMore(Highcharts);
   styleUrls: ['./data.component.css']
 })
 export class DataComponent implements OnInit {
+  constructor(public dialog: MatDialog) {}
+
 
   ngOnInit() {
     this.createDonutChart();
@@ -132,6 +136,19 @@ export class DataComponent implements OnInit {
     } as Highcharts.Options);
   }
 
+  openFilterDailog(): void{
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = '500px'; // Set the width of the dialog
+    dialogConfig.height = 'auto'; // Let the height adjust automatically
+    dialogConfig.maxWidth = '90vw'; // Set the maximum width as a percentage of the viewport width
 
+    const dialogRef = this.dialog.open(FilterComponent, dialogConfig);
+
+
+    dialogRef.afterClosed().subscribe(result => {
+      // Handle the updated device data here
+      console.log("Filter Modal is Open and closed", result);
+    });
+  }
 
 }
