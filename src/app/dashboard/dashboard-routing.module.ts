@@ -6,6 +6,7 @@ import { TempComponent } from './dash-pages/temp/temp.component';
 import { DataComponent } from './dash-pages/data/data.component';
 import { ProfileComponent } from './dash-pages/profile/profile.component';
 
+import { AuthGuard } from '../login/auth/auth.guard';
 const routes: Routes = [
 	{
 	  path: '', 

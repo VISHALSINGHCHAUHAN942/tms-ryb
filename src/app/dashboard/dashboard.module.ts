@@ -29,7 +29,12 @@ import {MatNativeDateModule} from '@angular/material/core';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import {MatMenuModule} from '@angular/material/menu';
 import { MatListModule } from '@angular/material/list';
+import { NotificationComponent } from './dash-pages/notification/notification.component';
+import { UserManageComponent } from './dash-pages/user-manage/user-manage.component';
 
+import { HttpClientModule } from '@angular/common/http';
+
+import { AuthService } from '../login/auth/auth.service';
 
 @NgModule({
   declarations: [
@@ -41,7 +46,9 @@ import { MatListModule } from '@angular/material/list';
     ProfileComponent,
     EditDeviceComponent,
     TriggerDeviceComponent,
-    FilterComponent
+    FilterComponent,
+    NotificationComponent,
+    UserManageComponent
   ],
   imports: [
     CommonModule,
@@ -63,7 +70,11 @@ import { MatListModule } from '@angular/material/list';
     MatNativeDateModule,
     NgxMaterialTimepickerModule,
     MatMenuModule,
-    MatListModule
-  ]
+    MatListModule,
+    HttpClientModule
+  ],
+  providers:[
+    AuthService
+    ]
 })
 export class DashboardModule { }

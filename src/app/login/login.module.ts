@@ -5,7 +5,8 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ForgotComponent } from './forgot/forgot.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
-
+import { RegVerifyComponent } from './login-component/reg-verify/reg-verify.component';
+import { MailSendComponent } from './login-component/mail-send/mail-send.component';
 
 import { LoginRoutingModule } from './login-routing.module';
 
@@ -17,6 +18,11 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
 import {MatStepperModule} from '@angular/material/stepper';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
+import { HttpClientModule } from '@angular/common/http';
+
+import{ AuthService } from '../login/auth/auth.service';
 
 
 
@@ -25,7 +31,9 @@ import {MatStepperModule} from '@angular/material/stepper';
     LoginComponent,
     RegisterComponent,
     ForgotComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    RegVerifyComponent,
+    MailSendComponent
   ],
   imports: [
     CommonModule,
@@ -39,7 +47,10 @@ import {MatStepperModule} from '@angular/material/stepper';
     MatIconModule,
     MatButtonModule,
     MatSelectModule,
-    MatStepperModule
-  ]
+    MatStepperModule,
+    HttpClientModule,
+    MatSnackBarModule
+  ],
+  providers: [AuthService]
 })
 export class LoginModule { }

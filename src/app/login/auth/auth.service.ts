@@ -1,9 +1,76 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  private userType!: string;
+  private token!: string;
 
-  constructor() { }
+  encryptUsers!: any;
+  decryptUsers!: any;
+
+  constructor(private http: HttpClient, private router: Router) {}
+
+  private readonly API_URL = 'http://localhost:4000';
+
+  login(loginData: any): Observable<any> {
+    return this.http.post(`${this.API_URL}/login`, loginData);
+  }
+
+  isLoggedIn(): boolean {
+    return this.getToken() !== null;
+  }
+
+  setUserType(userType: string) {
+    sessionStorage.setItem('userType', userType);
+  }
+
+  getUserType(): string | null {
+    return sessionStorage.getItem('userType');
+  }
+
+  setToken(token: string): void {
+    this.token = token;
+    sessionStorage.setItem('token', token); // Store the token in the session storage
+
+    // Fetch user details immediately after setting the token
+    this.getUserDetails();
+  }
+
+  getToken(): string | null {
+    return this.token || sessionStorage.getItem('token'); // Retrieve the token from the session storage
+  }
+
+  logout(): void {
+    sessionStorage.removeItem('token'); // Clear the token
+    this.isLoggedIn(); // Set the logged-in status to false
+    this.setUserType(''); // Clear the user type
+    this.router.navigate(['/login/login']); // Additional cleanup or redirect logic can be added here
+  }
+
+  getUserDetails(): void {
+    const token = this.getToken();
+    if (token && !this.userType) {
+      // Make a request to fetch user details using the token
+      this.http.get(`${this.API_URL}/user`, { headers: { Authorization: `Bearer ${token}` } })
+        .subscribe(
+          (user: any) => {
+            // Handle the response and set the user type
+            const userType = user.UserType; // Modify this according to the response structure
+            this.setUserType(userType);
+          },
+          (error: any) => {
+            console.error(error);
+          }
+        );
+    }
+  }
+
+  getAllUsers(): Observable<any> {
+    return this.http.get<any>(`${this.API_URL}/users`);
+  }
 }

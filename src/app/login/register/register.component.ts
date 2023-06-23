@@ -36,14 +36,4 @@ export class RegisterComponent {
       ? 'Password should be at least 8 characters long'
       : '';
   }
-
-  firstFormGroup = this._formBuilder.group({
-    firstCtrl: ['', Validators.required],
-  });
-  secondFormGroup = this._formBuilder.group({
-    secondCtrl: ['', Validators.required],
-  });
-  isLinear = true;
-
-  constructor(private _formBuilder: FormBuilder) {}
 }
