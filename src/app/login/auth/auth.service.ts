@@ -21,6 +21,30 @@ export class AuthService {
     return this.http.post(`${this.API_URL}/login`, loginData);
   }
 
+  register(registerData: any): Observable<any> {
+    return this.http.post(`${this.API_URL}/register`, registerData);
+  }
+
+  resendVerificationEmail(resendVerifyData: any): Observable<any> {
+    return this.http.post(`${this.API_URL}/re-verify-mail`, resendVerifyData);
+  }
+
+  VerifyUser(verifyUserToken: any): Observable<any> {
+    return this.http.post(`${this.API_URL}/verify`, verifyUserToken);
+  }
+
+  forgot(forgotData: any): Observable<any> {
+    return this.http.post(`${this.API_URL}/forgot`, forgotData);
+  }
+
+  resendForgot(resendForgotData: any): Observable<any> {
+    return this.http.post(`${this.API_URL}/resend-forgot`, resendForgotData);
+  }
+
+  resetPassword(resetData: any): Observable<any> {
+    return this.http.post(`${this.API_URL}/reset-password`, resetData);
+  }
+
   isLoggedIn(): boolean {
     return this.getToken() !== null;
   }

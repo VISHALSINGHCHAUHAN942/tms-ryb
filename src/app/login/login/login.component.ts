@@ -13,6 +13,7 @@ export class LoginComponent {
   hide = true;
   email = new FormControl('', [Validators.required, Validators.email]);
   password = new FormControl('', [Validators.required, Validators.minLength(8)]);
+  errorMessage = '';
 
   constructor(
     private authService: AuthService,
@@ -56,25 +57,28 @@ export class LoginComponent {
                 duration: 2000
               });
             } else {
-              setTimeout(checkUserType, 100); // Retry after a delay
+              setTimeout(checkUserType, 100);
             }
           };
-          checkUserType(); // Check for user type initially
+          checkUserType();
         },
         (error) => {
-          this.snackBar.open(error.error.message || 'Login failed. Please try again.', 'Dismiss', {
-            duration: 2000
-          });
+          this.snackBar.open(
+            error.error.message || 'Login failed. Please try again.',
+            'Dismiss',
+            { duration: 2000 }
+          );
+          this.errorMessage = error.error.message || '';
         }
       );
     }
   }
 
-  private redirectUser(userType: string) {
+  redirectUser(userType: string) {
     if (userType === 'Standard' || userType === 'Admin') {
       this.router.navigate(['/dash/temp']);
-    } else if (userType === 'superadmin') {
-      this.router.navigate(['/sa/home']);
+    } else if (userType === 'Super Admin') {
+      this.router.navigate(['/sa/users']);
     }
   }
 }

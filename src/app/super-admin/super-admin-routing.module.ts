@@ -5,17 +5,16 @@ import { SALayoutComponent } from './sa-layout/sa-layout.component';
 import { UserComponent } from './SA-pages/user/user.component';
 import { DeviceComponent } from './SA-pages/device/device.component';
 import { CompanyComponent } from './SA-pages/company/company.component';
+import { HomeComponent } from './SA-pages/home/home.component';
 
 const routes: Routes = [
-	{
-	  path: '', 
-	  component: SALayoutComponent,
-	  children: [
+  { path: 'home', component:HomeComponent},
 	    { path: 'users', component: UserComponent },
 	    { path: 'devices', component:DeviceComponent },
-	    { path: 'companies', component:CompanyComponent},	   ]
-	 },
+	    { path: 'companies', component:CompanyComponent},
+	    { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
+
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

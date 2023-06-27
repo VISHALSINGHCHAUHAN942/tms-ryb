@@ -10,6 +10,9 @@ import { DataComponent } from './dash-pages/data/data.component';
 import { ProfileComponent } from './dash-pages/profile/profile.component';
 import { EditDeviceComponent } from './dash-component/edit-device/edit-device.component';
 import { TriggerDeviceComponent } from './dash-component/trigger-device/trigger-device.component';
+import { NotificationComponent } from './dash-pages/notification/notification.component';
+import { UserManageComponent } from './dash-pages/user-manage/user-manage.component';
+import { SidebarComponent } from './dash-component/sidebar/sidebar.component';
 
 import {MatIconModule} from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -29,12 +32,13 @@ import {MatNativeDateModule} from '@angular/material/core';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import {MatMenuModule} from '@angular/material/menu';
 import { MatListModule } from '@angular/material/list';
-import { NotificationComponent } from './dash-pages/notification/notification.component';
-import { UserManageComponent } from './dash-pages/user-manage/user-manage.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+
 
 import { HttpClientModule } from '@angular/common/http';
 
 import { AuthService } from '../login/auth/auth.service';
+
 
 @NgModule({
   declarations: [
@@ -48,7 +52,8 @@ import { AuthService } from '../login/auth/auth.service';
     TriggerDeviceComponent,
     FilterComponent,
     NotificationComponent,
-    UserManageComponent
+    UserManageComponent,
+    SidebarComponent
   ],
   imports: [
     CommonModule,
@@ -71,7 +76,8 @@ import { AuthService } from '../login/auth/auth.service';
     NgxMaterialTimepickerModule,
     MatMenuModule,
     MatListModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSidenavModule
   ],
   providers:[
     AuthService

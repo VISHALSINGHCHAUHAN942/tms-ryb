@@ -7,6 +7,8 @@ import { ForgotComponent } from './forgot/forgot.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { RegVerifyComponent } from './login-component/reg-verify/reg-verify.component';
 import { MailSendComponent } from './login-component/mail-send/mail-send.component';
+import { VerifyUserComponent } from './login-component/verify-user/verify-user.component';
+import { SendVerifyComponent } from './login-component/send-verify/send-verify.component';
 
 import { LoginRoutingModule } from './login-routing.module';
 
@@ -23,6 +25,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HttpClientModule } from '@angular/common/http';
 
 import{ AuthService } from '../login/auth/auth.service';
+import { LoginLayoutComponent } from './login-layout/login-layout.component';
+
 
 
 
@@ -33,7 +37,10 @@ import{ AuthService } from '../login/auth/auth.service';
     ForgotComponent,
     ResetPasswordComponent,
     RegVerifyComponent,
-    MailSendComponent
+    MailSendComponent,
+    VerifyUserComponent,
+    SendVerifyComponent,
+    LoginLayoutComponent
   ],
   imports: [
     CommonModule,

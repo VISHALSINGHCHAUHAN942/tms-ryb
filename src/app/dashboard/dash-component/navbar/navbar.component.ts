@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { DashService } from '../../dash.service';
 import { AuthService } from '../../../login/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -9,7 +10,7 @@ import { AuthService } from '../../../login/auth/auth.service';
 })
 export class NavbarComponent {
 
-  constructor(public dashService: DashService, public authService:  AuthService) { }
+  constructor(public dashService: DashService, public authService:  AuthService, private router: Router) { }
 
   public toggleMenu() {
     this.dashService.toggleMenu();
@@ -19,6 +20,25 @@ export class NavbarComponent {
     this.authService.logout();
   }
 
+  home(){
+    this.router.navigate(['/dash/temp']);
+  }
+
+  data(){
+    this.router.navigate(['/dash/data']);
+  }
+
+  notifications(){
+
+  }
+
+  settings(){
+
+  }
+
+  profile(){
+    this.router.navigate(['/dash/profile']);
+  }
   
   /*public notifications: string[] = [
     'Notification 1',

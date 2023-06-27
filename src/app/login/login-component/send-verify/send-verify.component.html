@@ -8,18 +8,18 @@
         <div class="form-container">
           <div class="row">
           </div>
-          <h5 class="text-center">Forgot Password</h5>
+          <h5 class="text-center">Resend Verification!</h5>
           <mat-form-field>
             <mat-label>Username and Email</mat-label>
             <input matInput placeholder="pat@example.com" [formControl]="email" required>
             <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
           </mat-form-field>
 
-          <button mat-raised-button color="primary" (click)="submit()">Submit</button>
+          <button mat-raised-button color="primary">Submit</button>
           <div class="row">
             <div class="col">
               <div class="d-flex justify-content-center">
-                <a class="link" routerLink="/login/login"><h6>Remember password? Sign In</h6></a>
+                <a class="link" routerLink="/login/login"><h6>Verified? Sign In</h6></a>
               </div>
             </div>
           </div>
@@ -28,5 +28,3 @@
     </mat-card>
   </div>
 </div>
-
-

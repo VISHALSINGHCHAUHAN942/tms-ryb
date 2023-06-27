@@ -21,13 +21,13 @@
   </div>
 
   <div class="right-side" [class.show-menu]="dashService.showMenu">
-    <button mat-mini-fab color="basic" aria-label="home">
+    <button mat-mini-fab color="basic" aria-label="home" (click)="home()">
       <mat-icon>home</mat-icon>
     </button>
-    <button mat-mini-fab color="basic" aria-label="data_usage">
+    <button mat-mini-fab color="basic" aria-label="data_usage" (click)="data()">
       <mat-icon>analytics</mat-icon>
     </button>
-    <button mat-mini-fab color="basic" aria-label="notifications">
+    <button mat-mini-fab color="basic" aria-label="notifications" (click)="notifications()">
       <mat-icon matBadge="15" matBadgeColor="warn">notifications</mat-icon>
     </button>
 <!--         <button mat-mini-fab [matMenuTriggerFor]="notificationMenu" color="basic" aria-label="notifications">
@@ -40,15 +40,15 @@
         </mat-list-item>
       </mat-list>
     </mat-menu> -->
-    <button mat-mini-fab color="basic" aria-label="settings">
+    <button mat-mini-fab color="basic" aria-label="settings" (click)="settings()">
       <mat-icon>settings</mat-icon>
     </button>
 
-    <button mat-mini-fab color="basic" aria-label="account_circles">
+    <button mat-mini-fab color="basic" aria-label="account_circles" (click)="profile()">
       <mat-icon>account_circles</mat-icon>
     </button>
 
-    <button mat-mini-fab color="basic" aria-label="logout" (click)="logout();">
+    <button mat-mini-fab color="basic" aria-label="logout" (click)="logout()">
       <mat-icon>exit_to_app</mat-icon>
     </button>
   </div>
