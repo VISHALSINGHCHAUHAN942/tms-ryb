@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   private userType!: string;
+  private CompanyEmail!: string;
   private token!: string;
 
   encryptUsers!: any;
@@ -57,6 +58,14 @@ export class AuthService {
     return sessionStorage.getItem('userType');
   }
 
+  setCompanyEmail(CompanyEmail: string){
+    sessionStorage.setItem('CompanyEmail', CompanyEmail);
+  }
+
+  getCompanyEmail(): string | null {
+    return sessionStorage.getItem('CompanyEmail');
+  }
+
   setToken(token: string): void {
     this.token = token;
     sessionStorage.setItem('token', token); // Store the token in the session storage
@@ -86,6 +95,9 @@ export class AuthService {
             // Handle the response and set the user type
             const userType = user.UserType; // Modify this according to the response structure
             this.setUserType(userType);
+
+            const CompanyEmail = user.CompanyEmail;
+            this.setCompanyEmail(CompanyEmail);
           },
           (error: any) => {
             console.error(error);

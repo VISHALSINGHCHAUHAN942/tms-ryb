@@ -29,7 +29,6 @@ import { FilterComponent } from './dash-component/filter/filter.component';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
-import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import {MatMenuModule} from '@angular/material/menu';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -73,7 +72,6 @@ import { AuthService } from '../login/auth/auth.service';
     FormsModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    NgxMaterialTimepickerModule,
     MatMenuModule,
     MatListModule,
     HttpClientModule,

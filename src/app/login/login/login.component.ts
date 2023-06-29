@@ -14,6 +14,8 @@ export class LoginComponent {
   email = new FormControl('', [Validators.required, Validators.email]);
   password = new FormControl('', [Validators.required, Validators.minLength(8)]);
   errorMessage = '';
+  loading: boolean = false;
+  loadingMessage: string = "Sign In";
 
   constructor(
     private authService: AuthService,
@@ -40,6 +42,9 @@ export class LoginComponent {
 
   submit() {
     if (this.email.valid && this.password.valid) {
+      this.loading = true;
+      this.loadingMessage = "Signing in...";
+
       const loginData = {
         Username: this.email.value,
         Password: this.password.value
@@ -61,6 +66,8 @@ export class LoginComponent {
             }
           };
           checkUserType();
+          this.loading = false;
+          this.loadingMessage = "Sign In";
         },
         (error) => {
           this.snackBar.open(
@@ -69,6 +76,8 @@ export class LoginComponent {
             { duration: 2000 }
           );
           this.errorMessage = error.error.message || '';
+          this.loading = false;
+          this.loadingMessage = "Sign In";
         }
       );
     }
