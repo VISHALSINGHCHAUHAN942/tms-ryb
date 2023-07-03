@@ -1,1 +1,32 @@
-<p>notification works!</p>
+<section class="section container-fluid">
+  <div class="row mb-3">
+    <div class="col-lg-8 col-md-8 col-sm-12">
+    	<div class="notification-card-container">
+    		<mat-accordion>
+        <mat-expansion-panel *ngFor="let notification of notifications" class="mb-1">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{ notification.title }}
+            </mat-panel-title>
+            <mat-panel-description>
+              {{ notification.summary }}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <p>{{ notification.content }}</p>
+        </mat-expansion-panel>
+      </mat-accordion>
+    	</div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-12">
+      <div class="fixed-card-container">
+        <mat-card class="fixed-card">
+          <mat-card-content>
+            <div *ngFor="let log of logs">
+              <p>{{ log.message }}</p>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</section>

@@ -29,7 +29,7 @@ export class NavbarComponent {
   }
 
   notifications(){
-
+    this.router.navigate(['/dash/notification']);
   }
 
   settings(){

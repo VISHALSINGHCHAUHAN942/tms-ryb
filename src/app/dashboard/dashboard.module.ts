@@ -32,6 +32,7 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {MatMenuModule} from '@angular/material/menu';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 
 import { HttpClientModule } from '@angular/common/http';
@@ -75,7 +76,8 @@ import { AuthService } from '../login/auth/auth.service';
     MatMenuModule,
     MatListModule,
     HttpClientModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatExpansionModule
   ],
   providers:[
     AuthService

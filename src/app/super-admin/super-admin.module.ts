@@ -16,6 +16,8 @@ import { MatButtonModule } from '@angular/material/button';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
 
 
 @NgModule({
@@ -36,7 +38,9 @@ import {MatTableDataSource, MatTableModule} from '@angular/material/table';
     MatButtonModule,
     MatBadgeModule,
     MatTableModule, 
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatSidenavModule,
+    MatListModule
   ]
 })
 export class SuperAdminModule { }

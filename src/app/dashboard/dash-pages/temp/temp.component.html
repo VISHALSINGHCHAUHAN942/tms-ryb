@@ -1,4 +1,4 @@
-<!-- <section class="cards container-fluid">
+<section class="cards container-fluid">
   <div class="row">
     <div class="col-lg-4 col-md-6 col-sm-12 mb-3" *ngFor="let device of userDevices">
       <div class="row">
@@ -7,10 +7,10 @@
             <mat-card-content>
               <div class="row">
                 <div class="col-8">
-                  <div class="device-name">{{ device.DiviceId}}</div>
+                  <div class="device-name">{{ device.DeviceUID}}</div>
                 </div>
                 <div class="col-4 card-title-right">
-                  <div class="device-time">{{ device.time}}</div>
+                  <div class="device-time">{{ device.DeviceName}}</div>
                 </div>
               </div>
               <div class="row">
@@ -37,54 +37,6 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
- -->
-
- <section class="cards container-fluid">
-  <div class="row">
-    <div class="col-lg-4 col-md-6 col-sm-12 mb-3" *ngFor="let device of userDevices">
-      <div *ngFor="let data of receivedData">
-        <div *ngIf="data.deviceId === device.DiviceId">
-          <div class="row">
-            <div class="col-10">
-              <mat-card>
-                <mat-card-content>
-                  <div class="row">
-                    <div class="col-8">
-                      <div class="device-name">{{ device.DiviceId}}</div>
-                    </div>
-                    <div class="col-4 card-title-right">
-                      <div class="device-time">{{ data.time}}</div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-6 d-flex">
-                      <img src="../../../../assets/img/tm.gif" class="card-img">
-                      <div class="image-text">{{ data.temperature }} &deg;C</div>
-                    </div>
-                    <div class="col-6 d-flex">
-                      <img src="../../../../assets/img/hm.gif" class="card-img">
-                      <div class="image-text">{{ data.humidity }}%</div>
-                    </div>
-                  </div>
-                </mat-card-content>
-              </mat-card>
-            </div>
-            <div class="col-2">
-              <div class="d-flex flex-column align-items-left">
-                <button mat-mini-fab color="warn" class="mb-2 card-buttons" (click)="openEditDeviceDialog(device)">
-                  <mat-icon>edit</mat-icon>
-                </button>
-                <button mat-mini-fab color="" class="mb-2 card-buttons" (click)="openTriggerDeviceDialog(device)">
-                  <mat-icon>notifications_active</mat-icon>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>  
     </div>
   </div>
 </section>
