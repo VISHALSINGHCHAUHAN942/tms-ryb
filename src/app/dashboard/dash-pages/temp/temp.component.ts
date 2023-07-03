@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { EditDeviceComponent } from '../../dash-component/edit-device/edit-device.component';
 import { TriggerDeviceComponent } from '../../dash-component/trigger-device/trigger-device.component';
@@ -7,37 +7,49 @@ import { AuthService } from '../../../login/auth/auth.service';
 import { Subscription } from 'rxjs';
 import { MqttService, IMqttMessage } from 'ngx-mqtt';
 
-
 @Component({
   selector: 'app-temp',
   templateUrl: './temp.component.html',
   styleUrls: ['./temp.component.css']
 })
 export class TempComponent implements OnInit, OnDestroy {
-
   userDevices: any[] = [];
   CompanyEmail!: string | null; 
+  mqttSubscriptions: Subscription[] = [];
+  deviceData: any[] = [];
+
+  constructor(
+    public dialog: MatDialog,
+    private dashDataService: DashDataService,
+    private authService: AuthService,
+    private mqttService: MqttService
+  ) {}
 
 
-  constructor(public dialog: MatDialog, private DashDataService: DashDataService, private authService: AuthService, private mqttService: MqttService) {}
 
   ngOnInit() {
     this.getUserDevices();
   }
 
   ngOnDestroy() {
+    this.unsubscribeFromTopics();
+  }
+
+  getUserType(): string | null {
+    return this.authService.getUserType();
   }
 
   getUserDevices() {
     this.CompanyEmail = this.authService.getCompanyEmail();
     console.log(this.CompanyEmail);
     if (this.CompanyEmail) {
-      this.DashDataService.userDevices(this.CompanyEmail).subscribe(
+      this.dashDataService.userDevices(this.CompanyEmail).subscribe(
         (devices: any) => {
           this.userDevices = devices.devices;
+          this.subscribeToTopics();
         },
         (error) => {
-          console.log('error While fetching User Devices!');
+          console.log('Error while fetching user devices!');
         }
       );
     } 
@@ -45,32 +57,71 @@ export class TempComponent implements OnInit, OnDestroy {
 
   openEditDeviceDialog(device: any): void {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.width = '500px'; // Set the width of the dialog
-    dialogConfig.height = 'auto'; // Let the height adjust automatically
-    dialogConfig.maxWidth = '90vw'; // Set the maximum width as a percentage of the viewport width
-
+    dialogConfig.width = '500px';
+    dialogConfig.height = 'auto';
+    dialogConfig.maxWidth = '90vw';
     dialogConfig.data = { device };
-
     const dialogRef = this.dialog.open(EditDeviceComponent, dialogConfig);
-
-
-    dialogRef.afterClosed().subscribe(updatedDevice => {
-    });
+    dialogRef.afterClosed().subscribe(updatedDevice => {});
   }
 
   openTriggerDeviceDialog(device: any): void {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.width = '500px'; // Set the width of the dialog
-    dialogConfig.height = 'auto'; // Let the height adjust automatically
-    dialogConfig.maxWidth = '90vw'; // Set the maximum width as a percentage of the viewport width
-
+    dialogConfig.width = '500px';
+    dialogConfig.height = 'auto';
+    dialogConfig.maxWidth = '90vw';
     dialogConfig.data = { device };
-
     const dialogRef = this.dialog.open(TriggerDeviceComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(updatedDevice => {});
+  }
 
+  subscribeToTopics() {
+    this.userDevices.forEach(device => {
+      const topic = `sense/live/${device.DeviceUID}`;
+      const subscription = this.mqttService.observe(topic).subscribe((message: IMqttMessage) => {
+        const payload = message.payload.toString();
+        const deviceData = JSON.parse(payload);
 
-    dialogRef.afterClosed().subscribe(updatedDevice => {
+        const index = this.userDevices.findIndex(d => d.DeviceUID === device.DeviceUID);
+        if (index !== -1) {
+          this.deviceData[index] = deviceData;
+        }
 
+        /*console.log(`Received message on topic ${topic}: ${payload}`);*/
+        /*console.log(deviceData);*/
+      });
+
+      this.mqttSubscriptions.push(subscription);
     });
   }
+
+  unsubscribeFromTopics() {
+    this.mqttSubscriptions.forEach(subscription => {
+      subscription.unsubscribe();
+    });
+    this.mqttSubscriptions = [];
+  }
+
+  getIndex(deviceUid: string): number {
+    return this.userDevices.findIndex(device => device.DeviceUID === deviceUid);
+  }
+
+  isDeviceConnected(deviceUid: string): boolean {
+    const deviceData = this.deviceData[this.getIndex(deviceUid)];
+    if (deviceData) {
+      const timestamp = new Date(deviceData.Timestamp);
+      const currentTime = new Date();
+      const timeDifference = currentTime.getTime() - timestamp.getTime();
+      const minutesDifference = Math.floor(timeDifference / 1000 / 60); // Convert milliseconds to minutes
+
+      // Check if the data is within the last 5 minutes (300 seconds)
+      return minutesDifference <= 5;
+    }
+    return false; // Device data not available, consider it disconnected
+  }
+
 }
+
+
+
+

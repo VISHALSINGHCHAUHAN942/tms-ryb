@@ -20,7 +20,7 @@
     <div class="col-md-6 col-sm-8 mb-2">
       <mat-form-field class="from-field">
         <mat-label>Device name</mat-label>
-        <input matInput value="{{device.name}}" readonly>
+        <input matInput [(ngModel)]="device.DeviceUID" disabled>
       </mat-form-field>
     </div>
     <div class="col-md-6 col-sm-4 mb-2">

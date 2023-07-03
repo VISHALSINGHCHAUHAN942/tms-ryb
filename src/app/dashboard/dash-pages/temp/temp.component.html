@@ -2,31 +2,34 @@
   <div class="row">
     <div class="col-lg-4 col-md-6 col-sm-12 mb-3" *ngFor="let device of userDevices">
       <div class="row">
-        <div class="col-10">
-          <mat-card>
+        <div class="col-{{ getUserType() === 'Admin' ? '10' : '12' }}">
+          <mat-card [class.warn-overlay]="!isDeviceConnected(device.DeviceUID)">
             <mat-card-content>
               <div class="row">
                 <div class="col-8">
-                  <div class="device-name">{{ device.DeviceUID}}</div>
+                  <div class="device-name">{{ device.DeviceName}}</div>
                 </div>
                 <div class="col-4 card-title-right">
-                  <div class="device-time">{{ device.DeviceName}}</div>
+                  <div class="device-time">
+                    <div *ngIf="isDeviceConnected(device.DeviceUID)" class="live-tag">Live</div>
+                    <div *ngIf="!isDeviceConnected(device.DeviceUID)" class="disconnected-tag">Disconnect</div>
+                  </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-6 d-flex">
                   <img src="../../../../assets/img/tm.gif" class="card-img">
-                  <div class="image-text">{{ device.temperature }} &deg;C</div>
+                  <div class="image-text"> {{ deviceData[getIndex(device.DeviceUID)]?.Temperature }} &deg;C</div>
                 </div>
                 <div class="col-6 d-flex">
                   <img src="../../../../assets/img/hm.gif" class="card-img">
-                  <div class="image-text">{{ device.humidity }}%</div>
+                  <div class="image-text">{{ deviceData[getIndex(device.DeviceUID)]?.Humidity }}%</div>
                 </div>
               </div>
             </mat-card-content>
           </mat-card>
         </div>
-        <div class="col-2">
+        <div class="col-2" *ngIf="getUserType() === 'Admin'">
           <div class="d-flex flex-column align-items-left">
             <button mat-mini-fab color="warn" class="mb-2 card-buttons" (click)="openEditDeviceDialog(device)">
               <mat-icon>edit</mat-icon>
