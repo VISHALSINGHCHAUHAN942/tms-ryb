@@ -7,6 +7,7 @@ import { AuthService } from '../../../login/auth/auth.service';
 import { Subscription } from 'rxjs';
 import { MqttService, IMqttMessage } from 'ngx-mqtt';
 
+
 @Component({
   selector: 'app-temp',
   templateUrl: './temp.component.html',
@@ -15,23 +16,16 @@ import { MqttService, IMqttMessage } from 'ngx-mqtt';
 export class TempComponent implements OnInit, OnDestroy {
 
   userDevices: any[] = [];
-  deviceData: any[] = [];
-  mqttSubscriptions: Subscription[] = [];
-  CompanyEmail!: string | null;
+  CompanyEmail!: string | null; 
 
-  constructor(
-    public dialog: MatDialog,
-    private DashDataService: DashDataService,
-    private authService: AuthService,
-    private mqttService: MqttService
-  ) {}
+
+  constructor(public dialog: MatDialog, private DashDataService: DashDataService, private authService: AuthService, private mqttService: MqttService) {}
 
   ngOnInit() {
     this.getUserDevices();
   }
 
   ngOnDestroy() {
-    this.unsubscribeTopics();
   }
 
   getUserDevices() {
@@ -41,77 +35,42 @@ export class TempComponent implements OnInit, OnDestroy {
       this.DashDataService.userDevices(this.CompanyEmail).subscribe(
         (devices: any) => {
           this.userDevices = devices.devices;
-          this.subscribeTopics();
         },
         (error) => {
-          console.log('Error while fetching User Devices!');
+          console.log('error While fetching User Devices!');
         }
       );
-    }
-  }
-
-  subscribeTopics() {
-    this.unsubscribeTopics(); // Unsubscribe from existing topics
-
-    this.userDevices.forEach(device => {
-      const topic = `sense/live/tms/${device.DeviceUID}`;
-      const subscription = this.mqttService.observeRetained(topic).subscribe((message: IMqttMessage) => {
-        const payload = message.payload.toString();
-        const data = JSON.parse(payload);
-
-        // Update deviceData array with the received data
-        const deviceDataIndex = this.deviceData.findIndex(d => d.deviceUID === device.DeviceUID);
-        if (deviceDataIndex !== -1) {
-          this.deviceData[deviceDataIndex] = {
-            deviceUID: device.DeviceUID,
-            timestamp: data.timestamp,
-            temperature: data.temperature,
-            humidity: data.humidity
-          };
-        } else {
-          this.deviceData.push({
-            deviceUID: device.DeviceUID,
-            timestamp: data.timestamp,
-            temperature: data.temperature,
-            humidity: data.humidity
-          });
-        }
-      });
-
-      this.mqttSubscriptions.push(subscription);
-    });
-  }
-
-  unsubscribeTopics() {
-    this.mqttSubscriptions.forEach(subscription => subscription.unsubscribe());
-    this.mqttSubscriptions = [];
+    } 
   }
 
   openEditDeviceDialog(device: any): void {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.width = '500px';
-    dialogConfig.height = 'auto';
-    dialogConfig.maxWidth = '90vw';
+    dialogConfig.width = '500px'; // Set the width of the dialog
+    dialogConfig.height = 'auto'; // Let the height adjust automatically
+    dialogConfig.maxWidth = '90vw'; // Set the maximum width as a percentage of the viewport width
+
     dialogConfig.data = { device };
 
     const dialogRef = this.dialog.open(EditDeviceComponent, dialogConfig);
 
+
     dialogRef.afterClosed().subscribe(updatedDevice => {
-      // Handle the updated device if needed
     });
   }
 
   openTriggerDeviceDialog(device: any): void {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.width = '500px';
-    dialogConfig.height = 'auto';
-    dialogConfig.maxWidth = '90vw';
+    dialogConfig.width = '500px'; // Set the width of the dialog
+    dialogConfig.height = 'auto'; // Let the height adjust automatically
+    dialogConfig.maxWidth = '90vw'; // Set the maximum width as a percentage of the viewport width
+
     dialogConfig.data = { device };
 
     const dialogRef = this.dialog.open(TriggerDeviceComponent, dialogConfig);
 
+
     dialogRef.afterClosed().subscribe(updatedDevice => {
-      // Handle the triggered device if needed
+
     });
   }
 }
