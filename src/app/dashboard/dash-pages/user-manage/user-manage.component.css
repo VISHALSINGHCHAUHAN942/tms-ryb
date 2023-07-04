@@ -1,0 +1,25 @@
+.users{
+    padding-top: 13vh;
+    padding-bottom: 5vh;
+}
+
+mat-card-header {
+    max-height: 40px;
+}
+
+mat-card-content {
+    max-height: 200px; /* Set the maximum height for the card content */
+    overflow-y: auto;
+}
+
+.card-header{
+    border-radius: 5px;
+    background-color: white;
+}
+
+.card-footer{
+    border-bottom: 1.5px solid #3F51B5;
+    border-radius: 5px;
+    background-color: white;
+}
+

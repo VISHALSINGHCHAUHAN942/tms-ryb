@@ -20,7 +20,8 @@ export class ForgotComponent {
 
   email = new FormControl('', [Validators.required, Validators.email]);
   errorMessage = '';
-  
+  loading:boolean = false;
+  loadingMessage: string  = "Submit";
   getErrorMessage() {
     if (this.email.hasError('required')) {
       return 'Email is required';
@@ -31,6 +32,8 @@ export class ForgotComponent {
 
   submit(){
     if (this.email.valid) {
+      this.loading = true;
+      this.loadingMessage = "Submitting...";
       const forgotData = {
         personalEmail: this.email.value,
       };
@@ -49,6 +52,8 @@ export class ForgotComponent {
             { duration: 2000 }
           );
           this.errorMessage = error.error.message || '';
+          this.loading = false;
+          this.loadingMessage = "Submit";
         }
       );
     }

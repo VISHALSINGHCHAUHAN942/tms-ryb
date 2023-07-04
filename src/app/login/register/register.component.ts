@@ -25,6 +25,8 @@ export class RegisterComponent {
   personalEmail = new FormControl('', [Validators.required, Validators.email]);
   confirmPassword = new FormControl('', [Validators.required, Validators.minLength(8)]);
   password = new FormControl('', [Validators.required, Validators.minLength(8)]);
+  loading: boolean = false;
+  loadingMessage: string = "Sign Up";
 
   constructor(
     private authService: AuthService,
@@ -73,6 +75,9 @@ export class RegisterComponent {
     if (this.companyName.valid && this.companyEmail.valid && this.contact.valid 
       && this.location.valid && this.firstName.valid && this.lastName.valid 
       && this.personalEmail.valid && this.designation.valid && this.password.valid && this.confirmPassword.valid) {
+      this.loading = true;
+      this.loadingMessage = "Signing Up...";
+      
       const registerData = {
         companyName: this.companyName.value, 
         companyEmail: this.companyEmail.value,
@@ -100,6 +105,8 @@ export class RegisterComponent {
             { duration: 2000 }
           );
           this.errorMessage = error.error.message || '';
+          this.loading = false;
+          this.loadingMessage = "Sign Up";
         }
       );
     }

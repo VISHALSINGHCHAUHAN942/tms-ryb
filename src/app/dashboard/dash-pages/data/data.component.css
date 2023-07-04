@@ -1,3 +1,8 @@
+.data{
+	padding-top: 13vh;
+	padding-bottom: 5vh;
+}
+
 .data-charts{
 	height: 38vh;
 	width: 100%;
@@ -46,9 +51,9 @@
 	}
 }
 
-@media(min-width:1024px) and (max-width:1440px){
+/*@media(min-width:1024px) and (max-width:1440px){
 	.data{
 		padding-top: 75px;
 		padding-bottom: 20px;
 	}
-}
+}*/

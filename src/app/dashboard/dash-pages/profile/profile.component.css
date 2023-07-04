@@ -26,11 +26,9 @@
 	border-right: 20px solid #3F51B5;
 }
 
-.profile-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
+.profile{
+  padding-top: 13vh;
+  padding-bottom: 5vh;
 }
 
 .user-container {

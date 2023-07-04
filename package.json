@@ -27,7 +27,7 @@
     "highcharts": "^11.1.0",
     "mqtt": "^4.3.7",
     "ngx-material-timepicker": "^13.0.3",
-    "ngx-mqtt": "^16.0.0",
+    "ngx-mqtt": "^16.1.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "url": "^0.11.1",

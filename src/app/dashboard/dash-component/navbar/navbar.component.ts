@@ -33,7 +33,7 @@ export class NavbarComponent {
   }
 
   settings(){
-
+    this.router.navigate(['/dash/users']);
   }
 
   profile(){
