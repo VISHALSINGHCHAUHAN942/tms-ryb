@@ -10,11 +10,16 @@ export class DashDataService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  private readonly API_URL = 'http://localhost:4000';
+  private readonly API_URL = 'http://ec2-43-204-32-198.ap-south-1.compute.amazonaws.com:3000';
 
   userDevices(CompanyEmail: string): Observable<any> {
     return this.http.get(`${this.API_URL}/userdevices/${CompanyEmail}`);
   }
+  
+  editDevice(DeviceUID: string, DeviceData:any):Observable<any> {
+    return this.http.post(`${this.API_URL}/editDevice/${DeviceUID}`, DeviceData)
+  }
+
 
 
 }
