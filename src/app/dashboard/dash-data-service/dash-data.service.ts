@@ -20,6 +20,9 @@ export class DashDataService {
     return this.http.post(`${this.API_URL}/editDevice/${DeviceUID}`, DeviceData)
   }
 
+  fetchTriggerAll(CompanyEmail: string):Observable<any> {
+    return this.http.get(`${this.API_URL}/user-devices-trigger/${CompanyEmail}`);
+  }
 
 
 }

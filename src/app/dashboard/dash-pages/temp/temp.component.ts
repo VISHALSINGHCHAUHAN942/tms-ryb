@@ -17,6 +17,7 @@ export class TempComponent implements OnInit, OnDestroy {
   CompanyEmail!: string | null; 
   mqttSubscriptions: Subscription[] = [];
   deviceData: any[] = [];
+  userDevicesTrigger: any[] = [];
 
   constructor(
     public dialog: MatDialog,
@@ -29,6 +30,7 @@ export class TempComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getUserDevices();
+    this.getUserDevicesTrigger();
   }
 
   ngOnDestroy() {
@@ -41,12 +43,25 @@ export class TempComponent implements OnInit, OnDestroy {
 
   getUserDevices() {
     this.CompanyEmail = this.authService.getCompanyEmail();
-    console.log(this.CompanyEmail);
     if (this.CompanyEmail) {
       this.dashDataService.userDevices(this.CompanyEmail).subscribe(
         (devices: any) => {
           this.userDevices = devices.devices;
           this.subscribeToTopics();
+        },
+        (error) => {
+          console.log('Error while fetching user devices!');
+        }
+      );
+    } 
+  }
+
+  getUserDevicesTrigger() {
+    this.CompanyEmail = this.authService.getCompanyEmail();
+     if (this.CompanyEmail) {
+      this.dashDataService.fetchTriggerAll(this.CompanyEmail).subscribe(
+        (triggers: any) => {
+          this.userDevicesTrigger = triggers.triggers;
         },
         (error) => {
           console.log('Error while fetching user devices!');
@@ -118,6 +133,21 @@ export class TempComponent implements OnInit, OnDestroy {
       return minutesDifference <= 5;
     }
     return false; // Device data not available, consider it disconnected
+  }
+
+  isDeviceHeated(deviceUid: string): boolean {
+    const deviceTrigger = this.deviceData[this.getIndex(deviceUid)];
+    if (deviceTrigger) {
+      const trigger = this.userDevicesTrigger.find(trigger => trigger.DeviceUID === deviceUid);
+      if (trigger && deviceTrigger.Temperature) {
+        const triggerValue = trigger.TriggerValue;
+        const temperature = deviceTrigger.Temperature;
+        const isHeated = temperature > triggerValue;
+        console.log('Is Heated:', isHeated);
+        return isHeated;
+      }
+    }
+    return false; // Device or trigger not found, or missing temperature value
   }
 
 }
