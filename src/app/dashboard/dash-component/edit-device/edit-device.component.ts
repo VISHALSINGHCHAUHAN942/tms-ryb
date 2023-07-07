@@ -1,6 +1,10 @@
 import { Component, Inject, HostListener } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {FormControl, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { DashDataService } from '../../dash-data-service/dash-data.service';
+import { AuthService } from '../../../login/auth/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-edit-device',
@@ -9,8 +13,9 @@ import {FormControl, Validators, FormsModule, ReactiveFormsModule} from '@angula
 })
 export class EditDeviceComponent {
   device: any;
-  deviceName = new FormControl('', [Validators.required]);
-  location = new FormControl('', [Validators.required]);
+  DeviceName = new FormControl('', [Validators.required]);
+  DeviceLocation = new FormControl('', [Validators.required]);
+  deviceId!: string; 
 
   @HostListener('window:resize')
   onWindowResize() {
@@ -28,6 +33,9 @@ export class EditDeviceComponent {
   }
 
   constructor(
+    private DashDataService: DashDataService,
+    private authService: AuthService,
+    public snackBar: MatSnackBar,
     public dialogRef: MatDialogRef<EditDeviceComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ){
@@ -43,11 +51,28 @@ export class EditDeviceComponent {
   }
 
   onSaveClick(): void {
-    this.dialogRef.close();
+    this.deviceId = this.device.DeviceUID;
+    console.log(this.deviceId);
+    const deviceData ={
+      DeviceLocation : this.DeviceLocation.value,
+      DeviceName : this.DeviceName.value
+    }
+    this.DashDataService.editDevice(this.deviceId, deviceData).subscribe(
+      () => {
+        this.snackBar.open('Device Details Updated successfully!', 'Dismiss', {
+            duration: 2000
+        });
+        this.dialogRef.close();
+      },
+      (error)=>{
+        this.snackBar.open('Failed to update Device!', 'Dismiss', {
+            duration: 2000
+          });
+      });
   }
 
   getDevicenameError() {
-    if (this.deviceName.hasError('required')) {
+    if (this.DeviceName.hasError('required')) {
       return 'Name is required';
     }
 
@@ -55,7 +80,7 @@ export class EditDeviceComponent {
   }
 
   getLocationError() {
-    if (this.location.hasError('required')) {
+    if (this.DeviceLocation.hasError('required')) {
       return 'Location is required';
     }
 

@@ -1,6 +1,9 @@
 import { Component, Inject, HostListener } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import {FormControl, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
+import { DashDataService } from '../../dash-data-service/dash-data.service';
+import { AuthService } from '../../../login/auth/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-filter',
@@ -9,15 +12,45 @@ import {FormControl, Validators, FormsModule, ReactiveFormsModule} from '@angula
 })
 export class FilterComponent {
 
+  CompanyEmail!: string | null;
   selectedDevice!: FormControl;
-  deviceOptions: string[] = ['Option 1', 'Option 2', 'Option 3'];
+   selectedDeviceInterval!: FormControl;
+  deviceOptions: any[] = [];
   selectedRadioButton: string = 'Last';
+  startDate!: Date;
+  endDate!: Date;
 
   @HostListener('window:resize')
   onWindowResize() {
     this.adjustDialogWidth();
   }
-  private adjustDialogWidth() {
+
+  constructor(
+    private DashDataService: DashDataService,
+    private authService: AuthService,
+    public snackBar: MatSnackBar,
+    public dialogRef: MatDialogRef<FilterComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {}
+
+  ngOnInit() {
+    this.adjustDialogWidth();
+    this.selectedDevice = new FormControl(this.deviceOptions.length > 0 ? this.deviceOptions[0].DeviceUID : '', [Validators.required]);
+    this.selectedDeviceInterval = new FormControl('1hour');
+    this.getUserDevices();
+
+    // Set end date as current date
+    this.endDate = new Date();
+
+    // Set start date as one day before the current date
+    const oneDay = 24 * 60 * 60 * 1000; // One day in milliseconds
+    const currentDate = new Date();
+    currentDate.setTime(currentDate.getTime() - oneDay);
+    this.startDate = currentDate;
+  }
+
+
+  adjustDialogWidth() {
     const screenWidth = window.innerWidth;
     if (screenWidth <= 600) {
       this.dialogRef.updateSize('90%', '');
@@ -28,15 +61,21 @@ export class FilterComponent {
     }
   }
 
-  constructor(
-    public dialogRef: MatDialogRef<FilterComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
-  ){
-  }
-
-  ngOnInit() {
-    this.adjustDialogWidth();
-    this.selectedDevice = new FormControl(this.deviceOptions[0], [Validators.required]);
+  getUserDevices() {
+    this.CompanyEmail = this.authService.getCompanyEmail();
+    if (this.CompanyEmail) {
+      this.DashDataService.userDevices(this.CompanyEmail).subscribe(
+        (devices: any) => {
+          this.deviceOptions = devices.devices;
+          if (this.deviceOptions.length > 0) {
+            this.selectedDevice.setValue(this.deviceOptions[0].DeviceUID);
+          }
+        },
+        (error) => {
+          console.log('Error while fetching user devices!');
+        }
+      );
+    }
   }
 
   onNoClick(): void {
@@ -44,7 +83,44 @@ export class FilterComponent {
   }
 
   onSaveClick(): void {
-    this.dialogRef.close();
-  }
+    if (this.selectedRadioButton === 'Last') {
+      if(this.selectedDevice.value){
+        this.DashDataService.dataLast(this.selectedDevice.value, this.selectedDeviceInterval.value)
+        .subscribe(
+          (data: any) => {
+            this.dialogRef.close({
+              data: data
+            });
+          },
+          (error) => {
+            console.log('Error while fetching last data!');
+          }
+        );
+      }
+      else{
+        console.log("No Device has been selected ");
+      }
+    } else if (this.selectedRadioButton === 'timePeriod') {
+      if (this.selectedDevice.value) {
+        // Convert startDate and endDate to the desired format
+        const formattedStartDate = this.startDate.toISOString().split('T')[0];
+        const formattedEndDate = this.endDate.toISOString().split('T')[0];
 
-} 
+        this.DashDataService.DataByCustomDate(this.selectedDevice.value, formattedStartDate, formattedEndDate)
+          .subscribe(
+            (data: any) => {
+              this.dialogRef.close({
+                data: data
+              });
+            },
+            (error) => {
+              console.log('Error while fetching last data!');
+            }
+          );
+      }
+      else{
+        console.log("No Device has been selected ");
+      }
+    }
+  }
+}

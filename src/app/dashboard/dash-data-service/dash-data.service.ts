@@ -16,13 +16,25 @@ export class DashDataService {
     return this.http.get(`${this.API_URL}/userdevices/${CompanyEmail}`);
   }
   
-  editDevice(DeviceUID: string, DeviceData:any):Observable<any> {
-    return this.http.post(`${this.API_URL}/editDevice/${DeviceUID}`, DeviceData)
+  editDevice(deviceId: string, DeviceData:any):Observable<any> {
+    return this.http.put(`${this.API_URL}/editDevice/${deviceId}`, DeviceData)
   }
 
   fetchTriggerAll(CompanyEmail: string):Observable<any> {
     return this.http.get(`${this.API_URL}/user-devices-trigger/${CompanyEmail}`);
   }
 
+  updateDeviceTrigger(deviceId: string, triggerData:any): Observable<any> {
+    return this.http.put(`${this.API_URL}/editDeviceTrigger/${deviceId}`, triggerData);
+  }
+
+  dataLast(deviceId:string, interval: any): Observable<any> {
+    return this.http.get(`${this.API_URL}/data/${deviceId}/intervals?interval=${interval}`);
+  }
+
+  DataByCustomDate(deviceId: string, startDate: any, endDate: any): Observable<any> {
+  const params = { start: startDate, end: endDate };
+  return this.http.get(`${this.API_URL}/data/${deviceId}`, { params });
+}
 
 }

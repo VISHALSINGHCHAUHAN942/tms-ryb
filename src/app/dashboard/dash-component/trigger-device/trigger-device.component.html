@@ -26,8 +26,8 @@
     <div class="col-md-6 col-sm-4 mb-2">
       <mat-form-field class="from-field">
         <mat-label>Threshold</mat-label>
-        <input matInput placeholder="35" [formControl]="threshold" required>
-        <mat-error *ngIf="threshold.invalid">{{getThresholdErrorMessage()}}</mat-error>
+        <input matInput placeholder="35" [formControl]="TriggerValue" required>
+        <mat-error *ngIf="TriggerValue.invalid">{{getThresholdErrorMessage()}}</mat-error>
       </mat-form-field>
     </div>
     <div class="col-md-6 justify-content-end d-flex mb-2">

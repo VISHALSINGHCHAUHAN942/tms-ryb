@@ -34,6 +34,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 import { HttpClientModule } from '@angular/common/http';
@@ -79,7 +80,8 @@ import { AuthService } from '../login/auth/auth.service';
     HttpClientModule,
     MatSidenavModule,
     MatExpansionModule,
-    MatTableModule
+    MatTableModule,
+    MatSnackBarModule
   ],
   providers:[
     AuthService

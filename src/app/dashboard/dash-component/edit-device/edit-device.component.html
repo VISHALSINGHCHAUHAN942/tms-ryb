@@ -8,8 +8,8 @@
     <div class="col-md-12 mb-2">
       <mat-form-field class="from-field">
         <mat-label>Device name</mat-label>
-        <input matInput [(ngModel)]="device.DeviceName" [formControl]="deviceName" required>
-        <mat-error *ngIf="deviceName.invalid">{{getDevicenameError()}}</mat-error>
+        <input matInput [(ngModel)]="device.DeviceName" [formControl]="DeviceName" required>
+        <mat-error *ngIf="DeviceName.invalid">{{getDevicenameError()}}</mat-error>
       </mat-form-field>
     </div>
     <div class="col-md-12 mb-2">
@@ -27,8 +27,8 @@
     <div class="col-md-12 mb-2">
       <mat-form-field class="from-field">
         <mat-label>Location</mat-label>
-        <input matInput [(ngModel)]="device.DeviceLocation" [formControl]="location" required>
-        <mat-error *ngIf="location.invalid">{{getLocationError()}}</mat-error>
+        <input matInput [(ngModel)]="device.DeviceLocation" [formControl]="DeviceLocation" required>
+        <mat-error *ngIf="DeviceLocation.invalid">{{getLocationError()}}</mat-error>
       </mat-form-field>
     </div>
     <div class="col-md-6 justify-content-end d-flex mb-2">

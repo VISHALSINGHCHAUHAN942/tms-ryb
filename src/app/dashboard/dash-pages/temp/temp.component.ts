@@ -91,6 +91,7 @@ export class TempComponent implements OnInit, OnDestroy {
   }
 
   subscribeToTopics() {
+    this.deviceData = [];
     this.userDevices.forEach(device => {
       const topic = `sense/live/${device.DeviceUID}`;
       const subscription = this.mqttService.observe(topic).subscribe((message: IMqttMessage) => {
@@ -101,9 +102,6 @@ export class TempComponent implements OnInit, OnDestroy {
         if (index !== -1) {
           this.deviceData[index] = deviceData;
         }
-
-        /*console.log(`Received message on topic ${topic}: ${payload}`);*/
-        /*console.log(deviceData);*/
       });
 
       this.mqttSubscriptions.push(subscription);
@@ -142,8 +140,7 @@ export class TempComponent implements OnInit, OnDestroy {
       if (trigger && deviceTrigger.Temperature) {
         const triggerValue = trigger.TriggerValue;
         const temperature = deviceTrigger.Temperature;
-        const isHeated = temperature > triggerValue;
-        console.log('Is Heated:', isHeated);
+        const isHeated = temperature > triggerValue;     
         return isHeated;
       }
     }
