@@ -3,6 +3,9 @@ import * as Highcharts from 'highcharts';
 import HighchartsMore from 'highcharts/highcharts-more';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { FilterComponent } from '../../dash-component/filter/filter.component';
+import { DashDataService } from '../../dash-data-service/dash-data.service';
+import { AuthService } from '../../../login/auth/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 HighchartsMore(Highcharts);
 
 @Component({
@@ -11,15 +14,51 @@ HighchartsMore(Highcharts);
   styleUrls: ['./data.component.css']
 })
 export class DataComponent implements OnInit {
-  constructor(public dialog: MatDialog) {}
+  constructor(
+    public dialog: MatDialog,
+    private DashDataService: DashDataService,
+    private authService: AuthService,
+    public snackBar: MatSnackBar
+  ) {}
+  
+  deviceOptions: any[] = [];
+  selectedDevice!: string ;
+  selectedDeviceInterval: any = '1hour';    
+  CompanyEmail!: string | null;
+  temperatureData: any[] = [];
+  humidityData: any[] = [];
+  timestampData: any[] = [];
 
 
   ngOnInit() {
+    const sessionData = sessionStorage.getItem('data');
+    if (sessionData) {
+      const jsonData = JSON.parse(sessionData);
+      console.log('Using session storage data:', jsonData);
+      this.processChartData(jsonData);
+    } else {
+      this.getUserDevices();
+    }
     this.createDonutChart();
     this.createDonutChart2();    
-    this.createChart();
-    this.createChart2();
+  }
 
+  getUserDevices() {
+    this.CompanyEmail = this.authService.getCompanyEmail();
+    if (this.CompanyEmail) {
+      this.DashDataService.userDevices(this.CompanyEmail).subscribe(
+        (devices: any) => {
+          this.deviceOptions = devices.devices;
+          if (this.deviceOptions.length > 0) {
+            this.selectedDevice = this.deviceOptions[0].DeviceUID;
+            this.fetchDefaultData();
+          }
+        },
+        (error) => {
+          console.log('Error while fetching user devices!');
+        }
+      );
+    }
   }
 
   createDonutChart() {
@@ -103,8 +142,8 @@ export class DataComponent implements OnInit {
         }
       },
       series: [{
-        name: 'Data',
-        data: [8, 10, 7, 15, 22, 25, 10, 21, 15, 11, 6, 3]
+        name: 'Temperature',
+        data: this.temperatureData
       }]
     } as Highcharts.Options);
   }
@@ -130,8 +169,8 @@ export class DataComponent implements OnInit {
         }
       },
       series: [{
-        name: 'Data',
-        data: [15, 7, 12, 18, 35, 30, 10]
+        name: 'Humitidy',
+        data: this.humidityData
       }]
     } as Highcharts.Options);
   }
@@ -146,9 +185,48 @@ export class DataComponent implements OnInit {
 
 
     dialogRef.afterClosed().subscribe(result => {
-      // Handle the updated device data here
-      console.log("Filter Modal is Open and closed", result);
+      if (result && result.data) {
+        console.log('Data received from filter modal:', result.data);
+        sessionStorage.setItem('data', JSON.stringify(result.data));
+        this.processChartData(result.data);
+      } else {
+        const sessionData = sessionStorage.getItem('data');
+        if (sessionData) {
+          const jsonData = JSON.parse(sessionData);
+          console.log('Using session storage data:', jsonData);
+          this.processChartData(jsonData);
+        } else {
+          console.log('No session storage data available');
+          this.fetchDefaultData();
+        }
+      }
     });
   }
 
+  fetchDefaultData() {
+    if(this.selectedDevice){
+      this.DashDataService.dataLast(this.selectedDevice, this.selectedDeviceInterval).subscribe(
+      (data: any) => {
+        sessionStorage.setItem('data', JSON.stringify(data));
+        this.processChartData(data);
+      },
+      (error) => {
+        console.log('Error while fetching last data!');
+      }
+    );
+    }
+    else{
+      console.log(" not defined");
+    }
+  }
+
+   processChartData(response: any) {
+    const data = response.data; // Access the 'data' property of the response object
+    this.temperatureData = data.map((entry: any) => [new Date(entry.TimeStamp).getTime(), entry.Temperature]);
+    this.humidityData = data.map((entry: any) => [new Date(entry.TimeStamp).getTime(), entry.Humidity]);
+    this.timestampData = data.map((entry: any) => new Date(entry.TimeStamp).getTime());
+
+    this.createChart();
+    this.createChart2();
+  }
 }
