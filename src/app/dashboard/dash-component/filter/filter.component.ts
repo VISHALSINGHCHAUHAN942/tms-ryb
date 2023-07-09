@@ -72,7 +72,7 @@ export class FilterComponent {
           }
         },
         (error) => {
-          console.log('Error while fetching user devices!');
+          console.log('Error whi le fetching user devices!');
         }
       );
     }
@@ -82,12 +82,23 @@ export class FilterComponent {
     this.dialogRef.close();
   }
 
-  onSaveClick(): void {
+  /*onSaveClick(): void {
     if (this.selectedRadioButton === 'Last') {
       if(this.selectedDevice.value){
         this.DashDataService.dataLast(this.selectedDevice.value, this.selectedDeviceInterval.value)
         .subscribe(
           (data: any) => {
+            this.dialogRef.close({
+              data: data
+            });
+          },
+          (error) => {
+            console.log('Error while fetching last data!');
+          }
+        );
+        this.DashDataService.dataLastStatus(this.selectedDevice.value, this.selectedDeviceInterval.value)
+        .subscribe(
+          (dataStatus: any) => {
             this.dialogRef.close({
               data: data
             });
@@ -117,10 +128,77 @@ export class FilterComponent {
               console.log('Error while fetching last data!');
             }
           );
+          this.DashDataService.DataByCustomDateStatus(this.selectedDevice.value, formattedStartDate, formattedEndDate)
+          .subscribe(
+            (dataStatus: any) => {
+              this.dialogRef.close({
+                data: data
+              });
+            },
+            (error) => {
+              console.log('Error while fetching last data!');
+            }
+          );
       }
       else{
         console.log("No Device has been selected ");
       }
     }
+  }*/
+  onSaveClick(): void {
+    if (this.selectedRadioButton === 'Last') {
+      if (this.selectedDevice.value) {
+        const device = this.selectedDevice.value;
+        const interval = this.selectedDeviceInterval.value;
+
+        this.DashDataService.dataLast(device, interval).subscribe(
+          (resultData: any) => {
+            this.DashDataService.dataLastStatus(device, interval).subscribe(
+              (resultDataStatus: any) => {
+                const data = resultData;
+                const dataStatus = resultDataStatus;
+                this.dialogRef.close({ data, dataStatus });
+              },
+              (error) => {
+                console.log('Error while fetching last data status!');
+              }
+            );
+          },
+          (error) => {
+            console.log('Error while fetching last data!');
+          }
+        );
+      } else {
+        console.log('No device has been selected.');
+      }
+    } else if (this.selectedRadioButton === 'timePeriod') {
+      if (this.selectedDevice.value) {
+        const device = this.selectedDevice.value;
+        const formattedStartDate = this.startDate.toISOString().split('T')[0];
+        const formattedEndDate = this.endDate.toISOString().split('T')[0];
+
+        this.DashDataService.DataByCustomDate(device, formattedStartDate, formattedEndDate).subscribe(
+          (resultData: any) => {
+            this.DashDataService.DataByCustomDateStatus(device, formattedStartDate, formattedEndDate).subscribe(
+              (resultDataStatus: any) => {
+                const data = resultData;
+                const dataStatus = resultDataStatus;
+                this.dialogRef.close({ data, dataStatus });
+              },
+              (error) => {
+                console.log('Error while fetching data status by custom date!');
+              }
+            );
+          },
+          (error) => {
+            console.log('Error while fetching data by custom date!');
+          }
+        );
+      } else {
+        console.log('No device has been selected.');
+      }
+    }
   }
+
+
 }

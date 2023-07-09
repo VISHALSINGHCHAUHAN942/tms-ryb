@@ -33,8 +33,18 @@ export class DashDataService {
   }
 
   DataByCustomDate(deviceId: string, startDate: any, endDate: any): Observable<any> {
-  const params = { start: startDate, end: endDate };
-  return this.http.get(`${this.API_URL}/data/${deviceId}`, { params });
-}
+    const params = { start: startDate, end: endDate };
+    return this.http.get(`${this.API_URL}/data/${deviceId}`, { params });
+  }
+
+  dataLastStatus(deviceId:string, interval: any): Observable<any> {
+    return this.http.get(`${this.API_URL}/dataStatus/${deviceId}/intervals?interval=${interval}`);
+  }
+
+  DataByCustomDateStatus(deviceId: string, startDate: any, endDate: any): Observable<any> {
+    const params = { start: startDate, end: endDate };
+    return this.http.get(`${this.API_URL}/dataStatus/${deviceId}`, { params });
+  }
+
 
 }
