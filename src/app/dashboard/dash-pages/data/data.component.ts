@@ -205,7 +205,7 @@ export class DataComponent implements OnInit {
 
     Highcharts.chart('donutChart', options);
   }
-  
+
   createDonutChart2() {
     const options: Highcharts.Options = {
       chart: {
@@ -356,6 +356,7 @@ export class DataComponent implements OnInit {
         this.DashDataService.dataLastStatus(this.selectedDevice, this.selectedDeviceInterval).subscribe(
           (dataStatus: any) => {
             sessionStorage.setItem('dataStatus', JSON.stringify(dataStatus));
+            this.createDonutChart(dataStatus.dataStatus); 
           }
         );
       },

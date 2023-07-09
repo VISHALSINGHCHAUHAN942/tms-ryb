@@ -82,69 +82,6 @@ export class FilterComponent {
     this.dialogRef.close();
   }
 
-  /*onSaveClick(): void {
-    if (this.selectedRadioButton === 'Last') {
-      if(this.selectedDevice.value){
-        this.DashDataService.dataLast(this.selectedDevice.value, this.selectedDeviceInterval.value)
-        .subscribe(
-          (data: any) => {
-            this.dialogRef.close({
-              data: data
-            });
-          },
-          (error) => {
-            console.log('Error while fetching last data!');
-          }
-        );
-        this.DashDataService.dataLastStatus(this.selectedDevice.value, this.selectedDeviceInterval.value)
-        .subscribe(
-          (dataStatus: any) => {
-            this.dialogRef.close({
-              data: data
-            });
-          },
-          (error) => {
-            console.log('Error while fetching last data!');
-          }
-        );
-      }
-      else{
-        console.log("No Device has been selected ");
-      }
-    } else if (this.selectedRadioButton === 'timePeriod') {
-      if (this.selectedDevice.value) {
-        // Convert startDate and endDate to the desired format
-        const formattedStartDate = this.startDate.toISOString().split('T')[0];
-        const formattedEndDate = this.endDate.toISOString().split('T')[0];
-
-        this.DashDataService.DataByCustomDate(this.selectedDevice.value, formattedStartDate, formattedEndDate)
-          .subscribe(
-            (data: any) => {
-              this.dialogRef.close({
-                data: data
-              });
-            },
-            (error) => {
-              console.log('Error while fetching last data!');
-            }
-          );
-          this.DashDataService.DataByCustomDateStatus(this.selectedDevice.value, formattedStartDate, formattedEndDate)
-          .subscribe(
-            (dataStatus: any) => {
-              this.dialogRef.close({
-                data: data
-              });
-            },
-            (error) => {
-              console.log('Error while fetching last data!');
-            }
-          );
-      }
-      else{
-        console.log("No Device has been selected ");
-      }
-    }
-  }*/
   onSaveClick(): void {
     if (this.selectedRadioButton === 'Last') {
       if (this.selectedDevice.value) {
@@ -153,9 +90,9 @@ export class FilterComponent {
 
         this.DashDataService.dataLast(device, interval).subscribe(
           (resultData: any) => {
+            const data = resultData;
             this.DashDataService.dataLastStatus(device, interval).subscribe(
               (resultDataStatus: any) => {
-                const data = resultData;
                 const dataStatus = resultDataStatus;
                 this.dialogRef.close({ data, dataStatus });
               },
@@ -179,9 +116,9 @@ export class FilterComponent {
 
         this.DashDataService.DataByCustomDate(device, formattedStartDate, formattedEndDate).subscribe(
           (resultData: any) => {
+            const data = resultData;
             this.DashDataService.DataByCustomDateStatus(device, formattedStartDate, formattedEndDate).subscribe(
               (resultDataStatus: any) => {
-                const data = resultData;
                 const dataStatus = resultDataStatus;
                 this.dialogRef.close({ data, dataStatus });
               },
