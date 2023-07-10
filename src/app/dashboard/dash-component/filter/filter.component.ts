@@ -94,7 +94,7 @@ export class FilterComponent {
             this.DashDataService.dataLastStatus(device, interval).subscribe(
               (resultDataStatus: any) => {
                 const dataStatus = resultDataStatus;
-                this.dialogRef.close({ data, dataStatus });
+                this.dialogRef.close({ data, dataStatus, device });
               },
               (error) => {
                 console.log('Error while fetching last data status!');
@@ -120,7 +120,7 @@ export class FilterComponent {
             this.DashDataService.DataByCustomDateStatus(device, formattedStartDate, formattedEndDate).subscribe(
               (resultDataStatus: any) => {
                 const dataStatus = resultDataStatus;
-                this.dialogRef.close({ data, dataStatus });
+                this.dialogRef.close({ data, dataStatus, device });
               },
               (error) => {
                 console.log('Error while fetching data status by custom date!');

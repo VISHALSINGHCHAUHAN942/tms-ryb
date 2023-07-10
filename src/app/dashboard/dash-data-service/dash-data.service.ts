@@ -46,5 +46,19 @@ export class DashDataService {
     return this.http.get(`${this.API_URL}/dataStatus/${deviceId}`, { params });
   }
 
+  deviceDetails(deviceId: string): Observable<any> {
+    return this.http.get(`${this.API_URL}/live-device-detail/${deviceId}`);
+  }
 
+  deviceStatus(deviceId: string): Observable<any> {
+    return this.http.get(`${this.API_URL}/live-device-status/${deviceId}`);
+  }
+
+  deviceTrigger(deviceId: string): Observable<any> {
+    return this.http.get(`${this.API_URL}/device-trigger/${deviceId}`);
+  }
+
+  userDetails(userId: string):Observable<any> {
+    return this.http.get(`${this.API_URL}/user-data/${userId}`);
+  }
 }

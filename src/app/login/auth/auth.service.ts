@@ -99,6 +99,10 @@ export class AuthService {
 
             const CompanyEmail = user.CompanyEmail;
             this.setCompanyEmail(CompanyEmail);
+
+            const userId = user.UserId;
+            sessionStorage.setItem('UserId', userId);
+            console.log(userId);
           },
           (error: any) => {
             console.error(error);

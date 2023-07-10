@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import * as Highcharts from 'highcharts';
 import HighchartsMore from 'highcharts/highcharts-more';
@@ -18,7 +19,8 @@ export class DataComponent implements OnInit {
     public dialog: MatDialog,
     private DashDataService: DashDataService,
     private authService: AuthService,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    private datePipe: DatePipe
   ) {}
   
   deviceOptions: any[] = [];
@@ -28,23 +30,28 @@ export class DataComponent implements OnInit {
   temperatureData: any[] = [];
   humidityData: any[] = [];
   timestampData: any[] = [];
+  DeviceName!: any;
+  DeviceStatus!: any;
+  DeviceLastUpdatedTime!: any;
+  DeviceTrigger!: any;
 
 
   ngOnInit() {
     const sessionData = sessionStorage.getItem('data');
     const sessionDataStatus = sessionStorage.getItem('dataStatus');
-    if (sessionData && sessionDataStatus) {
+    const sessionDevice = sessionStorage.getItem('device');
+    if (sessionData && sessionDataStatus && sessionDevice) {
       const jsonData = JSON.parse(sessionData);
       const jsonDataStatus = JSON.parse(sessionDataStatus);
       console.log('Using session storage data:', jsonData);
       console.log('Using session storage data fpr Status:', jsonDataStatus);
+      console.log('Using Session Storage for Device:', sessionDevice);
       this.processChartData(jsonData);
       this.createDonutChart(jsonDataStatus.dataStatus);
+      this.fetchDeviceInfo(sessionDevice);
     } else {
       this.getUserDevices();
-    }
-    /*this.createDonutChart();*/
-    this.createDonutChart2();    
+    }  
   }
 
   getUserDevices() {
@@ -55,7 +62,9 @@ export class DataComponent implements OnInit {
           this.deviceOptions = devices.devices;
           if (this.deviceOptions.length > 0) {
             this.selectedDevice = this.deviceOptions[0].DeviceUID;
+            sessionStorage.setItem('device', this.selectedDevice);
             this.fetchDefaultData();
+            this.fetchDeviceInfo(this.selectedDevice);
           }
         },
         (error) => {
@@ -65,71 +74,6 @@ export class DataComponent implements OnInit {
     }
   }
 
-  /*createDonutChart(dataStatus: any) {
-    const donutChartData = dataStatus.map((entry: any) => {
-      const formattedPercentage = parseFloat(entry.percentage.toFixed(2)); // Format to two decimal places
-      let color;
-
-      if (entry.status === 'online') {
-        color = {
-          linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
-          stops: [
-            [0, '#78f5e6'], // Start color (light green)
-            [1, '#43ab72']  // End color (darker green)
-          ]
-        };
-      } else if (entry.status === 'heating') {
-        color = {
-          linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
-          stops: [
-            [0, '#f0afad'],  // Start color (light red)
-            [1, 'rgba(255, 0, 0, 1)']   // End color (darker red)
-          ]
-        };
-      } else {
-        color = {
-          linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
-          stops: [
-            [0, '#E0E0E0'],  // Start color (default light gray)
-            [1, '#B1B1B1']   // End color (default darker gray)
-          ]
-        };
-      }
-
-      return {
-        name: entry.status,
-        y: formattedPercentage,
-        color: color
-      };
-    });
-
-    const options: Highcharts.Options = {
-      chart: {
-        type: 'pie'
-      },
-      title: {
-        text: ''
-      },
-      credits: {
-        enabled: false
-      },
-      plotOptions: {
-        pie: {
-          innerSize: '50%'
-        }
-      },
-      tooltip: {
-        pointFormat: '{series.name}: <b>{point.y}%</b>'
-      },
-      series: [{
-        type: 'pie',
-        name: 'Time',
-        data: donutChartData
-      }]
-    };
-
-    Highcharts.chart('donutChart', options);
-  }*/
   createDonutChart(dataStatus: any) {
     const donutChartData = dataStatus.map((entry: any) => {
       const formattedPercentage = parseFloat(entry.percentage.toFixed(2)); // Format to two decimal places
@@ -166,7 +110,7 @@ export class DataComponent implements OnInit {
         name: entry.status,
         y: formattedPercentage,
         color: color,
-        time: time
+        time : time
       };
     });
 
@@ -175,7 +119,7 @@ export class DataComponent implements OnInit {
         type: 'pie'
       },
       title: {
-        text: ''
+        text: '   '
       },
       credits: {
         enabled: false
@@ -183,18 +127,18 @@ export class DataComponent implements OnInit {
       plotOptions: {
         pie: {
           innerSize: '50%',
-          dataLabels: {
+          /*dataLabels: {
             enabled: true,
             distance: -40, // Adjust the distance of labels from the center of the pie
             format: '{point.name}: {point.time}', // Include status and hours in the label
             style: {
               fontWeight: 'bold'
             }
-          }
+          }*/
         }
       },
       tooltip: {
-        enabled: false // Disable the tooltip
+        pointFormat: '{series.name}: <b>{point.y}%</b> <br><b>({point.time})<b>'
       },
       series: [{
         type: 'pie',
@@ -206,36 +150,6 @@ export class DataComponent implements OnInit {
     Highcharts.chart('donutChart', options);
   }
 
-  createDonutChart2() {
-    const options: Highcharts.Options = {
-      chart: {
-        type: 'pie'
-      },
-      title: {
-        text: ''
-      },
-      credits: {
-        enabled: false // Disable the credits display
-      },
-      plotOptions: {
-        pie: {
-          innerSize: '50%' // Set the inner size to create a donut chart
-        }
-      },
-      series: [{
-        type: 'pie', // Specify the series type as 'pie'
-        name: 'Data',
-        data: [
-          { name: 'Category 1', y: 30 },
-          { name: 'Category 2', y: 20 },
-          { name: 'Category 3', y: 50 }
-        ]
-      }]
-    };
-
-    Highcharts.chart('donutChart2', options);
-  }
-  
   createChart() {
     Highcharts.chart('curvedLineChart', {
       chart: {
@@ -249,7 +163,8 @@ export class DataComponent implements OnInit {
           },
 
       xAxis: {
-        type: 'datetime'
+        type: 'datetime',
+        timezoneOffset: 330
       },
       yAxis: {
         title: {
@@ -324,21 +239,25 @@ export class DataComponent implements OnInit {
 
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result && result.data && result.dataStatus) {
-        console.log('Data received from filter modal:', result.data , result.dataStatus);
+      if (result && result.data && result.dataStatus && result.device) {
+        console.log('Data received from filter modal:', result.data , result.dataStatus, result.device);
         sessionStorage.setItem('data', JSON.stringify(result.data));
         sessionStorage.setItem('dataStatus', JSON.stringify(result.dataStatus));
+        sessionStorage.setItem('device',result.device);
         this.processChartData(result.data);
         this.createDonutChart(result.dataStatus.dataStatus);
+        this.fetchDeviceInfo(result.device);
       } else {
         const sessionData = sessionStorage.getItem('data');
         const sessionDataStatus = sessionStorage.getItem('dataStatus');
-        if (sessionData && sessionDataStatus) {
+        const sessionDevice = sessionStorage.getItem('device');
+        if (sessionData && sessionDataStatus && sessionDevice) {
           const jsonData = JSON.parse(sessionData);
           const jsonDataStatus = JSON.parse(sessionDataStatus);
-          console.log('Using session storage data:', jsonData, jsonDataStatus);
+          console.log('Using session storage data:', jsonData, jsonDataStatus, sessionDevice);
           this.processChartData(jsonData);
           this.createDonutChart(jsonDataStatus.dataStatus);
+          this.fetchDeviceInfo(sessionDevice);
         } else {
           console.log('No session storage data available');
           this.fetchDefaultData();
@@ -350,20 +269,20 @@ export class DataComponent implements OnInit {
   fetchDefaultData() {
     if(this.selectedDevice){
       this.DashDataService.dataLast(this.selectedDevice, this.selectedDeviceInterval).subscribe(
-      (data: any) => {
-        sessionStorage.setItem('data', JSON.stringify(data));
-        this.processChartData(data);
-        this.DashDataService.dataLastStatus(this.selectedDevice, this.selectedDeviceInterval).subscribe(
-          (dataStatus: any) => {
-            sessionStorage.setItem('dataStatus', JSON.stringify(dataStatus));
-            this.createDonutChart(dataStatus.dataStatus); 
-          }
-        );
-      },
-      (error) => {
+        (data: any) => {
+          sessionStorage.setItem('data', JSON.stringify(data));
+          this.processChartData(data);
+          this.DashDataService.dataLastStatus(this.selectedDevice, this.selectedDeviceInterval).subscribe(
+            (dataStatus: any) => {
+              sessionStorage.setItem('dataStatus', JSON.stringify(dataStatus));
+              this.createDonutChart(dataStatus.dataStatus); 
+            }
+          );
+        },
+        (error) => {
         console.log('Error while fetching last data!');
       }
-    );
+      );
     }
     else{
       console.log(" not defined");
@@ -372,12 +291,71 @@ export class DataComponent implements OnInit {
 
   processChartData(response: any) {
     const data = response.data; // Access the 'data' property of the response object
-    this.temperatureData = data.map((entry: any) => [new Date(entry.TimeStamp).getTime(), entry.Temperature]);
-    this.humidityData = data.map((entry: any) => [new Date(entry.TimeStamp).getTime(), entry.Humidity]);
-    this.timestampData = data.map((entry: any) => new Date(entry.TimeStamp).getTime());
+    const istOffset = 5.5 * 60 * 60 * 1000; // IST offset: +5:30 in milliseconds
+
+    this.temperatureData = data.map((entry: any) => [
+      new Date(entry.TimeStamp).getTime() + istOffset,
+      entry.Temperature
+    ]);
+    this.humidityData = data.map((entry: any) => [
+      new Date(entry.TimeStamp).getTime() + istOffset,
+      entry.Humidity
+    ]);
+    this.timestampData = data.map((entry: any) =>
+      new Date(entry.TimeStamp).getTime() + istOffset
+    );
 
     this.createChart();
     this.createChart2();
   }
 
+
+  fetchDeviceInfo(deviceId: string) {
+    this.DashDataService.deviceDetails(deviceId).subscribe(
+      (deviceDetailsResult: any) => {
+        this.DeviceName = deviceDetailsResult[0].DeviceName;
+        this.DashDataService.deviceStatus(deviceId).subscribe(
+          (dataStatusResult: any) => {
+            this.DeviceStatus = dataStatusResult[0].Status;
+            const lastUpdatedTime = dataStatusResult[0].TimeStamp;
+            this.DeviceLastUpdatedTime = this.formatTime(lastUpdatedTime);
+            this.DashDataService.deviceTrigger(deviceId).subscribe(
+              (deviceTriggerResult: any) => {
+                this.DeviceTrigger = deviceTriggerResult[0].TriggerValue;
+              }
+            );
+          }
+        );
+      },
+      (error) => {
+        console.log('Error while fetching last data!');
+      }
+    ); 
+  }
+
+  formatTime(lastUpdatedTime: string): string {
+    const currentTime = new Date();
+    const updatedTime = new Date(lastUpdatedTime);
+    const diff = Math.abs(currentTime.getTime() - updatedTime.getTime()) / 1000; // Time difference in seconds
+
+    if (diff < 60) {
+      return `${Math.floor(diff)} sec ago`;
+    } else if (diff < 3600) {
+      const mins = Math.floor(diff / 60);
+      return `${mins} min ago`;
+    } else if (diff < 86400) {
+      const hours = Math.floor(diff / 3600);
+      return `${hours} hour ago`;
+    } else {
+      const formattedTime = this.datePipe.transform(updatedTime, 'yyyy-MM-dd hh:mm:ss');
+      return formattedTime || ''; 
+    }
+  }
+
+  refresh(){
+    const deviceId = sessionStorage.getItem('device');
+    if(deviceId){
+      this.fetchDeviceInfo(deviceId);
+    }
+  }
 }

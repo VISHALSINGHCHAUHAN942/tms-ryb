@@ -6,7 +6,95 @@
 .data-charts{
 	height: 38vh;
 	width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
 }
+
+.panel-title {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 550;
+  color: #3F51B5;
+}
+
+.refresh-button {
+  margin-left: auto;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.online {
+	background: linear-gradient(to right, #3c9e55, #00FFFF);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+	text-fill-color: transparent;
+}
+
+.offline {
+  background: linear-gradient(to right, #808080, #A9A9A9);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+	text-fill-color: transparent;
+}
+
+.heating {
+  background: linear-gradient(to right, #FF0000, #FFA500);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+.panel {
+  display: flex;
+  justify-content: space-between;
+}
+
+.panel-device-name {
+  background: linear-gradient(to right, #3F51B5, #66BB6A);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  font-size: 1.2rem;
+	font-weight: 550;
+	text-align: left;
+}
+
+.panel-device-trigger{
+	background: linear-gradient(to right, #FF0000, #FFA500);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+	font-size: 1.2rem;
+	font-weight: 550;
+	text-align: right;
+}
+
+.panel-device-status{
+	font-weight: 500;
+	font-size: 5rem;
+	text-align: center;
+}
+
+.panel-device-time {
+	font-weight: 550;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  margin: 0;
+  font-size: 14px;
+  font-style: italic;
+}
+
+
 
 .chart-container {
   height: 35vh; /* Adjust the height of the chart container as needed */
@@ -28,6 +116,8 @@
   background-color: #3F51B5;
   color: whitesmoke;
 }
+
+
 
 
 @media(max-width:425px){
@@ -57,3 +147,22 @@
 		padding-bottom: 20px;
 	}
 }*/
+
+@media screen and (max-height: 500px) {
+	.panel-title {
+		font-size: 14px;
+	}
+
+	.panel-device-name,
+	.panel-device-trigger {
+		font-size: 1rem;
+	}
+
+	.panel-device-status{
+		font-size: 1.5rem;
+	}
+
+	.panel-device-time{
+		font-size: 0.8rem;
+	}
+}

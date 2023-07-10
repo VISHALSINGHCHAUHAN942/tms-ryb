@@ -1,5 +1,35 @@
 <section class="data container">
 	<div class="row mb-2">
+		<div class="col-lg-4 col-md-4 col-sm-12 mb-2">
+			<mat-card class="mb-2 data-charts">
+			  <mat-card-content>
+			    <div class="panel-title">
+			      <mat-icon>thermostat</mat-icon>
+			      Device Panel
+			      <button mat-icon-button color="primary" class="refresh-button" (click)="refresh()">
+			        <mat-icon>refresh</mat-icon>
+			      </button>
+			    </div>
+			    <div class="panel">
+					  <div class="panel-device-name">Name: {{ DeviceName }}</div>
+					  <div class="panel-device-trigger">Trigger: {{ DeviceTrigger }}</div>
+					</div>
+
+			    <div class="panel-device-status"
+					     [ngClass]="{
+					       'online': DeviceStatus === 'online',
+					       'offline': DeviceStatus === 'offline',
+					       'heating': DeviceStatus === 'heating'
+					     }">
+					{{ DeviceStatus }}
+					</div>
+			    <div class="panel-device-time">
+			      Last Updated: <span>{{ DeviceLastUpdatedTime }}</span>
+			    </div>
+			  </mat-card-content>
+			</mat-card>
+
+		</div>
 		<div class="col-lg-8 col-md-8 col-sm-12 mb-2">
 			<mat-card class="data-charts">
 			  <mat-card-content>
@@ -7,6 +37,8 @@
 			  </mat-card-content>
 			</mat-card>
 		</div>
+	</div>
+	<div class="row mb-2">
 		<div class="col-lg-4 col-md-4 col-sm-12 mb-2">
 			<mat-card class='mb-2 data-charts'>
 			  <mat-card-content>
@@ -14,19 +46,10 @@
 			  </mat-card-content>
 			</mat-card>
 		</div>
-	</div>
-	<div class="row mb-2">
 		<div class="col-lg-8 col-md-8 col-sm-12 mb-2">
 			<mat-card class="data-charts">
 			  <mat-card-content>
 			  	<div id="curvedLineChart2" class="chart-container"></div>
-			  </mat-card-content>
-			</mat-card>
-		</div>
-		<div class="col-lg-4 col-md-4 col-sm-12 mb-2">
-			<mat-card class='mb-2 data-charts'>
-			  <mat-card-content>
-			  	<div id="donutChart2" class="chart-container"></div>
 			  </mat-card-content>
 			</mat-card>
 		</div>

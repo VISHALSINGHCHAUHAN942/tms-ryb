@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { NavbarComponent } from './dash-component/navbar/navbar.component';
 import { FooterComponent } from './dash-component/footer/footer.component';
 import { DashLayoutComponent } from './dash-layout/dash-layout.component';
@@ -84,7 +84,8 @@ import { AuthService } from '../login/auth/auth.service';
     MatSnackBarModule
   ],
   providers:[
-    AuthService
+    AuthService,
+    DatePipe
     ]
 })
 export class DashboardModule { }
