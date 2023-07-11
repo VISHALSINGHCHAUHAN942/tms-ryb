@@ -15,7 +15,7 @@ export class AuthService {
   decryptUsers!: any;
 
   constructor(private http: HttpClient, private router: Router) {}
-  private readonly API_URL = 'http://ec2-43-204-32-198.ap-south-1.compute.amazonaws.com:3000';
+  private readonly API_URL = 'http://ec2-43-205-177-9.ap-south-1.compute.amazonaws.com:3000';
 
   //private readonly API_URL = 'http://localhost:4000';
 
