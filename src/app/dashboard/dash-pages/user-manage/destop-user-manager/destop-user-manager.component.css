@@ -1,0 +1,82 @@
+.users {
+  padding-top: 13vh;
+  padding-bottom: 5vh;
+}
+
+mat-card-content {
+  max-height: 700px; /* Set the maximum height for the card content */
+  width: 1000px;
+  overflow-y: auto;
+}
+
+/* mat-card{
+    border:1.5px solid #3F51B5 ;
+    
+} */
+
+.card-header {
+  border-radius: 5px;
+  background-color: white;
+  border-top: 1.5px solid #3f51b5;
+}
+
+.card-footer {
+  border-bottom: 1.5px solid #3f51b5;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.example-large-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 16px;
+  padding: 16px;
+  border-radius: 8px;
+}
+.example-large-box {
+  height: 600px;
+  width: 92%;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  margin-top: 10px;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.example-card {
+  max-width: 300px;
+  height: 100px;
+  margin: auto;
+  margin-bottom: 7%;
+}
+.button-row {
+  margin-block: 5%;
+}
+.cards-column {
+  display: flex;
+  align-items: center;
+  flex-direction: Row;
+  width: 100%;
+}
+
+.card-item {
+  margin-bottom: 16px;
+  width: 300px;
+  height: 100px;
+  align-items: center;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+
+.user-text {
+  align-items: center;
+  margin: auto;
+}
+
+mat-table {
+  width: 100%;
+}
+

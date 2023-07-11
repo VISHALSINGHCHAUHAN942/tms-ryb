@@ -34,12 +34,16 @@ import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+import {MatChipsModule} from '@angular/material/chips';
+
 
 
 import { HttpClientModule } from '@angular/common/http';
 
 import { AuthService } from '../login/auth/auth.service';
-
+import {MatTabsModule} from '@angular/material/tabs';
+import { DestopUserManagerComponent } from './dash-pages/user-manage/destop-user-manager/destop-user-manager.component';
+import { MobileUserManagerComponent } from './dash-pages/user-manage/mobile-user-manager/mobile-user-manager.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +58,9 @@ import { AuthService } from '../login/auth/auth.service';
     FilterComponent,
     NotificationComponent,
     UserManageComponent,
-    SidebarComponent
+    SidebarComponent,
+    DestopUserManagerComponent,
+    MobileUserManagerComponent
   ],
   imports: [
     CommonModule,
@@ -79,7 +85,10 @@ import { AuthService } from '../login/auth/auth.service';
     HttpClientModule,
     MatSidenavModule,
     MatExpansionModule,
-    MatTableModule
+    MatTableModule,
+    MatTabsModule,
+    MatChipsModule
+
   ],
   providers:[
     AuthService

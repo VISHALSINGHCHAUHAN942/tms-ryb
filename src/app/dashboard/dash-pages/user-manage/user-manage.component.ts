@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { MatDialog} from '@angular/material/dialog';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { DestopUserManagerComponent } from './destop-user-manager/destop-user-manager.component';
+import { MobileUserManagerComponent } from './mobile-user-manager/mobile-user-manager.component';
 
 @Component({
   selector: 'app-user-manage',
@@ -6,14 +10,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./user-manage.component.css']
 })
 export class UserManageComponent {
-  displayedColumns: string[] = ['Name', 'designation', 'status', 'Action'];
 
-  dataSource: any[] = [
-    { firstName: 'John', lastName: 'Doe', email: 'john.doe@example.com', designation: 'Developer', status: 'Active' },
-    { firstName: 'Jane', lastName: 'Smith', email: 'jane.smith@example.com', designation: 'Designer', status: 'Inactive' },
-    { firstName: 'John', lastName: 'Doe', email: 'john.doe@example.com', designation: 'Developer', status: 'Active' },
-    { firstName: 'Jane', lastName: 'Smith', email: 'jane.smith@example.com', designation: 'Designer', status: 'Inactive' }
-    // Add more dummy data objects here
-  ];
+  constructor(private breakpointObserver: BreakpointObserver,
+    public dialog: MatDialog) { }
 
+  isMobile:boolean = false;
+  ngOnInit() {
+    this.breakpointObserver.observe([Breakpoints.XSmall, Breakpoints.XSmall]).subscribe(result => {
+      this.isMobile = result.matches;
+    });
+  }
+  
 }

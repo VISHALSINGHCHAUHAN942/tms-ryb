@@ -6,6 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./notification.component.css']
 })
 export class NotificationComponent {
+
+ 
   panelOpenState = false;
 
    notifications = [
@@ -97,4 +99,6 @@ export class NotificationComponent {
     {message: "Hi Thisis Log 19."},
     {message: "Hi Thisis Log 20."}
   ]
+
 }
+

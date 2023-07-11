@@ -1,0 +1,139 @@
+<section class="users container-fluid">
+    <mat-tab-group  >
+        <mat-tab label="Users"> 
+            <mat-accordion class="accordian">
+                <mat-expansion-panel *ngFor="let list of data" class="mb-1">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      User Name: {{ list.firstName }} {{ list.lastName }}
+                    </mat-panel-title>
+                    <mat-panel-title>
+                      User Position: <strong>{{ list.position }}</strong>
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  
+                  <p><strong>Email:</strong> {{ list.email }}</p>
+                  <p><strong>Company Name: </strong>{{ list.designation }}</p>
+                  <p><strong>Role: </strong>{{ list.status }}</p>
+                  <p><strong>Details: </strong>{{ list.position }}</p>
+                  <p>Edit: <button
+                    mat-icon-button
+                    color="secoundry"
+                    aria-label="Example icon button with a home icon">
+                    <mat-icon color="red">add</mat-icon>
+                  </button>    <button
+                  mat-icon-button
+                  color="secoundry"
+                  aria-label="Example icon button with a home icon">
+                  <mat-icon color="red">delete</mat-icon>
+                </button>
+                </p>
+                </mat-expansion-panel>
+              </mat-accordion>
+             
+
+              <!-- <div class="cards-column">
+                <mat-card class="card-item">
+                  <div class="user-text ">Total Number of Users: 11</div>
+                </mat-card>
+                <mat-card class="card-item">
+                  <div class="user-text">Total working Users: 11</div>
+                </mat-card>
+                <mat-card class="card-item">
+                  <div class="user-text">Total disabled Users: 11</div>
+                </mat-card>
+               
+              </div> -->
+            </mat-tab>
+            <mat-tab label="device">
+                <mat-accordion>
+                    <mat-expansion-panel *ngFor="let list of data" class="mb-1">
+                      <mat-expansion-panel-header>
+                        <mat-panel-title>
+                          User Id: {{ list.firstName }}
+                        </mat-panel-title>
+                        <mat-panel-description>
+                          User Name: <strong>{{ list.lastName}}</strong>
+                        </mat-panel-description>
+                      </mat-expansion-panel-header>
+                      <p><strong>Email:</strong> {{ list.email }}</p>
+                      <p><strong>Company Name: </strong>{{ list.designation }}</p>
+                      <p><strong>Role: </strong>{{ list.status }}</p>
+                      <p><strong>Details: </strong>{{ list.position }}</p>
+                      <p>Edit: <button
+                        mat-icon-button
+                        color="secoundry"
+                        aria-label="Example icon button with a home icon">
+                        <mat-icon color="red">add</mat-icon>
+                      </button>    <button
+                      mat-icon-button
+                      color="secoundry"
+                      aria-label="Example icon button with a home icon">
+                      <mat-icon color="red">delete</mat-icon>
+                    </button>
+                    </p>
+                    </mat-expansion-panel>
+                  </mat-accordion>
+            </mat-tab>
+            <mat-tab label="alert">
+                <mat-accordion>
+                    <mat-expansion-panel *ngFor="let list of data" class="mb-1">
+                      <mat-expansion-panel-header>
+                        <mat-panel-title>
+                          User Id: {{ list.firstName }}
+                        </mat-panel-title>
+                        <mat-panel-description>
+                          User Name: <strong>{{ list.lastName}}</strong>
+                        </mat-panel-description>
+                      </mat-expansion-panel-header>
+                      <p><strong>Email:</strong> {{ list.email }}</p>
+                      <p><strong>Company Name: </strong>{{ list.designation }}</p>
+                      <p><strong>Role: </strong>{{ list.status }}</p>
+                      <p><strong>Details: </strong>{{ list.position }}</p>
+                      <p>Edit: <button
+                        mat-icon-button
+                        color="secoundry"
+                        aria-label="Example icon button with a home icon">
+                        <mat-icon color="red">add</mat-icon>
+                      </button>    <button
+                      mat-icon-button
+                      color="secoundry"
+                      aria-label="Example icon button with a home icon">
+                      <mat-icon color="red">delete</mat-icon>
+                    </button>
+                    </p>
+                    </mat-expansion-panel>
+                  </mat-accordion>
+            </mat-tab>
+            <mat-tab label="Notif">
+                <mat-accordion>
+                    <mat-expansion-panel *ngFor="let list of data" class="mb-1">
+                      <mat-expansion-panel-header>
+                        <mat-panel-title>
+                          User Id: {{ list.firstName }}
+                        </mat-panel-title>
+                        <mat-panel-description>
+                          User Name: <strong>{{ list.lastName}}</strong>
+                        </mat-panel-description>
+                      </mat-expansion-panel-header>
+                      <p><strong>Email:</strong> {{ list.email }}</p>
+                      <p><strong>Company Name: </strong>{{ list.designation }}</p>
+                      <p><strong>Role: </strong>{{ list.status }}</p>
+                      <p><strong>Details: </strong>{{ list.position }}</p>
+                      <p>Edit: <button
+                        mat-icon-button
+                        color="secoundry"
+                        aria-label="Example icon button with a home icon">
+                        <mat-icon color="red">add</mat-icon>
+                      </button>    <button
+                      mat-icon-button
+                      color="secoundry"
+                      aria-label="Example icon button with a home icon">
+                      <mat-icon color="red">delete</mat-icon>
+                    </button>
+                    </p>
+                    </mat-expansion-panel>
+                  </mat-accordion>
+            </mat-tab>
+            </mat-tab-group>
+        </section>

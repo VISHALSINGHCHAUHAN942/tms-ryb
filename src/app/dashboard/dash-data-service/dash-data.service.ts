@@ -23,6 +23,7 @@ export class DashDataService {
   fetchTriggerAll(CompanyEmail: string):Observable<any> {
     return this.http.get(`${this.API_URL}/user-devices-trigger/${CompanyEmail}`);
   }
+  
 
 
 }

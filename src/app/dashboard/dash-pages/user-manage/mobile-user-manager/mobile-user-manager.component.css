@@ -1,0 +1,10 @@
+.accordian{
+  width: 400px;
+  height: 200px;
+}
+.card-item{
+  margin: auto;
+  margin-top: 10px;
+  padding: 20px;
+  width: 260px;
+}

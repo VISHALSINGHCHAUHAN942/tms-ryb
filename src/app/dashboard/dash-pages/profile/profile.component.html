@@ -4,7 +4,7 @@
 			<mat-card class="title-card">
 			  <mat-card-content>
 			  	<div class="d-flex">
-			  		<p class="title-card-head">Hellow, {{ fname }} {{ lname }}</p>
+			  		<p class="title-card-head">Hello, {{ personalDetail.firstName }} {{ personalDetail.lastName }}</p>
 					<p class="ms-auto title-card-head">Welcome to the Dashbord</p>
 				</div>
 			  </mat-card-content>
@@ -21,19 +21,24 @@
 					  </button>
 					</div>
 			  	</div>
+				   <!-- mat avtar  -->
+				   <div class="avatar-container">
+					<img class="avatar-image" src="https://media.istockphoto.com/id/1474576599/photo/3d-illustration-of-smiling-bearded-american-businessman-bob-has-positive-emotions-3d.jpg?s=612x612&w=0&k=20&c=aJ2JoiCFEgtYWcj1N2fiOrVwk-qVXw_pDDjlW6r8ilg=" alt="Avatar">
+				  </div>
+	
 			    <div class="row">
 			      <div class="col-lg-8 col-md-8 col-sm-12">
 			      	<div class="row">
 			      		<div class="col-lg-12">
 			      			<mat-form-field class="form-field">
 				                <mat-label>Company Name</mat-label>
-				                <input matInput value="{{ companyName}}" required>
+				                <input [(ngModel)]="companyDetail.companyName" name="companyName" matInput value="{{ companyDetail.companyName}}" required>
 				            </mat-form-field>      			
 			      		</div>
 			      		<div class="col-lg-12">
 			      			<mat-form-field class="form-field">
 				                <mat-label>Company Email</mat-label>
-				                <input matInput value="{{ companyEmail}}" required>
+				                <input [(ngModel)]="companyDetail.companyEmail" name="companyEmail" matInput value="{{ companyDetail.companyEmail}}" required>
 				            </mat-form-field>      			
 			      		</div>
 			      	</div>
@@ -44,23 +49,23 @@
 		      		<div class="col-lg-6">
 		      			<mat-form-field class="form-field">
 			                <mat-label>Contact No</mat-label>
-			                <input matInput value="{{ contactNo}}" required>
+			                <input [(ngModel)]="companyDetail.contact" name="contactNo" matInput value="{{ companyDetail.contact}}" required>
 			            </mat-form-field>      			
 		      		</div>
 		      		<div class="col-lg-6">
 		      			<mat-form-field class="form-field">
 			                <mat-label>Location</mat-label>
-			                <input matInput value="{{ location }}" required>
+			                <input [(ngModel)]="companyDetail.location" name="location" matInput value="{{ companyDetail.location }}" required>
 			            </mat-form-field>      			
 		      		</div>
 		      		<div class="col-lg-12">
 		      			<mat-form-field class="form-field">
 			                <mat-label>Designation</mat-label>
-			                <input matInput value="{{ designation}}" required>
+			                <input [(ngModel)]="companyDetail.designation" name="designation" matInput value="{{ companyDetail.designation}}" required>
 			            </mat-form-field>      			
 		      		</div>
 		      		<div class="col-lg-12 text-center">
-		      			<button mat-raised-button color="primary">Primary</button>
+		      			<button (click)="retrieveCompanyData()" mat-raised-button color="primary">update</button>
 		      		</div>
 		      	</div>
 			  </mat-card-content>
@@ -69,27 +74,33 @@
 		<div class="col-lg-6 mb-3">
 			<mat-card class="mb-3 cmn-card cmn-card-left">
 			  <mat-card-content>
+  <!--  secound edit button -->
+  <div class="col-lg-12 d-flex mb-3"  >
+	<button mat-raised-button mat-button  class=" minimized-button ms-auto" color="warn" (click)="toggleButton()"  (click)="toggleEditMode()"  >{{ buttonText }}</button>
+</div>
+
+
 			  	<div class="row">
 		      		<div class="col-lg-6">
 		      			<mat-form-field class="form-field">
 			                <mat-label>First name</mat-label>
-			                <input matInput value="{{ fname }}" required>
+			                <input [disabled]="!editMode"  [(ngModel)]="personalDetail.firstName" name="firstName" matInput value="{{ personalDetail.firstName }}" required>
 			            </mat-form-field>      			
 		      		</div>
 		      		<div class="col-lg-6">
 		      			<mat-form-field class="form-field">
 			                <mat-label>Last Name</mat-label>
-			                <input matInput value="{{ lname }}" required>
+			                <input [disabled]="!editMode"  [(ngModel)]="personalDetail.lastName" name="lastName" matInput value="{{ personalDetail.lastName }}" required>
 			            </mat-form-field>      			
 		      		</div>
 		      		<div class="col-lg-12">
 		      			<mat-form-field class="form-field">
 			                <mat-label>Personal Email</mat-label>
-			                <input matInput value="{{ personalEmail }}" required>
+			                <input [disabled]="!editMode" [(ngModel)]="personalDetail.personalEmail" name="personalEmail" matInput value="{{ personalDetail.personalEmail }}" required>
 			            </mat-form-field>      			
 		      		</div>
 		      		<div class="col-lg-12 text-center">
-		      			<button mat-raised-button color="primary">Primary</button>
+		      			<button (click)="retrievePersonalData()" mat-raised-button color="primary" mat-button *ngIf="showNewButton" >update</button>
 		      		</div>
 		      	</div>
 			  </mat-card-content>
@@ -100,7 +111,7 @@
 		      		<div class="col-lg-6">
 		      			<mat-form-field>
 		                <mat-label>Enter your password</mat-label>
-		                <input matInput [type]="hide ? 'password' : 'text'">
+		                <input [(ngModel)]="password.password" name="password" matInput [type]="hide ? 'password' : 'text'">
 		                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
 		                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
 		                </button>
@@ -108,7 +119,7 @@
 		      		</div>
 		      		<div class="col-lg-6">
 		      			<mat-form-field>
-		                <mat-label>Enter your password</mat-label>
+		                <mat-label >Enter your password</mat-label>
 		                <input matInput [type]="hide ? 'password' : 'text'">
 		                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
 		                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -116,7 +127,7 @@
 		              	</mat-form-field>     			
 		      		</div>
 		      		<div class="col-lg-12 text-center">
-		      			<button mat-raised-button color="primary">Primary</button>
+		      			<button (click)="retrievePassword()" mat-raised-button color="primary">Update</button>
 		      		</div>
 		      	</div>
 			  </mat-card-content>
