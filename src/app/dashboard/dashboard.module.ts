@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { NavbarComponent } from './dash-component/navbar/navbar.component';
 import { FooterComponent } from './dash-component/footer/footer.component';
 import { DashLayoutComponent } from './dash-layout/dash-layout.component';
@@ -34,10 +34,11 @@ import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+
 import {MatChipsModule} from '@angular/material/chips';
 
 
-
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AuthService } from '../login/auth/auth.service';
@@ -87,11 +88,12 @@ import { MobileUserManagerComponent } from './dash-pages/user-manage/mobile-user
     MatExpansionModule,
     MatTableModule,
     MatTabsModule,
-    MatChipsModule
-
+    MatChipsModule,
+    MatSnackBarModule
   ],
   providers:[
-    AuthService
+    AuthService,
+    DatePipe
     ]
 })
 export class DashboardModule { }

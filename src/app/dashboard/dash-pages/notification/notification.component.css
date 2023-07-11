@@ -3,13 +3,20 @@
 	padding-bottom: 5vh;
 }
 
+.notification-title{
+  font-size: 1.2rem;
+  font-weight: 550;
+  padding-bottom: 2px;  
+  background: linear-gradient(to right, #216e7a, #3F51B5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
- /* .notification-card-container {
+  .notification-card-container {
   position: sticky;
   top: 0;
-  height: calc(85vh - 35px); */
-   /* Adjust this value based on your header's height */
-  /* overflow-y: auto;
+  height: calc(80vh - 35px); /* Adjust this value based on your header's height */
+  overflow-y: auto;
   background-color: #f5f5f5;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -19,11 +26,9 @@
 .fixed-card-container {
   position: sticky;
   top: 0;
-  height: calc(85vh - 35px);  
-  
-                           /* Adjust this value based on your header's height */ */
-  /* overflow-y: auto;
-  background-color: #f5f5f5;
+  height: calc(80vh - 35px); /* Adjust this value based on your header's height */
+  overflow-y: auto;
+   background-color: #f5f5f5;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);

@@ -1,6 +1,9 @@
 import { Component, Inject, HostListener } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {FormControl, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { DashDataService } from '../../dash-data-service/dash-data.service';
+import { AuthService } from '../../../login/auth/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-trigger-device',
@@ -9,7 +12,9 @@ import {FormControl, Validators, FormsModule, ReactiveFormsModule} from '@angula
 })
 export class TriggerDeviceComponent {
   device: any;
-  threshold = new FormControl('', [Validators.required, Validators.pattern(/^\d*\.?\d+$/), Validators.min(0), Validators.max(100)]);
+  deviceId!: string;
+  CompanyEmail!:string | null;
+  TriggerValue = new FormControl('', [Validators.required, Validators.pattern(/^\d*\.?\d+$/), Validators.min(0), Validators.max(100)]);
 
   @HostListener('window:resize')
   onWindowResize() {
@@ -27,6 +32,9 @@ export class TriggerDeviceComponent {
   }
 
   constructor(
+    private DashDataService: DashDataService,
+    private authService: AuthService,
+    public snackBar: MatSnackBar,
     public dialogRef: MatDialogRef<TriggerDeviceComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ){
@@ -42,22 +50,43 @@ export class TriggerDeviceComponent {
   }
 
   onSaveClick(): void {
-    this.dialogRef.close();
+    this.deviceId = this.device.DeviceUID;
+    this.CompanyEmail = this.authService.getCompanyEmail();
+    console.log(this.CompanyEmail);
+    if(this.TriggerValue.valid){
+      const triggerData = {
+        TriggerValue : this.TriggerValue.value,
+        CompanyEmail : this.CompanyEmail
+      }
+
+      this.DashDataService.updateDeviceTrigger(this.deviceId, triggerData).subscribe(
+      () => {
+        this.snackBar.open('Trigger Updated successfully!', 'Dismiss', {
+            duration: 2000
+        });
+        this.dialogRef.close();
+      },
+      (error)=>{
+        this.snackBar.open('Failed to update trigger!', 'Dismiss', {
+            duration: 2000
+          });
+      });
+    }
   }
   getThresholdErrorMessage() {
-    if (this.threshold.hasError('required')) {
+    if (this.TriggerValue.hasError('required')) {
       return 'Threshold is required';
     }
     
-    if (this.threshold.hasError('pattern')) {
+    if (this.TriggerValue.hasError('pattern')) {
       return 'Not a valid number';
     }
     
-    if (this.threshold.hasError('min')) {
+    if (this.TriggerValue.hasError('min')) {
       return 'Not less than 0';
     }
     
-    if (this.threshold.hasError('max')) {
+    if (this.TriggerValue.hasError('max')) {
       return 'Not more than 100';
     }
     

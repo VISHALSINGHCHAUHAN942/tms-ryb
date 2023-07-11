@@ -1,6 +1,10 @@
 <section class="section container-fluid">
   <div class="row mb-3">
     <div class="col-lg-8 col-md-8 col-sm-12">
+      <div class="d-flex">
+        <div class="notification-title">Notification</div>
+        <div class="ms-auto notification-title">Unread:(99+)</div>
+      </div>
     	<div class="notification-card-container">
     		<mat-accordion>
         <mat-expansion-panel *ngFor="let notification of notifications" class="mb-1">
@@ -18,6 +22,9 @@
     	</div>
     </div>
     <div class="col-lg-4 col-md-4 col-sm-12">
+      <div class="d-flex">
+        <div class="ms-auto notification-title">Live logs</div>
+      </div>
       <div class="fixed-card-container">
         <mat-card class="fixed-card">
           <mat-card-content>
