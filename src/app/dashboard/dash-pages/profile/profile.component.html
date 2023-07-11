@@ -16,8 +16,8 @@
 			  	<div class="row">
 			  		<div class="col-lg-12 d-flex mb-3">
 					  <h6 class="me-auto profile-title">Company Details</h6>
-					  <button mat-icon-button  class=" minimized-button ms-auto" color="warn" aria-label="edit">
-					    <mat-icon>edit</mat-icon>
+					  <button mat-icon-button  class=" minimized-button ms-auto" color="warn" aria-label="edit"  (click)="toggleButton()"  (click)="toggleEditMode()" >
+					    <mat-icon>{{ buttonText }}</mat-icon>
 					  </button>
 					</div>
 			  	</div>
