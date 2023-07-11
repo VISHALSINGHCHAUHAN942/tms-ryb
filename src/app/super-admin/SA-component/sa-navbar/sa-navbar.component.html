@@ -21,24 +21,30 @@
   </div>
 
   <div class="right-side" [class.show-menu]="saService.showMenu">
+    <div class="right-button">
     <button mat-mini-fab class="menu-item" aria-label="home" (click)="home()">
       <mat-icon>home</mat-icon>
-    </button>
+    </button></div>
+    <div class="right-button">
     <button mat-mini-fab class="menu-item" aria-label="users" (click)="users()">
       <mat-icon>groups</mat-icon>
-    </button>
+    </button></div>
+    <div class="right-button">
     <button mat-mini-fab class="menu-item" aria-label="notifications" (click)="notifications()">
       <mat-icon matBadge="15" matBadgeColor="warn">notifications</mat-icon>
-    </button>
+    </button></div>
+    <div class="right-button">
     <button mat-mini-fab class="menu-item" aria-label="settings">
       <mat-icon>settings</mat-icon>
-    </button>
+    </button></div>
+    <div class="right-button">
     <button mat-mini-fab class="menu-item" aria-label="account_circles">
       <mat-icon>account_circles</mat-icon>
-    </button>
-    <button mat-mini-fab color="basic" aria-label="logout" (click)="logout()">
+    </button></div>
+    <div class="logout-button">
+    <button mat-mini-fab class="menu-item" color="basic" aria-label="logout" (click)="logout()">
       <mat-icon>exit_to_app</mat-icon>
-    </button>
+    </button></div>
   </div>
 </mat-toolbar>
 

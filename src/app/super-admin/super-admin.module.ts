@@ -9,15 +9,46 @@ import { CompanyComponent } from './SA-pages/company/company.component';
 import { HomeComponent } from './SA-pages/home/home.component';
 
 import { SuperAdminRoutingModule } from './super-admin-routing.module';
-
+import { MatChipsModule } from '@angular/material/chips'; 
 import {MatIconModule} from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
-import { MatSidenavModule } from '@angular/material/sidenav';
+import { ContainerComponent } from './sa-layout/container/container.component';
+import { SidenavComponent } from './SA-component/sidenav/sidenav.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+
+import {MatDialogModule} from '@angular/material/dialog';
+import { DeleteDeviceComponent } from './SA-pages/device/delete-device/delete-device.component';
+import { AddDevicesComponent } from './SA-pages/device/add-devices/add-devices.component';
+import { AddMultipleDevicesComponent } from './SA-pages/device/add-multiple-devices/add-multiple-devices.component';
+import { EditCompanyComponent } from './SA-pages/company/edit-company/edit-company.component';
+import { DeleteCompanyComponent } from './SA-pages/company/delete-company/delete-company.component';
+import { AddUsersComponent } from './SA-pages/company/add-users/add-users.component';
+import { AddMultipleUsersComponent } from './SA-pages/company/add-multiple-users/add-multiple-users.component';
+import { AddusersComponent } from './SA-pages/user/addusers/addusers.component';
+import { AddMultiusersComponent } from './SA-pages/user/add-multiusers/add-multiusers.component';
+import { EdituserComponent } from './SA-pages/user/edituser/edituser.component';
+import { DeleteuserComponent } from './SA-pages/user/deleteuser/deleteuser.component';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatListModule } from '@angular/material/list';
+import { MatCardModule } from '@angular/material/card';
+import { UserMobileComponent } from './SA-pages/user/user-mobile/user-mobile.component';
+import { UserDesktopComponent } from './SA-pages/user/user-desktop/user-desktop.component';
+import { CompanyDesktopComponent } from './SA-pages/company/company-desktop/company-desktop.component';
+import { CompanyMobileComponent } from './SA-pages/company/company-mobile/company-mobile.component';
+import { DeviceMobileComponent } from './SA-pages/device/device-mobile/device-mobile.component';
+import { DeviceDesktopComponent } from './SA-pages/device/device-desktop/device-desktop.component';
+
+
+
+
 
 
 @NgModule({
@@ -28,7 +59,27 @@ import { MatListModule } from '@angular/material/list';
     DeviceComponent,
     CompanyComponent,
     SALayoutComponent,
-    HomeComponent
+    HomeComponent,
+    ContainerComponent,
+    SidenavComponent,
+    DeleteDeviceComponent,
+    AddDevicesComponent,
+    AddMultipleDevicesComponent,
+    EditCompanyComponent,
+    DeleteCompanyComponent,
+    AddUsersComponent,
+    AddMultipleUsersComponent,
+    AddusersComponent,
+    AddMultiusersComponent,
+    EdituserComponent,
+    DeleteuserComponent,
+    UserMobileComponent,
+    UserDesktopComponent,
+    CompanyDesktopComponent,
+    CompanyMobileComponent,
+    DeviceMobileComponent,
+    DeviceDesktopComponent,
+
   ],
   imports: [
     CommonModule,
@@ -39,8 +90,15 @@ import { MatListModule } from '@angular/material/list';
     MatBadgeModule,
     MatTableModule, 
     MatPaginatorModule,
-    MatSidenavModule,
-    MatListModule
+    MatCheckboxModule,
+    MatDialogModule,
+    FormsModule,
+    MatInputModule,
+    MatFormFieldModule ,
+    MatExpansionModule,
+    MatListModule,
+    MatCardModule,
+    MatChipsModule
   ]
 })
 export class SuperAdminModule { }

@@ -1,1 +1,7 @@
-<p>company works!</p>
+<div *ngIf="!isMobile">
+    <app-company-desktop></app-company-desktop>
+    </div>
+    
+    <div *ngIf="isMobile">
+    <app-company-mobile></app-company-mobile>
+    </div>
