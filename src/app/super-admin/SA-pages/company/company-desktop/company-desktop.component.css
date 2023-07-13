@@ -1,3 +1,26 @@
+.sa-title-company {
+  font-size: 25px;
+  line-height: 36px;
+}
+
+.search-field {
+  flex: 1;
+  margin-right: 8px;
+}
+
+.search-input {
+  height: 30px;
+}
+
+.search-button {
+  height: 36px;
+}
+
+
+
+
+
+
 th{
   text-align: center;
 }

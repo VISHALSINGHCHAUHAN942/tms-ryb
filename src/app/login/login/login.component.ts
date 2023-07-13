@@ -66,8 +66,6 @@ export class LoginComponent {
             }
           };
           checkUserType();
-          this.loading = false;
-          this.loadingMessage = "Sign In";
         },
         (error) => {
           this.snackBar.open(
