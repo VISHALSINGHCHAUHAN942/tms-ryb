@@ -1,1 +1,7 @@
-<p>device works!</p>
+<div *ngIf="!isMobile">
+    <app-device-desktop></app-device-desktop>
+    </div>
+    
+    <div *ngIf="isMobile">
+    <app-device-mobile></app-device-mobile>
+    </div>

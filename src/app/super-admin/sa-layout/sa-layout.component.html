@@ -1,3 +1,8 @@
 <app-sa-navbar></app-sa-navbar>
-<router-outlet></router-outlet>
-<app-sa-footer></app-sa-footer>
+<app-sidenav (onToggleSideNav)="onToggleSideNav($event)"></app-sidenav>
+<app-container
+[collapsed]="isSideNavCollapsed"
+[screenWidth]="screenWidth"
+></app-container>
+<app-sa-footer overflow="hidden"></app-sa-footer>
+
