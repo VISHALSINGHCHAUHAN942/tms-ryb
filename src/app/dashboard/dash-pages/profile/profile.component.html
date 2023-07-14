@@ -4,7 +4,7 @@
 			<mat-card class="title-card">
 			  <mat-card-content>
 			  	<div class="d-flex">
-			  		<p class="title-card-head">Hello, {{fname }} {{ lname }}</p>
+			  		<p class="title-card-head">Hellow, {{ fname }} {{ lname }}</p>
 					<p class="ms-auto title-card-head">Welcome to the Dashbord</p>
 				</div>
 			  </mat-card-content>
@@ -16,29 +16,24 @@
 			  	<div class="row">
 			  		<div class="col-lg-12 d-flex mb-3">
 					  <h6 class="me-auto profile-title">Company Details</h6>
-					  <button mat-icon-button  class=" minimized-button ms-auto" color="warn" aria-label="edit"  (click)="toggleButton()"  (click)="toggleEditMode()" >
-					    <mat-icon>{{ buttonText }}</mat-icon>
+					  <button mat-icon-button  class=" minimized-button ms-auto" color="warn" aria-label="edit">
+					    <mat-icon>edit</mat-icon>
 					  </button>
 					</div>
 			  	</div>
-				   <!-- mat avtar  -->
-				   <div class="avatar-container">
-					<img class="avatar-image" src="https://media.istockphoto.com/id/1474576599/photo/3d-illustration-of-smiling-bearded-american-businessman-bob-has-positive-emotions-3d.jpg?s=612x612&w=0&k=20&c=aJ2JoiCFEgtYWcj1N2fiOrVwk-qVXw_pDDjlW6r8ilg=" alt="Avatar">
-				  </div>
-	
 			    <div class="row">
 			      <div class="col-lg-8 col-md-8 col-sm-12">
 			      	<div class="row">
 			      		<div class="col-lg-12">
 			      			<mat-form-field class="form-field">
 				                <mat-label>Company Name</mat-label>
-				                <input  name="companyName" matInput value="{{companyName}}" required>
+				                <input matInput value="{{ companyName}}" required>
 				            </mat-form-field>      			
 			      		</div>
 			      		<div class="col-lg-12">
 			      			<mat-form-field class="form-field">
 				                <mat-label>Company Email</mat-label>
-				                <input  name="companyEmail" matInput value="{{companyEmail}}" required>
+				                <input matInput value="{{ companyEmail}}" required>
 				            </mat-form-field>      			
 			      		</div>
 			      	</div>
@@ -49,23 +44,23 @@
 		      		<div class="col-lg-6">
 		      			<mat-form-field class="form-field">
 			                <mat-label>Contact No</mat-label>
-			                <input  name="contactNo" matInput value="{{contactNo}}" required>
+			                <input matInput value="{{ contactNo}}" required>
 			            </mat-form-field>      			
 		      		</div>
 		      		<div class="col-lg-6">
 		      			<mat-form-field class="form-field">
 			                <mat-label>Location</mat-label>
-			                <input name="location" matInput value="{{location }}" required>
+			                <input matInput value="{{ location }}" required>
 			            </mat-form-field>      			
 		      		</div>
 		      		<div class="col-lg-12">
 		      			<mat-form-field class="form-field">
 			                <mat-label>Designation</mat-label>
-			                <input  name="designation" matInput value="{{designation}}" required>
+			                <input matInput value="{{ designation}}" required>
 			            </mat-form-field>      			
 		      		</div>
 		      		<div class="col-lg-12 text-center">
-		      			<button  mat-raised-button color="primary">update</button>
+		      			<button mat-raised-button color="primary">Primary</button>
 		      		</div>
 		      	</div>
 			  </mat-card-content>
@@ -74,33 +69,27 @@
 		<div class="col-lg-6 mb-3">
 			<mat-card class="mb-3 cmn-card cmn-card-left">
 			  <mat-card-content>
-  <!--  secound edit button -->
-  <div class="col-lg-12 d-flex mb-3"  >
-	<button mat-raised-button mat-button  class=" minimized-button ms-auto" color="warn" (click)="toggleButton()"  (click)="toggleEditMode()"  >{{ buttonText }}</button>
-</div>
-
-
 			  	<div class="row">
 		      		<div class="col-lg-6">
 		      			<mat-form-field class="form-field">
 			                <mat-label>First name</mat-label>
-			                <input [disabled]="!editMode"   name="firstName" matInput value="{{ fname }}" required>
+			                <input matInput value="{{ fname }}" required>
 			            </mat-form-field>      			
 		      		</div>
 		      		<div class="col-lg-6">
 		      			<mat-form-field class="form-field">
 			                <mat-label>Last Name</mat-label>
-			                <input [disabled]="!editMode"  name="lastName" matInput value="{{ lname }}" required>
+			                <input matInput value="{{ lname }}" required>
 			            </mat-form-field>      			
 		      		</div>
 		      		<div class="col-lg-12">
 		      			<mat-form-field class="form-field">
 			                <mat-label>Personal Email</mat-label>
-			                <input [disabled]="!editMode"  name="personalEmail" matInput value="{{personalEmail}}" required>
+			                <input matInput value="{{ personalEmail }}" required>
 			            </mat-form-field>      			
 		      		</div>
 		      		<div class="col-lg-12 text-center">
-		      			<button  mat-raised-button color="primary" mat-button *ngIf="showNewButton" >update</button>
+		      			<button mat-raised-button color="primary">Primary</button>
 		      		</div>
 		      	</div>
 			  </mat-card-content>
@@ -111,7 +100,7 @@
 		      		<div class="col-lg-6">
 		      			<mat-form-field>
 		                <mat-label>Enter your password</mat-label>
-		                <input  name="password" matInput [type]="hide ? 'password' : 'text'">
+		                <input matInput [type]="hide ? 'password' : 'text'">
 		                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
 		                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
 		                </button>
@@ -119,7 +108,7 @@
 		      		</div>
 		      		<div class="col-lg-6">
 		      			<mat-form-field>
-		                <mat-label >Enter your password</mat-label>
+		                <mat-label>Enter your password</mat-label>
 		                <input matInput [type]="hide ? 'password' : 'text'">
 		                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
 		                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -127,7 +116,7 @@
 		              	</mat-form-field>     			
 		      		</div>
 		      		<div class="col-lg-12 text-center">
-		      			<button  mat-raised-button color="primary">Update</button>
+		      			<button mat-raised-button color="primary">Primary</button>
 		      		</div>
 		      	</div>
 			  </mat-card-content>

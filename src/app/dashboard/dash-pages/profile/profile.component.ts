@@ -23,25 +23,7 @@ export class ProfileComponent implements OnInit{
   hide = true;
   userId!: string | null;
 
-  showNewButton: boolean = false;
-  buttonText: string = 'Edit';
- 
-   // for show new button while click
-  toggleButton(): void {
-    if (this.showNewButton) {
-      this.showNewButton = false;
-      this.buttonText = 'Edit';
-    } else {
-      this.showNewButton = true;
-      this.buttonText = 'Cancel';
-    }
-  }
-  editMode: boolean = false;
-
-
-  toggleEditMode() {
-    this.editMode = !this.editMode;
-  }
+  
 
   ngOnInit() {
     this.fetchUserData();

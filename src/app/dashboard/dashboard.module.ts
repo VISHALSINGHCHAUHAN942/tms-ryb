@@ -45,6 +45,7 @@ import { AuthService } from '../login/auth/auth.service';
 import {MatTabsModule} from '@angular/material/tabs';
 import { DestopUserManagerComponent } from './dash-pages/user-manage/destop-user-manager/destop-user-manager.component';
 import { MobileUserManagerComponent } from './dash-pages/user-manage/mobile-user-manager/mobile-user-manager.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -89,7 +90,8 @@ import { MobileUserManagerComponent } from './dash-pages/user-manage/mobile-user
     MatTableModule,
     MatTabsModule,
     MatChipsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatPaginatorModule
   ],
   providers:[
     AuthService,

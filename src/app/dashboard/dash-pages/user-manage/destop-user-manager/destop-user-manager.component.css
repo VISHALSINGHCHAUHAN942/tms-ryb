@@ -1,18 +1,17 @@
-.users {
-  padding-top: 13vh;
-  padding-bottom: 5vh;
-}
 
 mat-card-content {
-  max-height: 700px; /* Set the maximum height for the card content */
-  width: 1000px;
+  max-height: 700px; 
+  /* Set the maximum height for the card content */
+  width: 100%px;
   overflow-y: auto;
+  overflow-x:auto;
 }
 
-/* mat-card{
+mat-card{
     border:1.5px solid #3F51B5 ;
+    max-height: 60vh;
     
-} */
+}
 
 .card-header {
   border-radius: 5px;
@@ -64,7 +63,7 @@ mat-card-content {
 .card-item {
   margin-bottom: 16px;
   width: 300px;
-  height: 100px;
+  height: 70px;
   align-items: center;
   margin-left: 10px;
   margin-right: 10px;
@@ -75,8 +74,28 @@ mat-card-content {
   align-items: center;
   margin: auto;
 }
-
-mat-table {
-  width: 100%;
+.tab-group{
+margin-top: 3.0rem;
 }
+
+.button-row{
+  margin-left: 2%;
+  margin-top: 2%;
+    justify-content: center;
+    align-items: center;
+  }
+  /* tr:nth-child(even){
+    background-color: whitesmoke;
+  }
+  
+  tr:nth-child(odd){
+    background-color: whitesmoke;
+  }
+   */
+  table {
+    max-height: 60vh;
+    width:100%;
+
+    } 
+    
 

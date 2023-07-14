@@ -62,4 +62,6 @@ export class DashDataService {
   userDetails(userId: string):Observable<any> {
     return this.http.get(`${this.API_URL}/user-data/${userId}`);
   }
+
+
 }
