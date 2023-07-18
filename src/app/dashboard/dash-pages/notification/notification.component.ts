@@ -1,82 +1,61 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { DashDataService } from '../../dash-data-service/dash-data.service';
+import { AuthService } from '../../../login/auth/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-notification',
   templateUrl: './notification.component.html',
   styleUrls: ['./notification.component.css']
 })
-export class NotificationComponent {
+export class NotificationComponent implements OnInit{
+  UserEmail!: string | null;
+  notifications: any[] = [];
 
+  constructor(
+    private DashDataService: DashDataService,
+    private authService: AuthService,
+    public snackBar: MatSnackBar,
+  ) {}
  
   panelOpenState = false;
 
-   notifications = [
-      {
-        title: 'Notification 1',
-        summary: 'Summary of notification 1',
-        content: 'This is the primary content of notification 1.'
-      },
-      {
-        title: 'Notification 2',
-        summary: 'Summary of notification 2',
-        content: 'This is the primary content of notification 2.'
-      },
-      {
-        title: 'Notification 3',
-        summary: 'Summary of notification 3',
-        content: 'This is the primary content of notification 2.'
-      },
-      {
-        title: 'Notification 4',
-        summary: 'Summary of notification 4',
-        content: 'This is the primary content of notification 2.'
-      },
-      {
-        title: 'Notification 5',
-        summary: 'Summary of notification 5',
-        content: 'This is the primary content of notification 2.'
-      },
-      {
-        title: 'Notification 1',
-        summary: 'Summary of notification 1',
-        content: 'This is the primary content of notification 1.'
-      },
-      {
-        title: 'Notification 2',
-        summary: 'Summary of notification 2',
-        content: 'This is the primary content of notification 2.'
-      },
-      {
-        title: 'Notification 3',
-        summary: 'Summary of notification 3',
-        content: 'This is the primary content of notification 2.'
-      },
-      {
-        title: 'Notification 4',
-        summary: 'Summary of notification 4',
-        content: 'This is the primary content of notification 2.'
-      },{
-        title: 'Notification 1',
-        summary: 'Summary of notification 1',
-        content: 'This is the primary content of notification 1.'
-      },
-      {
-        title: 'Notification 2',
-        summary: 'Summary of notification 2',
-        content: 'This is the primary content of notification 2.'
-      },
-      {
-        title: 'Notification 3',
-        summary: 'Summary of notification 3',
-        content: 'This is the primary content of notification 2.'
-      },
-      {
-        title: 'Notification 4',
-        summary: 'Summary of notification 4',
-        content: 'This is the primary content of notification 2.'
-      }
-      // Add more notifications as needed
-    ];
+
+  ngOnInit(){
+    this.userEmail();
+  }
+
+  userEmail(){
+    const sessionUserId = sessionStorage.getItem('UserId');
+    if(sessionUserId){
+      this.DashDataService.userDetails(sessionUserId).subscribe(
+        (userData) => {
+          this.UserEmail = userData[0].PersonalEmail;
+          console.log(this.UserEmail);
+          this.userMessages();
+        },
+        (error) => {
+          console.log("Error While Fetching the User Email", error)
+        }
+      );
+    }
+  }
+
+  userMessages(){
+    if(this.UserEmail){
+      this.DashDataService.userMessages(this.UserEmail).subscribe(
+        (message) =>{
+          this.notifications = message;
+          console.log(this.notifications);
+        },
+        (error) => {
+          console.log("Error While Fetching the User Messages!");
+        }
+      );
+    }
+  }
+
    logs = [
     {message: "Hi Thisis Log 1."},
     {message: "Hi Thisis Log 2."},

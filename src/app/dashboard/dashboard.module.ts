@@ -43,9 +43,6 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AuthService } from '../login/auth/auth.service';
 import {MatTabsModule} from '@angular/material/tabs';
-import { DestopUserManagerComponent } from './dash-pages/user-manage/destop-user-manager/destop-user-manager.component';
-import { MobileUserManagerComponent } from './dash-pages/user-manage/mobile-user-manager/mobile-user-manager.component';
-
 
 @NgModule({
   declarations: [
@@ -61,8 +58,6 @@ import { MobileUserManagerComponent } from './dash-pages/user-manage/mobile-user
     NotificationComponent,
     UserManageComponent,
     SidebarComponent,
-    DestopUserManagerComponent,
-    MobileUserManagerComponent
   ],
   imports: [
     CommonModule,

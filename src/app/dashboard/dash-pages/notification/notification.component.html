@@ -7,16 +7,20 @@
       </div>
     	<div class="notification-card-container">
     		<mat-accordion>
-        <mat-expansion-panel *ngFor="let notification of notifications" class="mb-1">
+        <mat-expansion-panel *ngFor="let notification of notifications" class="mb-1"
+        [ngClass]="{'read': notification.isRead.data[0] === 1, 'unread': notification.isRead.data[0] === 0}">
           <mat-expansion-panel-header>
             <mat-panel-title>
-              {{ notification.title }}
+              {{ notification.sender }}
             </mat-panel-title>
             <mat-panel-description>
-              {{ notification.summary }}
+                <div class="ms-auto">{{ notification.timestamp}}</div>
             </mat-panel-description>
           </mat-expansion-panel-header>
-          <p>{{ notification.content }}</p>
+          <div class="container">
+            <div>{{ notification.message }}</div>
+          <p>{{ notification.timestamp }}</p>
+          </div>
         </mat-expansion-panel>
       </mat-accordion>
     	</div>

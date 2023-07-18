@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
 import { MatDialog} from '@angular/material/dialog';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { DestopUserManagerComponent } from './destop-user-manager/destop-user-manager.component';
-import { MobileUserManagerComponent } from './mobile-user-manager/mobile-user-manager.component';
 
 @Component({
   selector: 'app-user-manage',
@@ -11,14 +8,31 @@ import { MobileUserManagerComponent } from './mobile-user-manager/mobile-user-ma
 })
 export class UserManageComponent {
 
-  constructor(private breakpointObserver: BreakpointObserver,
-    public dialog: MatDialog) { }
-
-  isMobile:boolean = false;
-  ngOnInit() {
-    this.breakpointObserver.observe([Breakpoints.XSmall, Breakpoints.XSmall]).subscribe(result => {
-      this.isMobile = result.matches;
-    });
-  }
+  constructor(public dialog: MatDialog) { }
+  displayedColumns: string[] = ['Name', 'Contact', 'Designation', 'Status'];
+  dataSource: YourData[] = [
+    { fname: 'Kaushal', lname:'Pohekar', email: 'kaushalpohekar85@gmail.com', contactNo: '9309865924', designation:'SDE', status:'Active' },   
+    { fname: 'Kaushal', lname:'Pohekar', email: 'kaushalpohekar85@gmail.com', contactNo: '9309865924', designation:'SDE', status:'Active' },
+    { fname: 'Kaushal', lname:'Pohekar', email: 'kaushalpohekar85@gmail.com', contactNo: '9309865924', designation:'SDE', status:'Active' },   
+    { fname: 'Kaushal', lname:'Pohekar', email: 'kaushalpohekar85@gmail.com', contactNo: '9309865924', designation:'SDE', status:'Active' },
+    { fname: 'Kaushal', lname:'Pohekar', email: 'kaushalpohekar85@gmail.com', contactNo: '9309865924', designation:'SDE', status:'Active' },   
+    { fname: 'Kaushal', lname:'Pohekar', email: 'kaushalpohekar85@gmail.com', contactNo: '9309865924', designation:'SDE', status:'Active' },
+    { fname: 'Kaushal', lname:'Pohekar', email: 'kaushalpohekar85@gmail.com', contactNo: '9309865924', designation:'SDE', status:'Active' },   
+    { fname: 'Kaushal', lname:'Pohekar', email: 'kaushalpohekar85@gmail.com', contactNo: '9309865924', designation:'SDE', status:'Active' },
+    { fname: 'Kaushal', lname:'Pohekar', email: 'kaushalpohekar85@gmail.com', contactNo: '9309865924', designation:'SDE', status:'Active' },   
+    { fname: 'Kaushal', lname:'Pohekar', email: 'kaushalpohekar85@gmail.com', contactNo: '9309865924', designation:'SDE', status:'Active' },
+    { fname: 'Kaushal', lname:'Pohekar', email: 'kaushalpohekar85@gmail.com', contactNo: '9309865924', designation:'SDE', status:'Active' },   
+    { fname: 'Kaushal', lname:'Pohekar', email: 'kaushalpohekar85@gmail.com', contactNo: '9309865924', designation:'SDE', status:'Active' },   // Add more data objects as needed
+    
+  ];
   
+}
+
+export interface YourData {
+  fname: string;
+  lname: string;
+  email: string;
+  contactNo: string;
+  designation: string;
+  status: string;
 }

@@ -63,5 +63,19 @@ export class DashDataService {
     return this.http.get(`${this.API_URL}/user-data/${userId}`);
   }
 
+  userMessages(receiver: string): Observable<any> {
+    return this.http.get(`${this.API_URL}/messages/${receiver}`);
+  }
 
+  updatePersonal(userId: string, PersonalData:any): Observable<any>{
+    return this.http.put(`${this.API_URL}/personalDetails/${userId}`, PersonalData);
+  }
+
+  updateCompany(CompanyEmail: string, CompanyData:any): Observable<any>{
+    return this.http.put(`${this.API_URL}/companyDetails/${CompanyEmail}`, CompanyData);
+  }
+
+  updatePassword(userId: string, Password:any): Observable<any>{
+    return this.http.put(`${this.API_URL}/updatePassword/${userId}`, Password);
+  }
 }
