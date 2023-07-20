@@ -34,6 +34,7 @@ export class DataComponent implements OnInit {
   DeviceStatus!: any;
   DeviceLastUpdatedTime!: any;
   DeviceTrigger!: any;
+  loading1 = true;
 
 
   ngOnInit() {
@@ -322,6 +323,7 @@ export class DataComponent implements OnInit {
             this.DashDataService.deviceTrigger(deviceId).subscribe(
               (deviceTriggerResult: any) => {
                 this.DeviceTrigger = deviceTriggerResult[0].TriggerValue;
+                this.loading1 = false;
               }
             );
           }

@@ -7,6 +7,7 @@ import { AddUserComponent } from '../../dash-component/add-user/add-user.compone
 import { AddDeviceComponent } from '../../dash-component/add-device/add-device.component';
 import { interval, Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
+import{ DashService } from '../../dash.service';
 
 
 @Component({
@@ -32,12 +33,14 @@ export class UserManageComponent implements OnInit, OnDestroy {
     public dialog: MatDialog,
     private authService: AuthService,
     private dashDataService: DashDataService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    public dashService: DashService
   ) {}
 
   ngOnInit() {
     this.fetchData();
     this.startInterval();
+    this.dashService.isPageLoading(true);
   }
 
   ngOnDestroy() {
@@ -75,6 +78,7 @@ export class UserManageComponent implements OnInit, OnDestroy {
           this.totalUsers = users.length;
           this.totalOnlineUsers = this.dataSource.filter(user => user.is_online === 1).length;
           this.totalOfflineUsers = this.dataSource.filter(user => user.is_online === 0).length;
+          this.dashService.isPageLoading(false);
         },
         (error) => {
           // Handle error
@@ -93,6 +97,7 @@ export class UserManageComponent implements OnInit, OnDestroy {
           });
 
           this.totalDevices = this.dataSource2.length;
+          this.dashService.isPageLoading(false);
         },
         (error) => {
           console.log('Error while fetching user devices!');

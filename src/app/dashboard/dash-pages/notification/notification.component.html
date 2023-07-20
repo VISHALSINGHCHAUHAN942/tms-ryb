@@ -3,7 +3,7 @@
     <div class="col-lg-8 col-md-8 col-sm-12">
       <div class="d-flex">
         <div class="notification-title">Notification</div>
-        <div class="ms-auto notification-title">Unread:(99+)</div>
+        <div class="ms-auto notification-title">Unread: {{ unreadCount }}</div>
       </div>
     	<div class="notification-card-container">
     		<mat-accordion>
@@ -14,12 +14,12 @@
               {{ notification.sender }}
             </mat-panel-title>
             <mat-panel-description>
-                <div class="ms-auto">{{ notification.timestamp}}</div>
+                <div class="ms-auto">{{ notification.timestamp | date: 'medium' }}</div>
             </mat-panel-description>
           </mat-expansion-panel-header>
           <div class="container">
             <div>{{ notification.message }}</div>
-          <p>{{ notification.timestamp }}</p>
+          <p>{{ notification.timestamp | date: 'medium' }}</p>
           </div>
         </mat-expansion-panel>
       </mat-accordion>

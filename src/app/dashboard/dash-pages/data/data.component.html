@@ -2,31 +2,36 @@
 	<div class="row mb-2">
 		<div class="col-lg-4 col-md-4 col-sm-12 mb-2">
 			<mat-card class="mb-2 data-charts">
-			  <mat-card-content>
-			    <div class="panel-title">
-			      <mat-icon>thermostat</mat-icon>
-			      Device Panel
-			      <button mat-icon-button color="primary" class="refresh-button" (click)="refresh()">
-			        <mat-icon>refresh</mat-icon>
-			      </button>
-			    </div>
-			    <div class="panel">
-					  <div class="panel-device-name">Name: {{ DeviceName }}</div>
-					  <div class="panel-device-trigger">Trigger: {{ DeviceTrigger }}</div>
-					</div>
+				<div class="spinner-container" *ngIf="loading1">
+		      <mat-spinner class="custom-spinner"></mat-spinner>
+		    </div>
+				<div *ngIf="!loading1">
+				  <mat-card-content>
+				    <div class="panel-title">
+				      <mat-icon>thermostat</mat-icon>
+				      Device Panel
+				      <button mat-icon-button color="primary" class="refresh-button" (click)="refresh()">
+				        <mat-icon>refresh</mat-icon>
+				      </button>
+				    </div>
+				    <div class="panel">
+						  <div class="panel-device-name">Name: {{ DeviceName }}</div>
+						  <div class="panel-device-trigger">Trigger: {{ DeviceTrigger }}</div>
+						</div>
 
-			    <div class="panel-device-status"
-					     [ngClass]="{
-					       'online': DeviceStatus === 'online',
-					       'offline': DeviceStatus === 'offline',
-					       'heating': DeviceStatus === 'heating'
-					     }">
-					{{ DeviceStatus }}
-					</div>
-			    <div class="panel-device-time">
-			      Last Updated: <span>{{ DeviceLastUpdatedTime }}</span>
-			    </div>
-			  </mat-card-content>
+				    <div class="panel-device-status"
+						     [ngClass]="{
+						       'online': DeviceStatus === 'online',
+						       'offline': DeviceStatus === 'offline',
+						       'heating': DeviceStatus === 'heating'
+						     }">
+						{{ DeviceStatus }}
+						</div>
+				    <div class="panel-device-time">
+				      Last Updated: <span>{{ DeviceLastUpdatedTime }}</span>
+				    </div>
+				  </mat-card-content>
+				</div>
 			</mat-card>
 
 		</div>

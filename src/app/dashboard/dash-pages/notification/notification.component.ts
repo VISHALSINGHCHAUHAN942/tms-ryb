@@ -12,6 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class NotificationComponent implements OnInit{
   UserEmail!: string | null;
   notifications: any[] = [];
+  unreadCount!: any;
 
   constructor(
     private DashDataService: DashDataService,
@@ -47,7 +48,7 @@ export class NotificationComponent implements OnInit{
       this.DashDataService.userMessages(this.UserEmail).subscribe(
         (message) =>{
           this.notifications = message;
-          console.log(this.notifications);
+          this.unreadCount = this.notifications.filter(msg => !msg.isRead || msg.isRead.data[0] === 0).length;
         },
         (error) => {
           console.log("Error While Fetching the User Messages!");

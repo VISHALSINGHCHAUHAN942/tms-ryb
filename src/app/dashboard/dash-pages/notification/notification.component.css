@@ -47,9 +47,9 @@
 
 
 .read {
-  border-left: 5px solid blue;
+  border-left: 5px solid grey;
 }
 
 .unread {
-  background-color: grey;
+  border-left: 5px solid blue;
 }

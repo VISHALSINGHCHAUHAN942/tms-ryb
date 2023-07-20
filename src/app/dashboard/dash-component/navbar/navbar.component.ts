@@ -3,6 +3,7 @@ import { DashService } from '../../dash.service';
 import { AuthService } from '../../../login/auth/auth.service';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -14,6 +15,10 @@ export class NavbarComponent {
 
   public toggleMenu() {
     this.dashService.toggleMenu();
+  }
+
+  getUserType(): string | null {
+    return this.authService.getUserType();
   }
 
   logout(){
@@ -39,10 +44,4 @@ export class NavbarComponent {
   profile(){
     this.router.navigate(['/dash/profile']);
   }
-  
-  /*public notifications: string[] = [
-    'Notification 1',
-    'Notification 2',
-    'Notification 3'
-  ];*/
 }

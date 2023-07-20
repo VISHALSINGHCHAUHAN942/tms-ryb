@@ -19,6 +19,7 @@ export class AddDeviceComponent implements OnInit{
   DeviceName = new FormControl('', [Validators.required]);
   DeviceUID = new FormControl('', [Validators.required]);
   DeviceLocation = new FormControl('', [Validators.required]);
+
   @HostListener('window:resize')
   onWindowResize() {
     this.adjustDialogWidth();
@@ -76,6 +77,7 @@ export class AddDeviceComponent implements OnInit{
               this.snackBar.open('Device Added Successful!', 'Dismiss', {
                 duration: 2000
               });
+              this.dialogRef.close();
             },
             (error) => {
               this.snackBar.open(
@@ -92,6 +94,7 @@ export class AddDeviceComponent implements OnInit{
             'Dismiss',
             { duration: 2000 }
           );
+        this.dialogRef.close();
       });
     }
   }
