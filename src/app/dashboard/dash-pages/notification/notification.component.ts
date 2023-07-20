@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DashDataService } from '../../dash-data-service/dash-data.service';
 import { AuthService } from '../../../login/auth/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DatePipe } from '@angular/common';
 
 
 @Component({
@@ -18,6 +19,7 @@ export class NotificationComponent implements OnInit{
     private DashDataService: DashDataService,
     private authService: AuthService,
     public snackBar: MatSnackBar,
+    private datePipe: DatePipe,
   ) {}
  
   panelOpenState = false;
@@ -33,11 +35,12 @@ export class NotificationComponent implements OnInit{
       this.DashDataService.userDetails(sessionUserId).subscribe(
         (userData) => {
           this.UserEmail = userData[0].PersonalEmail;
-          console.log(this.UserEmail);
           this.userMessages();
         },
         (error) => {
-          console.log("Error While Fetching the User Email", error)
+          this.snackBar.open('Error While Fetching the UserEmail!', 'Dismiss', {
+            duration: 2000
+          });          
         }
       );
     }
@@ -51,7 +54,9 @@ export class NotificationComponent implements OnInit{
           this.unreadCount = this.notifications.filter(msg => !msg.isRead || msg.isRead.data[0] === 0).length;
         },
         (error) => {
-          console.log("Error While Fetching the User Messages!");
+          this.snackBar.open('Error While Fetching the User Messages!', 'Dismiss', {
+            duration: 2000
+          });
         }
       );
     }
