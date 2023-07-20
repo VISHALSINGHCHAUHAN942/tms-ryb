@@ -102,7 +102,6 @@ export class AuthService {
 
             const userId = user.UserId;
             sessionStorage.setItem('UserId', userId);
-            console.log(userId);
           },
           (error: any) => {
             console.error(error);

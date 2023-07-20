@@ -52,7 +52,6 @@ export class EditDeviceComponent {
 
   onSaveClick(): void {
     this.deviceId = this.device.DeviceUID;
-    console.log(this.deviceId);
     if (this.DeviceLocation.valid && this.DeviceName.valid){
       const deviceData ={
       DeviceLocation : this.DeviceLocation.value,

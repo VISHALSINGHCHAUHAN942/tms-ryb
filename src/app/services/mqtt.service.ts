@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MqttService, IMqttMessage } from 'ngx-mqtt';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class MqttService {
   private password = 'your-password';
   private clientId = `mqtt-client-${Math.random().toString(16).substr(2, 8)}`;
 
-  constructor(private mqttService: MqttService) { }
+  constructor(private mqttService: MqttService,public snackBar: MatSnackBar) { }
 
   connect(): Promise<void> {
     return new Promise<void>((resolve, reject) => {
@@ -27,7 +28,9 @@ export class MqttService {
       });
 
       this.mqttClient.onConnect.subscribe(() => {
-        console.log('Connected to MQTT broker');
+        this.snackBar.open('Connected to MQTT broker!', 'Dismiss', {
+          duration: 2000
+        });
         resolve();
       });
 
@@ -41,7 +44,9 @@ export class MqttService {
   disconnect(): void {
     if (this.mqttClient) {
       this.mqttClient.disconnect();
-      console.log('Disconnected from MQTT broker');
+      this.snackBar.open('Disconnected from MQTT broker!', 'Dismiss', {
+        duration: 2000
+      });
     }
   }
 }

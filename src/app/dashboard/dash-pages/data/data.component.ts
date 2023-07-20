@@ -44,9 +44,6 @@ export class DataComponent implements OnInit {
     if (sessionData && sessionDataStatus && sessionDevice) {
       const jsonData = JSON.parse(sessionData);
       const jsonDataStatus = JSON.parse(sessionDataStatus);
-      console.log('Using session storage data:', jsonData);
-      console.log('Using session storage data fpr Status:', jsonDataStatus);
-      console.log('Using Session Storage for Device:', sessionDevice);
       this.processChartData(jsonData);
       this.createDonutChart(jsonDataStatus.dataStatus);
       this.fetchDeviceInfo(sessionDevice);
@@ -69,8 +66,10 @@ export class DataComponent implements OnInit {
           }
         },
         (error) => {
-          console.log('Error while fetching user devices!');
-        }
+          this.snackBar.open('Error while fetching user devices!', 'Dismiss', {
+            duration: 2000
+        });
+      }
       );
     }
   }
@@ -241,7 +240,6 @@ export class DataComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result && result.data && result.dataStatus && result.device) {
-        console.log('Data received from filter modal:', result.data , result.dataStatus, result.device);
         sessionStorage.setItem('data', JSON.stringify(result.data));
         sessionStorage.setItem('dataStatus', JSON.stringify(result.dataStatus));
         sessionStorage.setItem('device',result.device);
@@ -255,12 +253,13 @@ export class DataComponent implements OnInit {
         if (sessionData && sessionDataStatus && sessionDevice) {
           const jsonData = JSON.parse(sessionData);
           const jsonDataStatus = JSON.parse(sessionDataStatus);
-          console.log('Using session storage data:', jsonData, jsonDataStatus, sessionDevice);
           this.processChartData(jsonData);
           this.createDonutChart(jsonDataStatus.dataStatus);
           this.fetchDeviceInfo(sessionDevice);
         } else {
-          console.log('No session storage data available');
+          this.snackBar.open('No session storage data available!', 'Dismiss', {
+            duration: 2000
+          });
           this.fetchDefaultData();
         }
       }
@@ -281,12 +280,16 @@ export class DataComponent implements OnInit {
           );
         },
         (error) => {
-        console.log('Error while fetching last data!');
+          this.snackBar.open('Error while fetching last data!', 'Dismiss', {
+            duration: 2000
+          });
       }
       );
     }
     else{
-      console.log(" not defined");
+      this.snackBar.open('Not Defined!', 'Dismiss', {
+        duration: 2000
+      });
     }
   }
 
@@ -330,7 +333,9 @@ export class DataComponent implements OnInit {
         );
       },
       (error) => {
-        console.log('Error while fetching last data!');
+        this.snackBar.open('Error while fetching last data!', 'Dismiss', {
+          duration: 2000
+        });
       }
     ); 
   }

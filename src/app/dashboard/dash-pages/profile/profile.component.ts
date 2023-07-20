@@ -3,6 +3,7 @@ import { DashDataService } from '../../dash-data-service/dash-data.service';
 import { AuthService } from '../../../login/auth/auth.service';
 import { FormControl, Validators } from '@angular/forms';
 import{ DashService } from '../../dash.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -13,7 +14,7 @@ import{ DashService } from '../../dash.service';
 
 export class ProfileComponent implements OnInit{
 
-  constructor(private dashService:DashService,private authService:AuthService, private DashDataService:DashDataService){}
+  constructor(private dashService:DashService,private authService:AuthService, private DashDataService:DashDataService,public snackBar: MatSnackBar){}
   fname!: string;
   lname!: string;
   companyEmail!: string;
@@ -64,11 +65,15 @@ export class ProfileComponent implements OnInit{
           this.dashService.isPageLoading(false);
         },
         (error) => {
-          console.log("Error for getting details!");
+          this.snackBar.open('Error for getting details!', 'Dismiss', {
+            duration: 2000
+          });
         }
       );
     } else {
-          console.log("UserId is not available!")
+      this.snackBar.open('UserId is not available!', 'Dismiss', {
+        duration: 2000
+        });
     }
 
   }
@@ -81,16 +86,22 @@ export class ProfileComponent implements OnInit{
     if (this.userId) {
       this.DashDataService.updatePersonal(this.userId, PersonalData).subscribe(
         () => {
-          console.log("Successfully Updated!");
+          this.snackBar.open('Successfully Updated!', 'Dismiss', {
+            duration: 2000
+            });
           this.fetchUserData();
           this.togglePersonal();
         },
         (error) => {
-          console.log("Error for getting details!");
+          this.snackBar.open('Error for getting details!', 'Dismiss', {
+            duration: 2000
+            });
         }
       );
     } else {
-          console.log("UserId is not available!")
+      this.snackBar.open('UserId is not available!', 'Dismiss', {
+        duration: 2000
+        });
     }
 
   }
@@ -103,23 +114,31 @@ export class ProfileComponent implements OnInit{
     if (this.userId) {
       this.DashDataService.updateCompany(this.userId, CompanyData).subscribe(
         () => {
-          console.log("Successfully Updated!");
+          this.snackBar.open('Successfully Updated!', 'Dismiss', {
+            duration: 2000
+            });
           this.fetchUserData();
           this.toggleCompany();
         },
         (error) => {
-          console.log("Error for getting details!");
+          this.snackBar.open('Error for getting details!', 'Dismiss', {
+            duration: 2000
+            });
         }
       );
     } else {
-          console.log("UserId is not available!")
+      this.snackBar.open('UserId is not available!', 'Dismiss', {
+        duration: 2000
+        });
     }
 
   }
 
   updatePassword() {
   if (this.password !== this.CPassword) {
-    console.log("Passwords do not match.");
+    this.snackBar.open('Passwords do not match!', 'Dismiss', {
+      duration: 2000
+      });
     return;
   }
 
@@ -130,17 +149,23 @@ export class ProfileComponent implements OnInit{
   if (this.userId) {
     this.DashDataService.updatePassword(this.userId, passwordData).subscribe(
       () => {
-        console.log("Successfully updated password!");
+        this.snackBar.open('Successfully updated password!', 'Dismiss', {
+          duration: 2000
+          });
         // Additional logic if needed
         this.fetchUserData();
         this.togglePassword();
       },
       (error) => {
-        console.log("Error updating password:", error);
+        this.snackBar.open('Error updating password!', 'Dismiss', {
+          duration: 2000
+          });
       }
     );
   } else {
-    console.log("UserId is not available!");
+    this.snackBar.open('UserId is not available!', 'Dismiss', {
+      duration: 2000
+      });
   }
 }
 

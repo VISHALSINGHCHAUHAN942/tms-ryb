@@ -72,7 +72,9 @@ export class FilterComponent {
           }
         },
         (error) => {
-          console.log('Error whi le fetching user devices!');
+          this.snackBar.open('Error while fetching user devices!', 'Dismiss', {
+            duration: 2000
+          });
         }
       );
     }
@@ -97,16 +99,22 @@ export class FilterComponent {
                 this.dialogRef.close({ data, dataStatus, device });
               },
               (error) => {
-                console.log('Error while fetching last data status!');
+                this.snackBar.open('Error while fetching last data status!', 'Dismiss', {
+                  duration: 2000
+                });
               }
             );
           },
           (error) => {
-            console.log('Error while fetching last data!');
+            this.snackBar.open('Error while fetching last data!', 'Dismiss', {
+              duration: 2000
+            });
           }
         );
       } else {
-        console.log('No device has been selected.');
+        this.snackBar.open('No device has been selected!', 'Dismiss', {
+          duration: 2000
+        });
       }
     } else if (this.selectedRadioButton === 'timePeriod') {
       if (this.selectedDevice.value) {
@@ -123,19 +131,23 @@ export class FilterComponent {
                 this.dialogRef.close({ data, dataStatus, device });
               },
               (error) => {
-                console.log('Error while fetching data status by custom date!');
+                this.snackBar.open('Error while fetching data status by custom date!', 'Dismiss', {
+                  duration: 2000
+                });
               }
             );
           },
           (error) => {
-            console.log('Error while fetching data by custom date!');
+            this.snackBar.open('Error while fetching data by custom date!', 'Dismiss', {
+              duration: 2000
+            });
           }
         );
       } else {
-        console.log('No device has been selected.');
+        this.snackBar.open('No device has been selected!', 'Dismiss', {
+          duration: 2000
+        });
       }
     }
   }
-
-
 }

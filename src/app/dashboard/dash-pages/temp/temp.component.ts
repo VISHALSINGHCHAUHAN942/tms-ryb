@@ -7,6 +7,7 @@ import { AuthService } from '../../../login/auth/auth.service';
 import { Subscription } from 'rxjs';
 import { MqttService, IMqttMessage } from 'ngx-mqtt';
 import{ DashService } from '../../dash.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-temp',
@@ -25,7 +26,8 @@ export class TempComponent implements OnInit, OnDestroy {
     private dashDataService: DashDataService,
     private authService: AuthService,
     private mqttService: MqttService,
-    public dashService: DashService
+    public dashService: DashService,
+    public snackBar: MatSnackBar,
   ) {}
 
 
@@ -54,7 +56,9 @@ export class TempComponent implements OnInit, OnDestroy {
           this.dashService.isPageLoading(false);
         },
         (error) => {
-          console.log('Error while fetching user devices!');
+          this.snackBar.open('Error while fetching user devices!', 'Dismiss', {
+            duration: 2000
+          });
         }
       );
     } 
@@ -68,7 +72,9 @@ export class TempComponent implements OnInit, OnDestroy {
           this.userDevicesTrigger = triggers.triggers;
         },
         (error) => {
-          console.log('Error while fetching user devices!');
+          this.snackBar.open('Error while fetching user devices!', 'Dismiss', {
+            duration: 2000
+          });
         }
       );
     } 

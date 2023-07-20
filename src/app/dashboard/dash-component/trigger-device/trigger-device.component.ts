@@ -52,7 +52,6 @@ export class TriggerDeviceComponent {
   onSaveClick(): void {
     this.deviceId = this.device.DeviceUID;
     this.CompanyEmail = this.authService.getCompanyEmail();
-    console.log(this.CompanyEmail);
     if(this.TriggerValue.valid){
       const triggerData = {
         TriggerValue : this.TriggerValue.value,

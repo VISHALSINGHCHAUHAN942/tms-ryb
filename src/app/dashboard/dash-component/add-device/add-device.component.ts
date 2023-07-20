@@ -60,7 +60,6 @@ export class AddDeviceComponent implements OnInit{
         CompanyEmail: this.CompanyEmail,
         CompanyName: this.CompanyName
       }
-      console.log('Saved B utton Clicked.', deviceData);
       
       const triggerData = {
         DeviceUID: this.DeviceUID.value,
@@ -68,7 +67,6 @@ export class AddDeviceComponent implements OnInit{
         CompanyEmail: this.CompanyEmail
       }
 
-      console.log('Saved B utton Clicked.', triggerData);
 
       this.DashDataService.addDevice(deviceData).subscribe(
         () =>{
