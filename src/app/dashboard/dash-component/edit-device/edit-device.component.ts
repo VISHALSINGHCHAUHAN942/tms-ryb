@@ -53,11 +53,12 @@ export class EditDeviceComponent {
   onSaveClick(): void {
     this.deviceId = this.device.DeviceUID;
     console.log(this.deviceId);
-    const deviceData ={
+    if (this.DeviceLocation.valid && this.DeviceName.valid){
+      const deviceData ={
       DeviceLocation : this.DeviceLocation.value,
       DeviceName : this.DeviceName.value
     }
-    this.DashDataService.editDevice(this.deviceId, deviceData).subscribe(
+      this.DashDataService.editDevice(this.deviceId, deviceData).subscribe(
       () => {
         this.snackBar.open('Device Details Updated successfully!', 'Dismiss', {
             duration: 2000
@@ -69,6 +70,7 @@ export class EditDeviceComponent {
             duration: 2000
           });
       });
+    }
   }
 
   getDevicenameError() {

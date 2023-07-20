@@ -18,6 +18,16 @@
   color: green;
 }
 
+.online{
+	color: green;
+	font-weight: 550;
+}
+
+.offline{
+	color: red;
+	font-weight: 550;
+}
+
 .total-count {
   font-size: 28px;
   font-weight: bold;

@@ -1,38 +1,141 @@
-import { Component } from '@angular/core';
-import { MatDialog} from '@angular/material/dialog';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { DatePipe } from '@angular/common';
+import { DashDataService } from '../../dash-data-service/dash-data.service';
+import { AuthService } from '../../../login/auth/auth.service';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { AddUserComponent } from '../../dash-component/add-user/add-user.component';
+import { AddDeviceComponent } from '../../dash-component/add-device/add-device.component';
+import { interval, Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-user-manage',
   templateUrl: './user-manage.component.html',
   styleUrls: ['./user-manage.component.css']
 })
-export class UserManageComponent {
-
-  constructor(public dialog: MatDialog) { }
+export class UserManageComponent implements OnInit, OnDestroy {
+  CompanyEmail!: string | null;
   displayedColumns: string[] = ['Name', 'Contact', 'Designation', 'Status'];
-  dataSource: YourData[] = [
-    { fname: 'Kaushal', lname:'Pohekar', email: 'kaushalpohekar85@gmail.com', contactNo: '9309865924', designation:'SDE', status:'Active' },   
-    { fname: 'Kaushal', lname:'Pohekar', email: 'kaushalpohekar85@gmail.com', contactNo: '9309865924', designation:'SDE', status:'Active' },
-    { fname: 'Kaushal', lname:'Pohekar', email: 'kaushalpohekar85@gmail.com', contactNo: '9309865924', designation:'SDE', status:'Active' },   
-    { fname: 'Kaushal', lname:'Pohekar', email: 'kaushalpohekar85@gmail.com', contactNo: '9309865924', designation:'SDE', status:'Active' },
-    { fname: 'Kaushal', lname:'Pohekar', email: 'kaushalpohekar85@gmail.com', contactNo: '9309865924', designation:'SDE', status:'Active' },   
-    { fname: 'Kaushal', lname:'Pohekar', email: 'kaushalpohekar85@gmail.com', contactNo: '9309865924', designation:'SDE', status:'Active' },
-    { fname: 'Kaushal', lname:'Pohekar', email: 'kaushalpohekar85@gmail.com', contactNo: '9309865924', designation:'SDE', status:'Active' },   
-    { fname: 'Kaushal', lname:'Pohekar', email: 'kaushalpohekar85@gmail.com', contactNo: '9309865924', designation:'SDE', status:'Active' },
-    { fname: 'Kaushal', lname:'Pohekar', email: 'kaushalpohekar85@gmail.com', contactNo: '9309865924', designation:'SDE', status:'Active' },   
-    { fname: 'Kaushal', lname:'Pohekar', email: 'kaushalpohekar85@gmail.com', contactNo: '9309865924', designation:'SDE', status:'Active' },
-    { fname: 'Kaushal', lname:'Pohekar', email: 'kaushalpohekar85@gmail.com', contactNo: '9309865924', designation:'SDE', status:'Active' },   
-    { fname: 'Kaushal', lname:'Pohekar', email: 'kaushalpohekar85@gmail.com', contactNo: '9309865924', designation:'SDE', status:'Active' },   // Add more data objects as needed
-    
-  ];
-  
+  displayedColumns2: string[] = ['DeviceName', 'Location', 'IssueDate', 'Status'];
+  dataSource: UserData[] = [];
+  dataSource2: DeviceData[] = [];
+  totalUsers: number = 0;
+  totalOnlineUsers: number = 0;
+  totalOfflineUsers: number = 0;
+  totalDevices: number = 0;
+  totalActiveDevices: number = 0;
+  totalInactiveDevices: number = 0;
+  intervalSubscription: Subscription | undefined;
+
+  constructor(
+    public dialog: MatDialog,
+    private authService: AuthService,
+    private dashDataService: DashDataService,
+    private datePipe: DatePipe
+  ) {}
+
+  ngOnInit() {
+    this.fetchData();
+    this.startInterval();
+  }
+
+  ngOnDestroy() {
+    this.stopInterval();
+  }
+
+  startInterval() {
+    this.intervalSubscription = interval(5000)
+      .pipe(take(Infinity))
+      .subscribe(() => {
+        this.fetchData();
+      });
+  }
+
+  stopInterval() {
+    if (this.intervalSubscription) {
+      this.intervalSubscription.unsubscribe();
+    }
+  }
+
+  fetchData() {
+    this.fetchUsers();
+    this.fetchDevices();
+  }
+
+  fetchUsers() {
+    this.CompanyEmail = sessionStorage.getItem('CompanyEmail');
+    if (this.CompanyEmail) {
+      this.dashDataService.companyUsers(this.CompanyEmail).subscribe(
+        (users) => {
+          this.dataSource = users.map((user: UserData) => {
+            user.status = user.is_online === 1 ? 'Online' : 'Offline';
+            return user;
+          });
+          this.totalUsers = users.length;
+          this.totalOnlineUsers = this.dataSource.filter(user => user.is_online === 1).length;
+          this.totalOfflineUsers = this.dataSource.filter(user => user.is_online === 0).length;
+        },
+        (error) => {
+          // Handle error
+        }
+      );
+    }
+  }
+
+  fetchDevices() {
+    if (this.CompanyEmail) {
+      this.dashDataService.userDevices(this.CompanyEmail).subscribe(
+        (devices: any) => {
+          this.dataSource2 = devices.devices.map((device: DeviceData) => {
+            device.formattedIssueDate = this.datePipe.transform(device.IssueDate, 'yyyy-MM-dd HH:mm:ss');
+            return device;
+          });
+
+          this.totalDevices = this.dataSource2.length;
+        },
+        (error) => {
+          console.log('Error while fetching user devices!');
+        }
+      );
+    }
+  }
+
+  openAddUserDialog(): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = '500px';
+    dialogConfig.height = 'auto';
+    dialogConfig.maxWidth = '90vw';
+    const dialogRef = this.dialog.open(AddUserComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(userAdded => {});
+  }
+
+  openAddDeviceDialog(): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = '500px';
+    dialogConfig.height = 'auto';
+    dialogConfig.maxWidth = '90vw';
+    const dialogRef = this.dialog.open(AddDeviceComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(deviceAdded => {});
+  }
 }
 
-export interface YourData {
-  fname: string;
-  lname: string;
-  email: string;
-  contactNo: string;
-  designation: string;
+export interface UserData {
+  FirstName: string;
+  LastName: string;
+  ContactNo: string;
+  PersonalEmail: string;
+  Designation: string;
+  UserType: string;
+  is_online: number;
   status: string;
+}
+
+export interface DeviceData {
+  DeviceUID: string;
+  DeviceLocation: string;
+  DeviceName: string;
+  IssueDate: string;
+  Status: string;
+  formattedIssueDate: string | null;
 }

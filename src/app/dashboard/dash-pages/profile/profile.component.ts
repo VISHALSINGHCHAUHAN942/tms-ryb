@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DashDataService } from '../../dash-data-service/dash-data.service';
 import { AuthService } from '../../../login/auth/auth.service';
 import { FormControl, Validators } from '@angular/forms';
+import{ DashService } from '../../dash.service';
 
 
 @Component({
@@ -12,7 +13,7 @@ import { FormControl, Validators } from '@angular/forms';
 
 export class ProfileComponent implements OnInit{
 
-  constructor(private authService:AuthService, private DashDataService:DashDataService){}
+  constructor(private dashService:DashService,private authService:AuthService, private DashDataService:DashDataService){}
   fname!: string;
   lname!: string;
   companyEmail!: string;
@@ -21,25 +22,18 @@ export class ProfileComponent implements OnInit{
   location!: string;
   designation!: string;
   contactNo!: string ;
-  hide = true;
+  password: string = '';
+  CPassword: string = ''; 
+  hidePassword = true;
+  hideConfirmPassword = true;
   userId!: string | null;
   cancelCompany: boolean = false;
   cancelPersonal: boolean = false;
   cancelPassword: boolean = false;
-  
-
-  f_Name = new FormControl('', [Validators.required]);
-  l_Name = new FormControl('', [Validators.required]);
-  company_Name = new FormControl('', [Validators.required]);
-  contact_No = new FormControl('', [Validators.required]);
-  lo_cation = new FormControl('', [Validators.required]);
-  newPassword = new FormControl('', [Validators.required]);
-  confirmPassword = new FormControl('', [Validators.required]);
-
-
 
   ngOnInit() {
     this.fetchUserData();
+    this.dashService.isPageLoading(true);
   }
 
   toggleCompany(){
@@ -67,6 +61,7 @@ export class ProfileComponent implements OnInit{
           this.location = userData[0].Location;
           this.designation = userData[0].Designation;
           this.contactNo = userData[0].ContactNo;
+          this.dashService.isPageLoading(false);
         },
         (error) => {
           console.log("Error for getting details!");
@@ -78,13 +73,17 @@ export class ProfileComponent implements OnInit{
 
   }
 
-  /*updateCompany() {
+  updatePersonal() {
     const PersonalData = {
-
+      FirstName : this.fname,
+      LastName : this.lname
     }
     if (this.userId) {
-      this.DashDataService.userDetails(this.userId).subscribe(
-        (userData) => {
+      this.DashDataService.updatePersonal(this.userId, PersonalData).subscribe(
+        () => {
+          console.log("Successfully Updated!");
+          this.fetchUserData();
+          this.togglePersonal();
         },
         (error) => {
           console.log("Error for getting details!");
@@ -94,5 +93,55 @@ export class ProfileComponent implements OnInit{
           console.log("UserId is not available!")
     }
 
-  }*/
+  }
+  updateCompany() {
+    const CompanyData = {
+      Designation : this.designation,
+      ContactNo : this.contactNo,
+      Location : this.location
+    }
+    if (this.userId) {
+      this.DashDataService.updateCompany(this.userId, CompanyData).subscribe(
+        () => {
+          console.log("Successfully Updated!");
+          this.fetchUserData();
+          this.toggleCompany();
+        },
+        (error) => {
+          console.log("Error for getting details!");
+        }
+      );
+    } else {
+          console.log("UserId is not available!")
+    }
+
+  }
+
+  updatePassword() {
+  if (this.password !== this.CPassword) {
+    console.log("Passwords do not match.");
+    return;
+  }
+
+  const passwordData = {
+    Password: this.password,
+  };
+
+  if (this.userId) {
+    this.DashDataService.updatePassword(this.userId, passwordData).subscribe(
+      () => {
+        console.log("Successfully updated password!");
+        // Additional logic if needed
+        this.fetchUserData();
+        this.togglePassword();
+      },
+      (error) => {
+        console.log("Error updating password:", error);
+      }
+    );
+  } else {
+    console.log("UserId is not available!");
+  }
+}
+
 }

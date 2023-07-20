@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -10,7 +11,7 @@ export class DashDataService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  private readonly API_URL = 'http://ec2-43-205-177-9.ap-south-1.compute.amazonaws.com:3000';
+  private readonly API_URL = 'http://ec2-13-233-68-41.ap-south-1.compute.amazonaws.com:80';
 
   userDevices(CompanyEmail: string): Observable<any> {
     return this.http.get(`${this.API_URL}/userdevices/${CompanyEmail}`);
@@ -71,11 +72,27 @@ export class DashDataService {
     return this.http.put(`${this.API_URL}/personalDetails/${userId}`, PersonalData);
   }
 
-  updateCompany(CompanyEmail: string, CompanyData:any): Observable<any>{
-    return this.http.put(`${this.API_URL}/companyDetails/${CompanyEmail}`, CompanyData);
+  updateCompany(UserId: string, CompanyData:any): Observable<any>{
+    return this.http.put(`${this.API_URL}/companyDetails/${UserId}`, CompanyData);
   }
 
   updatePassword(userId: string, Password:any): Observable<any>{
     return this.http.put(`${this.API_URL}/updatePassword/${userId}`, Password);
+  }
+
+  companyUsers(CompanyEmail: string): Observable<any>{
+    return this.http.get(`${this.API_URL}/Company-users/${CompanyEmail}`);
+  }
+
+  addDeviceTrigger(triggerData: any):Observable<any> {
+    return this.http.post(`${this.API_URL}/addDeviceTrigger`, triggerData);
+  }
+
+  addDevice(deviceData: any):Observable<any> {
+    return this.http.post(`${this.API_URL}/addDevice`, deviceData);
+  }
+
+  addUser(userRegister: any): Observable<any> {
+    return this.http.post(`${this.API_URL}/register-dashboard`, userRegister);
   }
 }

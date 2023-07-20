@@ -76,6 +76,22 @@
 	font-size: 20px;
 }
 
+.avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px; /* Adjust the width as needed */
+    height: 150px; /* Adjust the height as needed */
+    border-radius: 50%; /* To make the image round */
+    overflow: hidden; /* To hide any overflowing parts of the image */
+    margin-bottom: 20px; /* Adjust the margin as needed */
+  }
+
+  .avatar img {
+    width: 100%;
+    height: auto;
+  }
+  
 @media(max-width:425px){
 	.profile{
 		padding-top: 75px;

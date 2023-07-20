@@ -43,6 +43,9 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AuthService } from '../login/auth/auth.service';
 import {MatTabsModule} from '@angular/material/tabs';
+import { AddUserComponent } from './dash-component/add-user/add-user.component';
+import { AddDeviceComponent } from './dash-component/add-device/add-device.component';
+import { PageLoadingComponent } from './dash-loading/page-loading/page-loading.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +61,9 @@ import {MatTabsModule} from '@angular/material/tabs';
     NotificationComponent,
     UserManageComponent,
     SidebarComponent,
+    AddUserComponent,
+    AddDeviceComponent,
+    PageLoadingComponent,
   ],
   imports: [
     CommonModule,

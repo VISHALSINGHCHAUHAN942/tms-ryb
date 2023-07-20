@@ -6,6 +6,7 @@ import { DashDataService } from '../../dash-data-service/dash-data.service';
 import { AuthService } from '../../../login/auth/auth.service';
 import { Subscription } from 'rxjs';
 import { MqttService, IMqttMessage } from 'ngx-mqtt';
+import{ DashService } from '../../dash.service';
 
 @Component({
   selector: 'app-temp',
@@ -23,7 +24,8 @@ export class TempComponent implements OnInit, OnDestroy {
     public dialog: MatDialog,
     private dashDataService: DashDataService,
     private authService: AuthService,
-    private mqttService: MqttService
+    private mqttService: MqttService,
+    public dashService: DashService
   ) {}
 
 
@@ -31,6 +33,7 @@ export class TempComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.getUserDevices();
     this.getUserDevicesTrigger();
+    this.dashService.isPageLoading(true);
   }
 
   ngOnDestroy() {
@@ -48,6 +51,7 @@ export class TempComponent implements OnInit, OnDestroy {
         (devices: any) => {
           this.userDevices = devices.devices;
           this.subscribeToTopics();
+          this.dashService.isPageLoading(false);
         },
         (error) => {
           console.log('Error while fetching user devices!');

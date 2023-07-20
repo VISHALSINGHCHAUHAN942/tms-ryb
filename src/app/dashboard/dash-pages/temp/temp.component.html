@@ -1,3 +1,5 @@
+<div *ngIf="dashService.pageLoading"><app-page-loading></app-page-loading></div>
+<div *ngIf="!dashService.pageLoading">
 <section class="cards container-fluid">
   <div class="row">
     <div class="col-lg-4 col-md-6 col-sm-12 mb-3" *ngFor="let device of userDevices">
@@ -43,3 +45,4 @@
     </div>
   </div>
 </section>
+</div>
