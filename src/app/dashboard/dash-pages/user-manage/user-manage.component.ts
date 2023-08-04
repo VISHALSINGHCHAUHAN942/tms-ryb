@@ -96,7 +96,14 @@ export class UserManageComponent implements OnInit, OnDestroy {
             return device;
           });
 
+          this.dataSource2 = devices.devices.map((device: DeviceData) => {
+            device.Status = device.is_active === 1 ? 'Online' : 'Offline';
+            return device;
+          });
+
           this.totalDevices = this.dataSource2.length;
+          this.totalActiveDevices = this.dataSource2.filter(devices => devices.is_active === 1).length;
+          this.totalInactiveDevices = this.dataSource2.filter(devices => devices.is_active === 0 ).length;
           this.dashService.isPageLoading(false);
         },
         (error) => {
@@ -141,6 +148,7 @@ export interface DeviceData {
   DeviceLocation: string;
   DeviceName: string;
   IssueDate: string;
+  is_active: number;
   Status: string;
   formattedIssueDate: string | null;
 }

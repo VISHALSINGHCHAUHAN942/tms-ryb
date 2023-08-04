@@ -169,7 +169,9 @@ export class DataComponent implements OnInit {
       yAxis: {
         title: {
           text: 'Temperature'
-        }
+        },
+        min: 0,
+        max: 100,
       },
       series: [{
         name: 'Temperature',
@@ -208,7 +210,9 @@ export class DataComponent implements OnInit {
       yAxis: {
         title: {
           text: 'Humidity'
-        }
+        },
+        min: 0,
+        max: 100,
       },
       series: [{
         name: 'Humitidy',
