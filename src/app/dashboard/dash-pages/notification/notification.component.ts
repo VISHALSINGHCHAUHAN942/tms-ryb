@@ -62,28 +62,5 @@ export class NotificationComponent implements OnInit{
     }
   }
 
-   logs = [
-    {message: "Hi Thisis Log 1."},
-    {message: "Hi Thisis Log 2."},
-    {message: "Hi Thisis Log 3."},
-    {message: "Hi Thisis Log 4."},
-    {message: "Hi Thisis Log 5."},
-    {message: "Hi Thisis Log 6."},
-    {message: "Hi Thisis Log 7."},
-    {message: "Hi Thisis Log 8."},
-    {message: "Hi Thisis Log 9."},
-    {message: "Hi Thisis Log 10."},
-    {message: "Hi Thisis Log 11."},
-    {message: "Hi Thisis Log 12."},
-    {message: "Hi Thisis Log 13."},
-    {message: "Hi Thisis Log 14."},
-    {message: "Hi Thisis Log 15."},
-    {message: "Hi Thisis Log 16."},
-    {message: "Hi Thisis Log 17."},
-    {message: "Hi Thisis Log 18."},
-    {message: "Hi Thisis Log 19."},
-    {message: "Hi Thisis Log 20."}
-  ]
-
 }
 
