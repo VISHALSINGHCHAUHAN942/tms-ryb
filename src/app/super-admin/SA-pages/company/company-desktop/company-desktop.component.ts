@@ -5,7 +5,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { EditCompanyComponent } from '../edit-company/edit-company.component';
 import { DeleteCompanyComponent } from '../delete-company/delete-company.component';
 import { AddUsersComponent } from '../add-users/add-users.component';
-import { AddMultipleDevicesComponent } from '../../device/add-multiple-devices/add-multiple-devices.component';
+
 import { AddMultipleUsersComponent } from '../add-multiple-users/add-multiple-users.component';
 
 @Component({

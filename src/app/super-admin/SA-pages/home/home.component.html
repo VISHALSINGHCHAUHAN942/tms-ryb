@@ -1,34 +1,247 @@
-<div class="content">
+<div class="container-fluid content">
+	<!--first row-->
 	<div class="row">
-	<div class="col-lg-2 col-md-4 col-sm-6">
-		<mat-card>
-			<mat-card-content>Simple card</mat-card-content>
-		</mat-card>
+		<div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+			<mat-card>
+				<mat-card-content>
+					<div class="row">
+						<div class="col">
+							<h5>Devices</h5>
+						</div>
+						<div class="col">
+							<button mat-raised-button color="primary" class="" style="float: right;">Add Device</button>
+							<button mat-stroked-button color="primary" style="float: right;">View Docs</button>
+						</div>
+					</div>
+					<div class="row" style="margin-top: 2%;">
+						<div class="col-lg-4 col-md-4 col-sm-12">
+							<mat-card>
+								<mat-card-content>Inactive</mat-card-content>
+								<br>
+								<h3 style="margin-left: 10%;">10</h3>
+							</mat-card>
+						</div>
+						<div class="col-lg-4 col-md-4 col-sm-12">
+							<mat-card>
+								<mat-card-content>Active</mat-card-content>
+								<br>
+								<h3 style="margin-left: 10%;">0</h3>
+							</mat-card>
+						</div>
+						<div class="col-lg-4 col-md-4 col-sm-12">
+							<mat-card>
+								<mat-card-content>Total</mat-card-content>
+								<br>
+								<h3 style="margin-left: 10%;">10</h3>
+							</mat-card>
+						</div>
+					</div>
+				</mat-card-content>
+			</mat-card>
+		</div>
+		<div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+			<mat-card style="height: 100%;">
+				<mat-card-content>
+					<h5>Alarms</h5>
+					<div class="row" style="margin-top: 4%;">
+						<div class="col-lg-4 col-md-4 col-sm-12">
+							<mat-card>
+								<mat-card-content>Critical</mat-card-content>
+								<br>
+								<h3 style="margin-left: 10%;">0</h3>
+							</mat-card>
+						</div>
+						<div class="col-lg-4 col-md-4 col-sm-12">
+							<mat-card>
+								<mat-card-content>Assigned</mat-card-content>
+								<br>
+								<h3 style="margin-left: 10%;">0</h3>
+							</mat-card>
+						</div>
+						<div class="col-lg-4 col-md-4 col-sm-12">
+							<mat-card>
+								<mat-card-content>Total</mat-card-content>
+								<br>
+								<h3 style="margin-left: 10%;">0</h3>
+							</mat-card>
+						</div>
+					</div>
+				</mat-card-content>
+			</mat-card>
+		</div>
 	</div>
-	<div class="col-lg-2 col-md-4 col-sm-6">
-		<mat-card>
-			<mat-card-content>Simple card</mat-card-content>
-		</mat-card>
+	<!--second row-->
+	<div class="row">
+		<div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+			<mat-card>
+				<mat-card-content>
+					<div class="row">
+						<div class="col">
+							<h5>Dashboards</h5>
+						</div>
+						<div class="col">
+							<button mat-raised-button color="primary" class="" style="float: right;">Add
+								Dashboard</button>
+							<button mat-stroked-button color="primary" style="float: right;"> Last viewed</button>
+						</div>
+					</div>
+
+					<div class="table-container mt-4" style="overflow: auto; max-height: calc(60vh - 10vh); ">
+						<table mat-table [dataSource]="dataSource3" class="mat-table">
+							<!-- Define your table columns -->
+							<ng-container matColumnDef="DashboardNumber">
+								<th mat-header-cell *matHeaderCellDef>S.no</th>
+								<td mat-cell *matCellDef="let element">{{ element.DashboardNumber}}</td>
+							</ng-container>
+
+							<ng-container matColumnDef="DashboardName">
+								<th mat-header-cell *matHeaderCellDef>Name</th>
+								<td mat-cell *matCellDef="let element">{{ element.DashboardName}}</td>
+							</ng-container>
+
+							<ng-container matColumnDef="DashboardStatus">
+								<th mat-header-cell *matHeaderCellDef>Last Viewed</th>
+								<td mat-cell *matCellDef="let element">{{ element.DashboardStatus }}</td>
+							</ng-container>
+							<!-- Render the table header row -->
+							<thead>
+								<tr mat-header-row *matHeaderRowDef="displayedColumns3;"></tr>
+							</thead>
+							<!-- Render the table body rows -->
+							<tbody>
+								<tr mat-row *matRowDef="let row; columns: displayedColumns3;"></tr>
+							</tbody>
+						</table>
+					</div>
+				</mat-card-content>
+			</mat-card>
+		</div>
+		<div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+			<mat-card  style="height: 100%;">
+				<mat-card-header>
+					<div class="d-flex">
+						<h5>Activity</h5>
+						<div class="ms-auto">
+							<button mat-stroked-button color="primary">Devices</button>
+						</div>
+					
+					</div>
+				</mat-card-header>
+				<mat-card-content class="mt-4">
+					
+					<div id="curvedLine1" style="height: 300px;"></div>
+				</mat-card-content>
+			</mat-card>
+		</div>
 	</div>
-	<div class="col-lg-2 col-md-4 col-sm-6">
-		<mat-card>
-			<mat-card-content>Simple card</mat-card-content>
-		</mat-card>
+	 <!--third row-->
+	 <div class="row">
+		<div class="col-lg-4 col-md-4 col-sm-12 mb-3">
+			<mat-card style="height: 24em;">
+				<mat-card-content>
+					<div class="row">
+						<div class="row">
+							<div class="col">
+								<h5>Quick links</h5>
+							</div>
+							<div class="col"><span class="material-icons" style="float: right;">mode_edit</span>
+							</div>
+						</div>
+						<div class="row mt-3">
+							<div class="col-lg-6 col-md-12 col-sm-12 top-mar "><mat-card style="border-radius: 5rem; height: 3rem;">
+									<mat-card-content>Alarms</mat-card-content>
+								</mat-card></div>
+							<div class="col-lg-6 col-md-12 col-sm-12 top-mar "><mat-card style="border-radius: 5rem; height: 3rem;">
+									<mat-card-content>Dasboards</mat-card-content>
+								</mat-card></div>
+						</div>
+						<div class="row  mt-2">
+							<div class="col-lg-6 col-md-12 col-sm-12 top-mar"><mat-card style="border-radius: 5rem; height: 3rem;">
+									<mat-card-content>Devices</mat-card-content>
+								</mat-card></div>
+						</div>
+					</div>
+				</mat-card-content>
+			</mat-card>
+		</div>
+		<div class="col-lg-4 col-md-4 col-sm-12 mb-3">
+			<mat-card style="height: 24em;">
+				<mat-card-content>
+					<div class="row">
+						<div class="row">
+							<div class="col">
+								<h5>Documentation</h5>
+							</div>
+							<div class="col"><span class="material-icons" style="float: right;">mode_edit</span>
+							</div>
+						</div>
+						<div class="row mt-3">
+							<div class="col-lg-6 col-md-12 col-sm-12 top-mar"><mat-card style="border-radius: 5rem; height: 3rem;">
+									<mat-card-content>Getting started</mat-card-content>
+								</mat-card></div>
+							<div class="col-lg-6 col-md-12 col-sm-12 top-mar "><mat-card style="border-radius: 5rem; height: 3rem;">
+									<mat-card-content>Rule engine</mat-card-content>
+								</mat-card></div>
+						</div>
+						<div class="row  mt-2">
+							<div class="col-lg-6 col-md-12 col-sm-12  top-mar"><mat-card style="border-radius: 5rem; height: 3rem;">
+									<mat-card-content>API</mat-card-content>
+								</mat-card></div>
+							<div class="col-lg-6 col-md-12 col-sm-12  top-mar"><mat-card style="border-radius: 5rem; height: 3rem;">
+									<mat-card-content>Device profiles</mat-card-content>
+								</mat-card></div>
+						</div>
+					</div>
+				</mat-card-content>
+			</mat-card>
+		</div>
+		<div class="col-lg-4 col-md-4 col-sm-12 mb-3">
+			<mat-card>
+				<mat-card-content>
+					<div class="d-flex">
+						<h5>Usage</h5>
+						<div class="ms-auto">
+							<button mat-stroked-button color="primary">Entities</button>
+						</div>
+					</div>
+					<div class="table-container" style="overflow: auto; max-height: calc(60vh - 10vh);">
+						<table mat-table [dataSource]="dataSource4" class="mat-table">
+							<!-- Define your table columns -->
+							<ng-container matColumnDef="Devices">
+								<th mat-header-cell *matHeaderCellDef></th>
+								<td mat-cell *matCellDef="let element">{{ element.Devices}}</td>
+							</ng-container>
+
+							<ng-container matColumnDef="Values">
+								<th mat-header-cell *matHeaderCellDef></th>
+								<td mat-cell *matCellDef="let element">{{ element.Values}}</td>
+							</ng-container>
+
+							<ng-container matColumnDef="dash_Progress">
+								<th mat-header-cell *matHeaderCellDef></th>
+								<td mat-cell *matCellDef="let element">
+									<mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+								</td>
+							</ng-container>
+
+
+							<!-- Render the table header row -->
+							<thead>
+								<tr mat-header-row *matHeaderRowDef="displayedColumns4;"></tr>
+							</thead>
+
+							<!-- Render the table body rows -->
+							<tbody>
+								<tr mat-row *matRowDef="let row; columns: displayedColumns4;"></tr>
+							</tbody>
+						</table>
+					</div>
+				</mat-card-content>
+			</mat-card>
+		</div>
+
 	</div>
-	<div class="col-lg-2 col-md-4 col-sm-6">
-		<mat-card>
-			<mat-card-content>Simple card</mat-card-content>
-		</mat-card>
-	</div>
-	<div class="col-lg-2 col-md-4 col-sm-6">
-		<mat-card>
-			<mat-card-content>Simple card</mat-card-content>
-		</mat-card>
-	</div>
-	<div class="col-lg-2 col-md-4 col-sm-6">
-		<mat-card>
-			<mat-card-content>Simple card</mat-card-content>
-		</mat-card>
-	</div>
-	</div>
+
+
+
 </div>

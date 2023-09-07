@@ -1,0 +1,97 @@
+<div class="container">
+  <mat-card>
+    <mat-card-header class="d-flex justify-content-end mr-3" style="height: 60px">
+      <div class="col col-lg-1 col-md-1 col-sm-1 d-flex justify-content-between">
+        <button mat-mini-fab>
+          <mat-icon>refresh</mat-icon>
+        </button>
+        <button mat-mini-fab>
+          <mat-icon>search</mat-icon>
+        </button>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row mt-2">
+        <div class="col-lg-12 col-sm-12 col-md-12">
+          <div class="table-container">
+            <!-- audit-logs.component.html -->
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" >
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="details">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>details</th>
+      <td mat-cell *matCellDef="let element">{{element.details}}</td>
+    </ng-container>
+
+    <!-- Timestamp Column -->
+    <ng-container matColumnDef="entity_name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>entity_name</th>
+      <td mat-cell *matCellDef="let element">{{element.entity_name }}</td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="entity_type">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>entity_type</th>
+      <td mat-cell *matCellDef="let element">{{element.entity_type }}</td>
+    </ng-container>
+    <!-- IP Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>id </th>
+      <td mat-cell *matCellDef="let element">{{element.id }}</td>
+    </ng-container>
+
+    <!-- Entity Type Column -->
+    <ng-container matColumnDef="ip">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>ip</th>
+      <td mat-cell *matCellDef="let element">{{element.ip }}</td>
+    </ng-container>
+
+    <!-- Entity Name Column -->
+    <ng-container matColumnDef="request_type">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>request_type</th>
+      <td mat-cell *matCellDef="let element">{{element.request_type }}</td>
+    </ng-container>
+
+    <!-- Username Column -->
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>status</th>
+      <td mat-cell *matCellDef="let element">{{element.status }}</td>
+    </ng-container>
+
+    <!-- User Type Column -->
+    <ng-container matColumnDef="timestamp">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>timestamp</th>
+      <td mat-cell *matCellDef="let element">{{element.timestamp }}</td>
+    </ng-container>
+
+    <!-- Request Type Column -->
+    <ng-container matColumnDef="user_type">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>user_type</th>
+      <td mat-cell *matCellDef="let element">{{element.user_type}}</td>
+    </ng-container>
+
+    <!-- Status Column -->
+    <ng-container matColumnDef="username">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>username</th>
+      <td mat-cell *matCellDef="let element">{{element.username}}</td>
+    </ng-container>
+
+    <!-- Details Column -->
+   
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+
+</div>
+
+            </div>
+              <mat-paginator [pageSize]="10" showFirstLastButtons [hidePageSize]="true" ></mat-paginator>
+            </div>
+          </div>
+    </mat-card-content>
+    </mat-card>
+</div>

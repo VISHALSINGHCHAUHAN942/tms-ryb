@@ -1,0 +1,17 @@
+.container{
+    padding-top: 8vh; padding-bottom: 5vh;
+}
+
+.table-container {
+    max-height: 80%; /* Adjust the height as needed */
+    overflow-y: auto;
+  }
+  .sticky-header {
+    position: sticky;
+    top: 0;
+    background-color: white; /* You can adjust the background color as needed */
+    z-index: 1;
+  }
+  .mat-tab { overflow: hidden!important}
+  
+  

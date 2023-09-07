@@ -1,0 +1,57 @@
+<!-- <mat-card style="height: 100%; width: 100%"></mat-card> -->
+<div class="row bg-dark" style="height: 60px">
+    <div class="col-lg-4 col-md-4 col-sm-12 mt-3 mx-auto">
+      <h3 class="text-light">Add new devices</h3>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-12 mt-2 d-flex justify-content-evenly">
+      
+      <button mat-mini-fab color="warn" aria-label="Example icon button with a filter list icon">
+        <mat-icon>help</mat-icon>
+      </button>
+      <button mat-mini-fab color="warn" aria-label="Example icon button with a filter list icon" [mat-dialog-close]="true">
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </div>
+  </div>
+  
+  <mat-dialog-content class="mat-typography" >
+    <div class="row mt-5">
+      <mat-form-field appearance="fill" >
+        <mat-label>Device Name</mat-label>
+        <input matInput placeholder="Name is required">
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      </mat-form-field>
+  
+      <mat-form-field>
+        <mat-label>Select Device type</mat-label>
+        <mat-select>
+          <mat-option value="one">alarm</mat-option>
+          <mat-option value="two">alarm</mat-option>
+        </mat-select>
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill" >
+        <mat-label>Device IP</mat-label>
+        <input matInput placeholder="Name is required">
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill" >
+        <mat-label>Label</mat-label>
+        <input matInput placeholder="Label">
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill">
+        <mat-label>Discription</mat-label>
+        <textarea matInput></textarea>
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+  
+  <mat-dialog-actions align="end">
+    <button mat-raised-button [mat-dialog-close]="true" >Cancel</button>
+    <button mat-raised-button [mat-dialog-close]="true" cdkFocusInitial color="warn">Add</button>
+  </mat-dialog-actions>
+
+  

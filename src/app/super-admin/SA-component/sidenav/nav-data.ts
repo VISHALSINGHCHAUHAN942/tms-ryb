@@ -19,5 +19,33 @@ export const navbarData = [
         icon: 'people',
         label: 'User'
     },
+    {
+        routeLink: 'ApiUsage',
+        icon: 'assessment',
+        label: 'Api usage'
+    },
+    {
+        routeLink: 'ApiTracker',
+        icon: 'warning',
+        label: 'Api Tracker '
+    },
+    {
+        routeLink: 'Notification',
+        icon: 'notifications',
+        label: 'Notification'
+    },
+    {
+        routeLink: 'AuditLogs',
+        icon: 'portable_wifi_off',
+        label: 'Audit Logs'
+    },
+    {
+        routeLink: 'Alarms',
+        icon: 'warning',
+        label: 'Alarms'
+    },
+  
+    
+    
 
 ];

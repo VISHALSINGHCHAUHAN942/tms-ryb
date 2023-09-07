@@ -7,7 +7,6 @@ import { UserComponent } from './SA-pages/user/user.component';
 import { DeviceComponent } from './SA-pages/device/device.component';
 import { CompanyComponent } from './SA-pages/company/company.component';
 import { HomeComponent } from './SA-pages/home/home.component';
-
 import { SuperAdminRoutingModule } from './super-admin-routing.module';
 import { MatChipsModule } from '@angular/material/chips'; 
 import {MatIconModule} from '@angular/material/icon';
@@ -23,11 +22,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
-
 import {MatDialogModule} from '@angular/material/dialog';
-import { DeleteDeviceComponent } from './SA-pages/device/delete-device/delete-device.component';
-import { AddDevicesComponent } from './SA-pages/device/add-devices/add-devices.component';
-import { AddMultipleDevicesComponent } from './SA-pages/device/add-multiple-devices/add-multiple-devices.component';
 import { EditCompanyComponent } from './SA-pages/company/edit-company/edit-company.component';
 import { DeleteCompanyComponent } from './SA-pages/company/delete-company/delete-company.component';
 import { AddUsersComponent } from './SA-pages/company/add-users/add-users.component';
@@ -43,8 +38,25 @@ import { UserMobileComponent } from './SA-pages/user/user-mobile/user-mobile.com
 import { UserDesktopComponent } from './SA-pages/user/user-desktop/user-desktop.component';
 import { CompanyDesktopComponent } from './SA-pages/company/company-desktop/company-desktop.component';
 import { CompanyMobileComponent } from './SA-pages/company/company-mobile/company-mobile.component';
-import { DeviceMobileComponent } from './SA-pages/device/device-mobile/device-mobile.component';
-import { DeviceDesktopComponent } from './SA-pages/device/device-desktop/device-desktop.component';
+
+import { ApiUsageComponent } from './SA-pages/api-usage/api-usage.component';
+import { NotificationsComponent } from './SA-pages/notifications/notifications.component';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatTabsModule} from '@angular/material/tabs';
+import { AuditLogsComponent } from './SA-pages/audit-logs/audit-logs.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import { AddDeviceComponent } from './SA-pages/device/add-device/add-device.component';
+import {MatSelectModule} from '@angular/material/select';
+import { AlarmsComponent } from './SA-pages/alarms/alarms.component';
+import { ApitrackerComponent } from './SA-pages/apitracker/apitracker.component';
+
+
+
+
+
+
+
 
 
 
@@ -55,16 +67,13 @@ import { DeviceDesktopComponent } from './SA-pages/device/device-desktop/device-
   declarations: [
     SANavbarComponent,
     SAFooterComponent,
-    UserComponent,
-    DeviceComponent,
+   
     CompanyComponent,
     SALayoutComponent,
     HomeComponent,
     ContainerComponent,
     SidenavComponent,
-    DeleteDeviceComponent,
-    AddDevicesComponent,
-    AddMultipleDevicesComponent,
+
     EditCompanyComponent,
     DeleteCompanyComponent,
     AddUsersComponent,
@@ -77,11 +86,18 @@ import { DeviceDesktopComponent } from './SA-pages/device/device-desktop/device-
     UserDesktopComponent,
     CompanyDesktopComponent,
     CompanyMobileComponent,
-    DeviceMobileComponent,
-    DeviceDesktopComponent,
 
+    ApiUsageComponent,
+    NotificationsComponent,
+    AuditLogsComponent,
+    DeviceComponent,
+    UserComponent,
+    AddDeviceComponent,
+    AlarmsComponent,
+    ApitrackerComponent,
   ],
   imports: [
+   
     CommonModule,
     SuperAdminRoutingModule,
     MatIconModule,
@@ -98,7 +114,15 @@ import { DeviceDesktopComponent } from './SA-pages/device/device-desktop/device-
     MatExpansionModule,
     MatListModule,
     MatCardModule,
-    MatChipsModule
+    MatChipsModule,
+    MatMenuModule,
+    MatProgressBarModule,
+    MatTabsModule,
+    MatTooltipModule,
+    MatCardModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatSelectModule
   ]
 })
 export class SuperAdminModule { }
