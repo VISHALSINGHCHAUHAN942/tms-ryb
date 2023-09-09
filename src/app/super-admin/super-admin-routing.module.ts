@@ -17,10 +17,10 @@ const routes: Routes = [
 	{ path: 'users', component: UserComponent },
 	{ path: 'devices', component:DeviceComponent },
 	{ path: 'companies', component:CompanyComponent},
-	{ path: 'ApiUsage', component:ApiUsageComponent},
-	{ path: 'ApiTracker', component:ApitrackerComponent},
+	{ path: 'Api-Usage', component:ApiUsageComponent},
+	{ path: 'Api-Tracker', component:ApitrackerComponent},
 	 {path:'Notification', component:NotificationsComponent},
-	 {path:'AuditLogs',component:AuditLogsComponent},
+	 {path:'Audit-Logs',component:AuditLogsComponent},
 	 {path:'Alarms',component:AlarmsComponent},
 
 	{ path: '', redirectTo: 'home', pathMatch: 'full' }

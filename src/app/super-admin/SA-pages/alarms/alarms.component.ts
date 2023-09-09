@@ -11,27 +11,25 @@ export interface PeriodicElement {
   type:string;
   Severity : string;
   status:string;
+  assignee:string;
+  
 }
-
 const ELEMENT_DATA: PeriodicElement[] = [
-  {createtime: 1, device_name: 'Hydrogen',device_ip:'Abcs21424', type: 'senslive', Severity : 'H',status:'online'},
-  {createtime: 1, device_name: 'Hydrogen',device_ip:'Abcs21424', type: 'senslive', Severity : 'H',status:'online'},
-  {createtime: 1, device_name: 'Hydrogen',device_ip:'Abcs21424', type: 'senslive', Severity : 'H',status:'online'},
-  {createtime: 1, device_name: 'Hydrogen',device_ip:'Abcs21424', type: 'senslive', Severity : 'H',status:'online'},
-  {createtime: 1, device_name: 'Hydrogen',device_ip:'Abcs21424', type: 'senslive', Severity : 'H',status:'online'},
-  {createtime: 1, device_name: 'Hydrogen',device_ip:'Abcs21424', type: 'senslive', Severity : 'H',status:'online'},
-  {createtime: 1, device_name: 'Hydrogen',device_ip:'Abcs21424', type: 'senslive', Severity : 'H',status:'online'},
-  {createtime: 1, device_name: 'Hydrogen',device_ip:'Abcs21424', type: 'senslive', Severity : 'H',status:'online'},
-  {createtime: 1, device_name: 'Hydrogen',device_ip:'Abcs21424', type: 'senslive', Severity : 'H',status:'online'},
-  {createtime: 1, device_name: 'Hydrogen',device_ip:'Abcs21424', type: 'senslive', Severity : 'H',status:'online'},
-  {createtime: 1, device_name: 'Hydrogen',device_ip:'Abcs21424', type: 'senslive', Severity : 'H',status:'online'},
-  {createtime: 1, device_name: 'Hydrogen',device_ip:'Abcs21424', type: 'senslive', Severity : 'H',status:'online'},
-  {createtime: 1, device_name: 'Hydrogen',device_ip:'Abcs21424', type: 'senslive', Severity : 'H',status:'online'},
-  {createtime: 1, device_name: 'Hydrogen',device_ip:'Abcs21424', type: 'senslive', Severity : 'H',status:'online'},
-  {createtime: 1, device_name: 'Hydrogen',device_ip:'Abcs21424', type: 'senslive', Severity : 'H',status:'online'},
-  {createtime: 1, device_name: 'Hydrogen',device_ip:'Abcs21424', type: 'senslive', Severity : 'H',status:'online'},
-  {createtime: 1, device_name: 'Hydrogen',device_ip:'Abcs21424', type: 'senslive', Severity : 'H',status:'online'},
-  {createtime: 1, device_name: 'Hydrogen',device_ip:'Abcs21424', type: 'senslive', Severity : 'H',status:'online'},
+  {createtime: 1, device_name: 'Hydrogen',device_ip:'Abcs21424', type: 'senslive', Severity : 'H',status:'online',assignee:'user 1'},
+  {createtime: 1, device_name: 'Hydrogen',device_ip:'Abcs21424', type: 'senslive', Severity : 'H',status:'online',assignee:'user 1'},
+  {createtime: 1, device_name: 'Hydrogen',device_ip:'Abcs21424', type: 'senslive', Severity : 'H',status:'online',assignee:'user 1'},
+  {createtime: 1, device_name: 'Hydrogen',device_ip:'Abcs21424', type: 'senslive', Severity : 'H',status:'online',assignee:'user 1'},
+  {createtime: 1, device_name: 'Hydrogen',device_ip:'Abcs21424', type: 'senslive', Severity : 'H',status:'online',assignee:'user 1'},
+  {createtime: 1, device_name: 'Hydrogen',device_ip:'Abcs21424', type: 'senslive', Severity : 'H',status:'online',assignee:'user 1'},
+  {createtime: 1, device_name: 'Hydrogen',device_ip:'Abcs21424', type: 'senslive', Severity : 'H',status:'online',assignee:'user 1'},
+  {createtime: 1, device_name: 'Hydrogen',device_ip:'Abcs21424', type: 'senslive', Severity : 'H',status:'online',assignee:'user 1'},
+  {createtime: 1, device_name: 'Hydrogen',device_ip:'Abcs21424', type: 'senslive', Severity : 'H',status:'online',assignee:'user 1'},
+  {createtime: 1, device_name: 'Hydrogen',device_ip:'Abcs21424', type: 'senslive', Severity : 'H',status:'online',assignee:'user 1'},
+  {createtime: 1, device_name: 'Hydrogen',device_ip:'Abcs21424', type: 'senslive', Severity : 'H',status:'online',assignee:'user 1'},
+  {createtime: 1, device_name: 'Hydrogen',device_ip:'Abcs21424', type: 'senslive', Severity : 'H',status:'online',assignee:'user 1'},
+  {createtime: 1, device_name: 'Hydrogen',device_ip:'Abcs21424', type: 'senslive', Severity : 'H',status:'online',assignee:'user 1'},
+  {createtime: 1, device_name: 'Hydrogen',device_ip:'Abcs21424', type: 'senslive', Severity : 'H',status:'online',assignee:'user 1'},
+  {createtime: 1, device_name: 'Hydrogen',device_ip:'Abcs21424', type: 'senslive', Severity : 'H',status:'online',assignee:'user 1'},
 ];
 
 
@@ -43,7 +41,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class AlarmsComponent implements OnInit{
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
 
-  displayedColumns: string[] = ['createtime', 'device_name','device_ip', 'type', 'Severity ','status','details'];
+  displayedColumns: string[] = ['createtime', 'device_name','device_ip', 'type', 'Severity','assignee','status','details'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
   applyFilter(event: Event) {

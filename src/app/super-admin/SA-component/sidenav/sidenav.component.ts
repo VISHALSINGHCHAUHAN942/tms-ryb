@@ -44,6 +44,7 @@ export class SidenavComponent implements OnInit {
   collapsed = false;
   screenWidth = 0;
   navData = navbarData;
+  
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
@@ -67,4 +68,5 @@ export class SidenavComponent implements OnInit {
     this.collapsed = false;
     this.onToggleSideNav.emit({collapsed: this.collapsed, screenWidth: this.screenWidth});
   }
+  
 }

@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { SuperAdminService } from '../../super-admin.service';
 
 
 export interface PeriodicElement {
@@ -59,6 +60,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 
 export class CompanyComponent implements OnInit{
+  currentTime: Date = new Date();
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
 
   displayedColumns: string[] = [' userId', 'userName', 'companyName', 'Location', 'totalUsers', 'totalActiveUsers', 
@@ -68,6 +70,10 @@ export class CompanyComponent implements OnInit{
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
     this.dataSource.paginator = this.paginator;
+   // currentTime: Date = new Date();
+    setInterval(() => {
+      this.currentTime = new Date();
+    }, 1000);
   }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

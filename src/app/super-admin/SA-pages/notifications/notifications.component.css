@@ -1,17 +1,52 @@
-.container{
+.content{
     padding-top: 8vh; padding-bottom: 5vh;
 }
+.container{
+  margin-top:5vh;
+}
+.mat-tab { overflow: hidden!important}
+   
+    tr:nth-child(even){
+    background-color: whitesmoke;
+    }
+      
+    tr:nth-child(odd){
+    background-color: whitesmoke;
+    }
+    th{
+    text-align: center;
+    }
+    
+    td{
+    text-align: center;
+    }
+    
+    .mat-table-sticky {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      background-color: white; 
+    }
+    
+    .example-table-container {
+      position: relative;
+      min-height: 200px;
+      max-height: 500px;
+      overflow: auto;
+      width: 550px;
+      max-width: 100%;
+    }
+    .example-container {
+      height: 500px;
+      overflow: auto;
+    }
+    .container{
+      margin-bottom:2.5rem;
+    }
+    .demo-button-container {
+      padding-bottom: 16px;
+    }
 
-.table-container {
-    max-height: 80%; /* Adjust the height as needed */
-    overflow-y: auto;
-  }
-  .sticky-header {
-    position: sticky;
-    top: 0;
-    background-color: white; /* You can adjust the background color as needed */
-    z-index: 1;
-  }
-  .mat-tab { overflow: hidden!important}
-  
-  
+    .demo-button + .demo-button {
+      margin-left: 8px;
+    }

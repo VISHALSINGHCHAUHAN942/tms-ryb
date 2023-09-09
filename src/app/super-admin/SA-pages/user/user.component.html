@@ -15,75 +15,66 @@
     </div>
   </div>
 </div>
+<div class="container">
+  <section class="example-container mat-elevation-z8" tabindex="0">
+  <table mat-table [dataSource]="dataSource">
 
-<div class="container-fluid">
-  <div class="table-container mt-4" style="overflow: auto; max-height: calc(60vh - 10vh); ">
-    <table mat-table [dataSource]="dataSource4" class="mat-table">
-      <!-- Define your table columns -->
+    <ng-container matColumnDef=" userId">
+      <th mat-header-cell *matHeaderCellDef> User Id</th>
+      <td mat-cell *matCellDef="let element">{{ element. userId}}</td>
+    </ng-container>
 
-      <ng-container matColumnDef=" userId">
-        <th mat-header-cell *matHeaderCellDef> User Id</th>
-        <td mat-cell *matCellDef="let element">{{ element. userId}}</td>
-      </ng-container>
+    <ng-container matColumnDef="userName">
+      <th mat-header-cell *matHeaderCellDef>User Name</th>
+      <td mat-cell *matCellDef="let element">{{ element.userName}}</td>
+    </ng-container>
 
-      <ng-container matColumnDef="userName">
-        <th mat-header-cell *matHeaderCellDef>User Name</th>
-        <td mat-cell *matCellDef="let element">{{ element.userName}}</td>
-      </ng-container>
+    <ng-container matColumnDef="Details">
+      <th mat-header-cell *matHeaderCellDef>Details</th>
+      <td mat-cell *matCellDef="let element">{{ element.Details}}</td>
+    </ng-container>
 
-      <ng-container matColumnDef="Details">
-        <th mat-header-cell *matHeaderCellDef>Details</th>
-        <td mat-cell *matCellDef="let element">{{ element.Details}}</td>
-      </ng-container>
+    <ng-container matColumnDef="companyName">
+      <th mat-header-cell *matHeaderCellDef>Company Name</th>
+      <td mat-cell *matCellDef="let element">{{ element.companyName}}</td>
+    </ng-container>
 
-      <ng-container matColumnDef="companyName">
-        <th mat-header-cell *matHeaderCellDef>Company Name</th>
-        <td mat-cell *matCellDef="let element">{{ element.companyName}}</td>
-      </ng-container>
+    <ng-container matColumnDef="Role">
+      <th mat-header-cell *matHeaderCellDef>Role</th>
+      <td mat-cell *matCellDef="let element">{{ element.Role}}</td>
+    </ng-container>
 
-      <ng-container matColumnDef="Role">
-        <th mat-header-cell *matHeaderCellDef>Role</th>
-        <td mat-cell *matCellDef="let element">{{ element.Role}}</td>
-      </ng-container>
+    <ng-container matColumnDef="Email">
+      <th mat-header-cell *matHeaderCellDef>Email</th>
+      <td mat-cell *matCellDef="let element">{{ element.Email}}</td>
+    </ng-container>
 
-      <ng-container matColumnDef="Email">
-        <th mat-header-cell *matHeaderCellDef>Email</th>
-        <td mat-cell *matCellDef="let element">{{ element.Email}}</td>
-      </ng-container>
+    <!-- Checkbox Column -->
+    <ng-container matColumnDef="check">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox class="green-checkbox" (change)="bulk($event)" matTooltip="Select all devices" ></mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let element" >
+        <mat-checkbox class="green-checkbox" matTooltip="Select  device" [(ngModel)]="element.isSelected"></mat-checkbox>
+      </td>
+    </ng-container>
 
-      <!-- Checkbox Column -->
-      <ng-container matColumnDef="check">
-        <th mat-header-cell *matHeaderCellDef> </th>
-        <td mat-cell *matCellDef="let element">
-          <mat-checkbox class="green-checkbox"></mat-checkbox>
-        </td>
-      </ng-container>
-
-      <!-- Edit Column -->
-      <ng-container matColumnDef="edit">
-        <th class="table-head" mat-header-cell *matHeaderCellDef> Edit </th>
-        <td mat-cell *matCellDef="let element"> <button  mat-icon-button color="secoundry"
-            aria-label="Example icon button with a home icon">
-            <mat-icon color="red">edit</mat-icon>
-          </button> <button  mat-icon-button color="secoundry"
-            aria-label="Example icon button with a home icon">
-            <mat-icon>delete</mat-icon>
-          </button></td>
-      </ng-container>
-
-
-
-      <!-- Render the table header row -->
-      <thead>
-        <tr mat-header-row *matHeaderRowDef="displayedColumns4;"></tr>
-      </thead>
-      <!-- Render the table body rows -->
-      <tbody>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns4;"></tr>
-      </tbody>
-    </table>
-  </div>
-  <mat-paginator [pageSizeOptions]="[9]" showFirstLastButtons aria-label="Select page of periodic elements">
-  </mat-paginator>
-
+    <!-- Edit Column -->
+    <ng-container matColumnDef="edit">
+      <th class="table-head" mat-header-cell *matHeaderCellDef> Edit </th>
+      <td mat-cell *matCellDef="let element"> <button  mat-icon-button color="secoundry"
+          aria-label="Example icon button with a home icon">
+          <mat-icon color="red">edit</mat-icon>
+        </button> <button  mat-icon-button color="secoundry"
+          aria-label="Example icon button with a home icon">
+          <mat-icon>delete</mat-icon>
+        </button></td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+  </table>
+   </section>
+<mat-paginator  [pageSize]="10" aria-label="Select page of GitHub search results"></mat-paginator>
 </div>
+

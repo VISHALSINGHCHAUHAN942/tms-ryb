@@ -10,25 +10,25 @@
 						</div>
 						<div class="col">
 							<button mat-raised-button color="primary" class="" style="float: right;">Add Device</button>
-							<button mat-stroked-button color="primary" style="float: right;">View Docs</button>
+							<button mat-stroked-button color="primary" class="mn-tp" style="float: right;">View Docs</button>
 						</div>
 					</div>
 					<div class="row" style="margin-top: 2%;">
-						<div class="col-lg-4 col-md-4 col-sm-12">
+						<div class="col-lg-4 col-md-4 col-sm-12 mb-3">
 							<mat-card>
 								<mat-card-content>Inactive</mat-card-content>
 								<br>
 								<h3 style="margin-left: 10%;">10</h3>
 							</mat-card>
 						</div>
-						<div class="col-lg-4 col-md-4 col-sm-12">
+						<div class="col-lg-4 col-md-4 col-sm-12 mb-3">
 							<mat-card>
 								<mat-card-content>Active</mat-card-content>
 								<br>
 								<h3 style="margin-left: 10%;">0</h3>
 							</mat-card>
 						</div>
-						<div class="col-lg-4 col-md-4 col-sm-12">
+						<div class="col-lg-4 col-md-4 col-sm-12 mb-3">
 							<mat-card>
 								<mat-card-content>Total</mat-card-content>
 								<br>
@@ -44,21 +44,21 @@
 				<mat-card-content>
 					<h5>Alarms</h5>
 					<div class="row" style="margin-top: 4%;">
-						<div class="col-lg-4 col-md-4 col-sm-12">
+						<div class="col-lg-4 col-md-4 col-sm-12 mb-2">
 							<mat-card>
 								<mat-card-content>Critical</mat-card-content>
 								<br>
 								<h3 style="margin-left: 10%;">0</h3>
 							</mat-card>
 						</div>
-						<div class="col-lg-4 col-md-4 col-sm-12">
+						<div class="col-lg-4 col-md-4 col-sm-12 mb-2">
 							<mat-card>
 								<mat-card-content>Assigned</mat-card-content>
 								<br>
 								<h3 style="margin-left: 10%;">0</h3>
 							</mat-card>
 						</div>
-						<div class="col-lg-4 col-md-4 col-sm-12">
+						<div class="col-lg-4 col-md-4 col-sm-12 mb-2">
 							<mat-card>
 								<mat-card-content>Total</mat-card-content>
 								<br>
@@ -82,7 +82,7 @@
 						<div class="col">
 							<button mat-raised-button color="primary" class="" style="float: right;">Add
 								Dashboard</button>
-							<button mat-stroked-button color="primary" style="float: right;"> Last viewed</button>
+							<button mat-stroked-button color="primary" class="mn-tp2" style="float: right;"> Last viewed</button>
 						</div>
 					</div>
 
@@ -117,20 +117,21 @@
 			</mat-card>
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-12 mb-3">
-			<mat-card  style="height: 100%;">
-				<mat-card-header>
-					<div class="d-flex">
-						<h5>Activity</h5>
-						<div class="ms-auto">
-							<button mat-stroked-button color="primary">Devices</button>
+			<mat-card>
+				<mat-card-content>
+					<div class="row">
+						<div class="d-flex">
+							<h5>Activity</h5>
+							<div class="ms-auto">
+								<button mat-stroked-button color="primary">Devices</button>
+							</div>
 						</div>
-					
 					</div>
-				</mat-card-header>
-				<mat-card-content class="mt-4">
-					
-					<div id="curvedLine1" style="height: 300px;"></div>
+					<div>
+						<div id="curvedLine1" style="height: 300px;"></div>
+					</div>
 				</mat-card-content>
+				
 			</mat-card>
 		</div>
 	</div>

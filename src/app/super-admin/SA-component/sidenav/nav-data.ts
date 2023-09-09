@@ -1,6 +1,6 @@
 export const navbarData = [
     {
-        routeLink: 'home',
+        routeLink: 'Home',
         icon: 'home',
         label: 'Home'
     },
@@ -20,12 +20,12 @@ export const navbarData = [
         label: 'User'
     },
     {
-        routeLink: 'ApiUsage',
+        routeLink: 'Api-Usage',
         icon: 'assessment',
         label: 'Api usage'
     },
     {
-        routeLink: 'ApiTracker',
+        routeLink: 'Api-Tracker',
         icon: 'warning',
         label: 'Api Tracker '
     },
@@ -35,7 +35,7 @@ export const navbarData = [
         label: 'Notification'
     },
     {
-        routeLink: 'AuditLogs',
+        routeLink: 'Audit-Logs',
         icon: 'portable_wifi_off',
         label: 'Audit Logs'
     },

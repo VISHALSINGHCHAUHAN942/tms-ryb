@@ -13,6 +13,15 @@
     </a>
     <span class="logo-text">SenseLive - TMS</span>
   </div>
+  <p>{{currentPageName}}</p>
+ 
+  <!-- clock counter  -->
+  <!-- <div class="clock">
+    <p>{{ currentTime | date: 'hh:mm:ss a' }}</p>
+  </div>
+  <div class="date">
+  <p>{{ currentTime | date: 'MMMM d, y' }}</p>
+</div> -->
 
   <div class="menu-icon" (click)="saService.toggleMenu()">
   	<button mat-mini-fab color="basic" aria-label="menu">

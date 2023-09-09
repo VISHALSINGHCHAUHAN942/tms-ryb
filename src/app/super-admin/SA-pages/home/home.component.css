@@ -1,7 +1,7 @@
 .content {
 	padding-top: 10vh;
 	padding-bottom: 5vh;
-	padding-left: 5vh;
+	padding-left: 1vh;
 }
 .users {
 	padding-top: 13vh;
@@ -28,4 +28,17 @@
 		margin: 10px;
 	}
 	
+  }
+  @media (max-width: 1024px){
+	.mn-tp{
+		margin: 7px;
+		width: 115px;
+	}
+	
+  }
+  @media (max-width: 1024px){
+	.mn-tp2{
+		margin: 7px;
+		width: 140px;
+	}
   }

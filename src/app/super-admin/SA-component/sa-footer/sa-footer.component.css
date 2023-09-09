@@ -26,3 +26,13 @@
 .footer-link:hover{
       color: black;
 }
+.clock-text{
+      text-align: center;
+      color: whitesmoke;
+      font-size: 1rem;
+      margin-top: 20px;
+      align-items: end;
+}
+p{
+      align-items: end;  
+}
