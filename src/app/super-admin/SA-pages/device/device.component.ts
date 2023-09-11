@@ -1,4 +1,3 @@
-
 import {Component, ViewChild, AfterViewInit, OnInit} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 
@@ -64,33 +63,4 @@ export class DeviceComponent {
         this.dialog.open(AddDeviceComponent);
       }
 }
-
-// export class DeviceComponent{
-
-//   showFiller = false;
-//   tick:false | undefined;
-//   isSelected:false | undefined;
-  
-
-  
-//   constructor(public dialog: MatDialog) {
-//   }
-
-//   openDialog() {
-//     this.dialog.open(AddDeviceComponent);
-//   }
-
-//   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
-
-//   displayedColumns: string[] = ['id','deviceuid','ip_address','status','timestamp'];
-//   dataSource = new MatTableDataSource(Data);
-  
-//   ngOnInit(): void {
-//     this.dataSource = new MatTableDataSource<PeriodicElement>(Data);
-//     this.dataSource.paginator = this.paginator;
-//   }
-//   applyFilter(event: Event) {
-//     const filterValue = (event.target as HTMLInputElement).value;
-//     this.dataSource.filter = filterValue.trim().toLowerCase();
-//   }
 
