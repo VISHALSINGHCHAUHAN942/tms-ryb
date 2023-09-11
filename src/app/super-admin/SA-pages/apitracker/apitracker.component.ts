@@ -27,6 +27,7 @@ export interface Data {
 })
 export class ApitrackerComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
+  isLoading: boolean = true;
 
   displayedColumns: string[] = [
     'id',
@@ -54,6 +55,7 @@ export class ApitrackerComponent implements OnInit {
     this.service.getApiTrackerData().then((data) => {
       this.dataSource.data = data.logs; // Assign data to the MatTableDataSource
       this.dataSource.paginator = this.paginator;
+      this.isLoading = false; 
       setInterval(() => {
         this.currentTime = new Date();
       }, 1000);

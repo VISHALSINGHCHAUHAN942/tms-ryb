@@ -2,12 +2,13 @@
 
 <div class="content">
   <div class="row">
-  <div class="clock col-lg-3 col-md-3 col-sm-12">
-          <p class="animated-clock">{{currentTime| date: 'hh:mm:ss a'}}</p>
-        </div>
     <div class="col-lg-3 col-md-3 col-sm-12 d-flex justify-content-center p-3">
       <h1 style="font-family: 'Trebuchet MS', sans-serif;font: size 45px;">Api tracker</h1>
     </div>
+    <div class="clock col-lg-3 col-md-3 col-sm-12 d-flex align-item-center">
+      <p class="animated-clock">{{currentTime| date: 'hh:mm:ss a'}}</p>
+    </div>
+    
      <div class="col-lg-3 col-md-3 col-sm-12 d-flex justify-content-around p-2">
       <mat-form-field appearance="fill">
         <mat-label>Search company/user</mat-label>
@@ -22,11 +23,17 @@
           <mat-icon>add</mat-icon>
         </button>
     </div>
+    
   </div>
 </div>
 
 
 <div class="container">
+   
+  <div *ngIf="dataSource.data.length > 0">
+    <mat-progress-bar mode="query" color="warn"></mat-progress-bar>
+  </div>
+  
   <section class="example-container mat-elevation-z8" tabindex="0">
     <table mat-table [dataSource]="dataSource" >
                         
@@ -112,7 +119,8 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    </section>
+     </section>
+  
     <mat-paginator  [pageSize]="10" aria-label="Select page of GitHub search results"></mat-paginator>
     </div>
 

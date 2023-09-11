@@ -11,6 +11,9 @@ import { Router,NavigationEnd  } from '@angular/router';
 })
 export class SANavbarComponent implements OnInit { 
   currentPageName: string = '';
+  isFullScreen = false;
+  elem = document.documentElement;
+  isFullscreen = false;
   constructor(public saService: SaService, public authService:  AuthService, private router: Router) 
   {
     this.router.events.subscribe((event) => {
@@ -54,5 +57,19 @@ export class SANavbarComponent implements OnInit {
   }
   notifications(){
     this.router.navigate(['sa/companies']);
+  }
+  toggleFullScreen() {
+    if (!this.isFullScreen) {
+      const elem = document.documentElement;
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+        this.isFullScreen = true;
+      }
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+        this.isFullScreen = false;
+      }
+    }
   }
 }

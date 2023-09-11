@@ -51,8 +51,8 @@ text-align: center;
   color: plum;
   background-color: black;
   padding: 10px;
-  /* border-radius: 10px; */
-
+  border-radius: 10px;
+  height: 60px;
   animation: fade-in 1s ease-in-out;
 }
 

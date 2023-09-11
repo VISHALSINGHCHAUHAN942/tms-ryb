@@ -2,6 +2,10 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { SuperAdminService } from '../../super-admin.service';
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+
+import { AddDeviceComponent } from '../device/add-device/add-device.component';
+
 
 
 export interface PeriodicElement {
@@ -49,8 +53,6 @@ const ELEMENT_DATA: PeriodicElement[] = [
   totalInactiveUsers:40, subscriptionStartDate: '20-08-23', subscriptionEndDate:'30-08-23' },
   { userId: 4896, userName: 'Virat', companyName: '-------', Location: 'Nagpur', totalUsers: 90, totalActiveUsers: 50,
   totalInactiveUsers:40, subscriptionStartDate: '20-08-23', subscriptionEndDate:'30-08-23' },
-
-
 ];
 @Component({
   selector: 'app-company',
@@ -78,5 +80,10 @@ export class CompanyComponent implements OnInit{
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+  constructor(public dialog: MatDialog) {}
+
+  openDialog() {
+    this.dialog.open(AddDeviceComponent);
   }
 }

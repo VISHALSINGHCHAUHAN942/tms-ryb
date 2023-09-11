@@ -6,7 +6,7 @@ import { EditCompanyComponent } from '../edit-company/edit-company.component';
 import { DeleteCompanyComponent } from '../delete-company/delete-company.component';
 import { AddUsersComponent } from '../add-users/add-users.component';
 
-import { AddMultipleUsersComponent } from '../add-multiple-users/add-multiple-users.component';
+
 
 @Component({
   selector: 'app-company-desktop',
@@ -45,13 +45,7 @@ export class CompanyDesktopComponent implements AfterViewInit {
       console.log(`Dialog result: ${result}`);
     });
   }
-  openAddMultiUsersDialog() {
-    const dialogRef = this.dialog.open(AddMultipleUsersComponent);
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
-  }
   }
   
 

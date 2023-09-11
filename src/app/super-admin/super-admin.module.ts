@@ -26,7 +26,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { EditCompanyComponent } from './SA-pages/company/edit-company/edit-company.component';
 import { DeleteCompanyComponent } from './SA-pages/company/delete-company/delete-company.component';
 import { AddUsersComponent } from './SA-pages/company/add-users/add-users.component';
-import { AddMultipleUsersComponent } from './SA-pages/company/add-multiple-users/add-multiple-users.component';
+
 import { AddusersComponent } from './SA-pages/user/addusers/addusers.component';
 import { AddMultiusersComponent } from './SA-pages/user/add-multiusers/add-multiusers.component';
 import { EdituserComponent } from './SA-pages/user/edituser/edituser.component';
@@ -50,6 +50,7 @@ import { AddDeviceComponent } from './SA-pages/device/add-device/add-device.comp
 import {MatSelectModule} from '@angular/material/select';
 import { AlarmsComponent } from './SA-pages/alarms/alarms.component';
 import { ApitrackerComponent } from './SA-pages/apitracker/apitracker.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 
@@ -77,7 +78,7 @@ import { ApitrackerComponent } from './SA-pages/apitracker/apitracker.component'
     EditCompanyComponent,
     DeleteCompanyComponent,
     AddUsersComponent,
-    AddMultipleUsersComponent,
+  
     AddusersComponent,
     AddMultiusersComponent,
     EdituserComponent,
@@ -122,7 +123,8 @@ import { ApitrackerComponent } from './SA-pages/apitracker/apitracker.component'
     MatCardModule,
     MatPaginatorModule,
     MatTableModule,
-    MatSelectModule
+    MatSelectModule,
+    MatProgressSpinnerModule
   ]
 })
 export class SuperAdminModule { }
