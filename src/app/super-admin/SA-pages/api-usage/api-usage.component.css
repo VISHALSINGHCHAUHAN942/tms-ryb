@@ -1,3 +1,32 @@
+.content{
+  padding: 1rem;
+  padding-top: 3rem;
+ margin-bottom: 2rem;
+}
+
+
+.text-green{
+color: #4FAF68;
+font-weight: bolder;
+font-size: larger;
+}
+.text{
+  font-weight: bold;
+font-size: larger;
+}
+
+.demo-button-container {
+  padding-bottom: 16px;
+}
+
+.demo-button + .demo-button {
+  margin-left: 8px;
+}
+@media(max-width:501px){
+  .text-hide{
+    display: none;
+  }
+}
 
 
   .progress-bar {

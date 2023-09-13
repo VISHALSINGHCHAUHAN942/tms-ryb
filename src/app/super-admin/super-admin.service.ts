@@ -35,5 +35,13 @@ export class SuperAdminService implements OnInit{
     return this.http.get('http://ec2-3-108-57-100.ap-south-1.compute.amazonaws.com:3000/devicelogs').
     toPromise();
   }
+  getUserDetails() : Promise<any>{
+    return this.http.get('http://ec2-3-108-57-100.ap-south-1.compute.amazonaws.com:3000/usermanagement').
+    toPromise();
+  }
+  getCompanyInfo():Promise<any>{
+    return this.http.get('http://ec2-3-108-57-100.ap-south-1.compute.amazonaws.com:3000/compInfo').
+    toPromise();
+  } 
 
 }

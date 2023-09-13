@@ -3,34 +3,25 @@ import { MatDialog } from '@angular/material/dialog';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { SuperAdminService } from '../../super-admin.service';
 
-export interface PeriodicElement {
-  userId: number;
-  userName: string;
-  Details: string;
-  companyName:string;
-  Role:string;
-  Email:string;
-  isSelected?: boolean;
-}
-const ELEMENT_DATA: PeriodicElement[] = [
-  { userId: 2256, userName: 'Snehal', Details: 'XYZ', companyName: '-------', Role: 'Manager', Email: 'user@gmail.com' },
-  { userId: 2547, userName: 'Vishal', Details: 'XYZ', companyName: '-------', Role: 'Manager', Email: 'user@gmail.com' },
-  { userId: 3784, userName: 'Krishna', Details: 'XYZ', companyName: '-------', Role: 'Manager', Email: 'user@gmail.com' },
-  { userId: 4896, userName: 'Virat', Details: 'XYZ', companyName: '-------', Role: 'Manager', Email: 'user@gmail.com' },
-  { userId: 5589, userName: 'Rami', Details: 'XYZ', companyName: '-------', Role: 'Manager', Email: 'user@gmail.com' },
-  { userId: 2566, userName: 'Aman', Details: 'XYZ', companyName: '-------', Role: 'Manager', Email: 'user@gmail.com' },
-  { userId: 7588, userName: 'Vijay', Details: 'XYZ', companyName: '-------', Role: 'Manager', Email: 'user@gmail.com' },
-  { userId: 7865, userName: 'Vinita', Details: 'XYZ', companyName: '-------', Role: 'Manager', Email: 'user@gmail.com' },
-  { userId: 7896, userName: 'Sagar', Details: 'XYZ', companyName: '-------', Role: 'Manager', Email: 'user@gmail.com' },
-  { userId: 2230, userName: 'Shyam', Details: 'XYZ', companyName: '-------', Role: 'Manager', Email: 'user@gmail.com' },
-  { userId: 7777, userName: 'Pawan', Details: 'XYZ', companyName: '-------', Role: 'Manager', Email: 'user@gmail.com' },
-  { userId: 3786, userName: 'Ashok', Details: 'XYZ', companyName: '-------', Role: 'Manager', Email: 'user@gmail.com' },
-  { userId: 8085, userName: 'Pankaj', Details: 'XYZ', companyName: '-------', Role: 'Manager', Email: 'user@gmail.com' },
-  { userId: 2101, userName: 'Sonu', Details: 'XYZ', companyName: '-------', Role: 'Manager', Email: 'user@gmail.com' },
-  { userId: 9991, userName: 'Monu', Details: 'XYZ', companyName: '-------', Role: 'Manager', Email: 'user@gmail.com' },
-  { userId: 1010, userName: 'Golu', Details: 'XYZ', companyName: '-------', Role: 'Manager', Email: 'user@gmail.com' },
-];
+// userId: number;
+// userName: string;
+// Details: string;
+// companyName:string;
+// Role:string;
+// Email:string;
+// isSelected?: boolean;
+
+export interface PeriodicElement{
+  UserId:any;
+  Username:any;
+  CompanyName:any;
+  Designation:any;
+  PersonalEmail:any;
+  }
+  
+  const Data: PeriodicElement[] = [];
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
@@ -39,25 +30,29 @@ const ELEMENT_DATA: PeriodicElement[] = [
 
 export class UserComponent implements OnInit{
 
+  currentTime: Date = new Date();
+  displayedColumns: string[] = ['UserId','Username','CompanyName','Designation','PersonalEmail'];
+  dataSource = new MatTableDataSource<PeriodicElement>([]);
+
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
 
-  tick = false; 
+  constructor(private service :SuperAdminService,public dialog: MatDialog) {}
 
-  displayedColumns: string[] = ['check', ' userId', 'userName', 'Details','companyName','Role', 'Email', 'edit'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
-
+  ngOnInit(): void {
+    this.service.getUserDetails().then(data => {
+      this.dataSource.data = data.userDetails;
+      this.dataSource.paginator = this.paginator;
+      console.log(data);
+      // currentTime: Date = new Date();
+      setInterval(() => {
+        this.currentTime = new Date();
+      }, 1000);
+    });
+  }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-  ngOnInit(): void {
-    this.dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-    this.dataSource.paginator = this.paginator;
-  }
-  bulk(event: any): void {
-    this.tick = event.checked;
-    this.dataSource.data.forEach((row: PeriodicElement) => {
-      row.isSelected = this.tick;
-    });
-  }
+
+ 
 }
