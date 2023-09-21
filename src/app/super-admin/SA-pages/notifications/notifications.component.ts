@@ -1,31 +1,20 @@
 import { Component,OnInit,ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { SuperAdminService } from '../../super-admin.service';
+import { SendNotificationComponent } from './send-notification/send-notification.component';
+import{ SaService } from '../../sa.service';
 
 export interface PeriodicElement {
-  create_time: any;
-  type: any;
-  subject:any;
-  message:any;
-  isSelected?: boolean; // 
+ id:any;
+ useremail:any;
+ message:any;
+ status:any;
+ timestamp:any;
+ type:any;
 }
 const ELEMENT_DATA: PeriodicElement[] = [
-  {create_time:'2023-08-29 11:53:32',type:'	Alarm',subject:'	New alarm `High Temperature`',message:'	Severity: critical, originator: Device`Sensor T1` '},
-  {create_time:'2023-08-29 11:53:32',type:'	Alarm',subject:'	New alarm `High Temperature`',message:'	Severity: critical, originator: Device`Sensor T1` '},
-  {create_time:'2023-08-29 11:53:32',type:'	Alarm',subject:'	New alarm `High Temperature`',message:'	Severity: critical, originator: Device`Sensor T1` '},
-  {create_time:'2023-08-29 11:53:32',type:'	Alarm',subject:'	New alarm `High Temperature`',message:'	Severity: critical, originator: Device`Sensor T1` '},
-  {create_time:'2023-08-29 11:53:32',type:'	Alarm',subject:'	New alarm `High Temperature`',message:'	Severity: critical, originator: Device`Sensor T1` '},
-  {create_time:'2023-08-29 11:53:32',type:'	Alarm',subject:'	New alarm `High Temperature`',message:'	Severity: critical, originator: Device`Sensor T1` '},
-  {create_time:'2023-08-29 11:53:32',type:'	Alarm',subject:'	New alarm `High Temperature`',message:'	Severity: critical, originator: Device`Sensor T1` '},
-  {create_time:'2023-08-29 11:53:32',type:'	Alarm',subject:'	New alarm `High Temperature`',message:'	Severity: critical, originator: Device`Sensor T1` '},
- {create_time:'2023-08-29 11:53:32',type:'	Alarm',subject:'	New alarm `High Temperature`',message:'	Severity: critical, originator: Device`Sensor T1` '},
- {create_time:'2023-08-29 11:53:32',type:'	Alarm',subject:'	New alarm `High Temperature`',message:'	Severity: critical, originator: Device`Sensor T1` '},
-{create_time:'2023-08-29 11:53:32',type:'	Alarm',subject:'	New alarm `High Temperature`',message:'	Severity: critical, originator: Device`Sensor T1` '},
-{create_time:'2023-08-29 11:53:32',type:'	Alarm',subject:'	New alarm `High Temperature`',message:'	Severity: critical, originator: Device`Sensor T1` '},
-{create_time:'2023-08-29 11:53:32',type:'	Alarm',subject:'	New alarm `High Temperature`',message:'	Severity: critical, originator: Device`Sensor T1` '},
-{create_time:'2023-08-29 11:53:32',type:'	Alarm',subject:'	New alarm `High Temperature`',message:'	Severity: critical, originator: Device`Sensor T1` '},
-{create_time:'2023-08-29 11:53:32',type:'	Alarm',subject:'	New alarm `High Temperature`',message:'	Severity: critical, originator: Device`Sensor T1` '},
-{create_time:'2023-08-29 11:53:32',type:'	Alarm',subject:'	New alarm `High Temperature`',message:'	Severity: critical, originator: Device`Sensor T1` '},
 ];
 export interface Template{
   create_time: any;
@@ -90,7 +79,7 @@ export class NotificationsComponent implements OnInit{
 
   tick = false; 
 
-  displayedColumns: string[] = ['check','create_time', 'type','subject','message','actions'];
+  displayedColumns: string[] = ['id','useremail', 'message','status','timestamp','type'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
   displayedColumns2: string[] = ['check','create_time', 'type','subject','message','actions'];
@@ -103,7 +92,10 @@ export class NotificationsComponent implements OnInit{
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+  constructor(public saService: SaService, private service :SuperAdminService,public dialog: MatDialog) {}
   ngOnInit(): void {
+    this.saService.isPageLoading(true);
+    this.getNotification();
     this.dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
     this.dataSource.paginator = this.paginator;
 
@@ -114,10 +106,25 @@ export class NotificationsComponent implements OnInit{
     this.dataSource3 = new MatTableDataSource<Template>(ELEMENT_DATA3);
     this.dataSource3.paginator = this.paginator;
   }
+
+  getNotification(){
+    this.service.getNotification().then(data =>{
+      this.dataSource.data = data.logs;
+      this.dataSource.paginator = this.paginator;
+      this.saService.isPageLoading(false);
+    });
+  }
   bulk(event: any): void {
     this.tick = event.checked;
     this.dataSource.data.forEach((row: PeriodicElement) => {
-      row.isSelected = this.tick;
+   
+    });
+  }
+ 
+
+  opensendDialog() {
+    this.dialog.open(SendNotificationComponent, {
+      width: '50%', // Set the width to 400px
     });
   }
 }

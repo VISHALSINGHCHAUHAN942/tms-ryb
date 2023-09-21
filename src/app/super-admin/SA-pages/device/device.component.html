@@ -1,118 +1,99 @@
-
-<div class="content">
-  <div class="demo-button-container">
-    <div class="row">
-        <div class="col-lg-3 col-md-6 col-sm-6 mx-auto d-flex justify-content-center ">
-        <div class="clock">
+<div *ngIf="saService.pageLoading"><app-page-loading></app-page-loading></div>
+<div *ngIf="!saService.pageLoading">
+  <div class="content">
+    <div class="demo-button-container">
+      <div class="row">
+          <div class="col-lg-3 col-md-6 col-sm-6 mx-auto d-flex justify-content-center ">
           <div class="clock">
-            <!-- <p class="animated-clock">{{currentTime| date: 'hh:mm:ss a'}}</p> -->
-          </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-6 mx-auto mt-3 text-hide">
-            <h1>Devices</h1>
+            <div class="clock">
+              <!-- <p class="animated-clock">{{currentTime| date: 'hh:mm:ss a'}}</p> -->
             </div>
-         
-      <div class="col col-lg-3 col-md-6 col-sm-6 d-flex justify-content-end">
-        <mat-form-field appearance="fill">
-          <mat-label>Search Device</mat-label>
-          <input matInput (keyup)="applyFilter($event)" matTooltip="search device"  placeholder="Enter  device name" #input>
-        </mat-form-field>
-        <button mat-mini-fab color="warn" matTooltip="Apply Filter" class="mx-auto" aria-label="Example icon button with a menu icon" >
-          <mat-icon>filter_list</mat-icon>
-        </button>
-        <button mat-mini-fab color="warn" matTooltip="add device" class="mx-auto"  (click)="openDialog()"   aria-label="Example icon button with a menu icon" >
-          <mat-icon>add</mat-icon>
-        </button>
-    </div>
-  </div>
-  </div>
-  <section class="example-container" tabindex="0">
-
-  <table mat-table [dataSource]="dataSource">
-  
-         <!-- Checkbox column -->
-         <!-- <ng-container matColumnDef="check">
-          <th mat-header-cell *matHeaderCellDef>
-            <mat-checkbox class="green-checkbox" matTooltip="Select all devices" ></mat-checkbox>
-          </th>
-          <td mat-cell *matCellDef="let element" >
-            <mat-checkbox class="green-checkbox" matTooltip="Select  device" [(ngModel)]="element.isSelected"></mat-checkbox>
-          </td>
-        </ng-container> -->
-
-      <!-- type Column -->
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef >id</th>
-        <td mat-cell *matCellDef="let row" >{{row.id}}</td>
-      </ng-container>
-
-      <!-- label Column -->
-      <ng-container matColumnDef="deviceuid">
-        <th mat-header-cell *matHeaderCellDef>deviceuid</th>
-        <td mat-cell *matCellDef="let row" >{{row.deviceuid}}</td>
-      </ng-container>
-
-        <!-- state Column -->
-        <!-- <ng-container matColumnDef="state">
-          <th mat-header-cell *matHeaderCellDef >state</th>
-          <td mat-cell *matCellDef="let row" >
-            <mat-chip  matTooltip="this device is {{row.state}}" 
-            class="{{row.color}}" >
-            {{row.state}}
-          </mat-chip>
-          </td>
-         
-        </ng-container> -->
-
-      <!-- name Column -->
-      <ng-container matColumnDef="ip_address">
-        <th mat-header-cell *matHeaderCellDef >ip_address</th>
-        <td mat-cell *matCellDef="let row" >{{row.ip_address}}</td>
-      </ng-container>
-
-      <!-- company_name Column -->
-      <ng-container matColumnDef="status">
-        <th mat-header-cell *matHeaderCellDef >status</th>
-        <td mat-cell *matCellDef="let row" >{{row.status}}</td>
-      </ng-container>
-
-      <!-- company_location Column -->
-      <!-- <ng-container matColumnDef="company_location" >
-        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear >
-          company_location
-        </th>
-        <td mat-cell *matCellDef="let row">{{row.company_location}}</td>
-      </ng-container> -->
-
-          <!-- ip col  -->
-      <ng-container matColumnDef="timestamp">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear >
-          timestamp
-        </th>
-        <td mat-cell *matCellDef="let row" >{{row.timestamp}}</td>
-      </ng-container>
-
-
-      <!-- Icons column -->
-      <!-- <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef class="col-lg-2 col-md-2 col-sm-2"></th>
-        <td mat-cell *matCellDef="let element" >
-          <button mat-icon-button matTooltip="edit" color="dark">
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-6 mx-auto mt-3 text-hide">
+              <h1>Devices</h1>
+              </div>
+          
+        <div class="col col-lg-3 col-md-6 col-sm-6 d-flex justify-content-end">
+          <mat-form-field appearance="fill">
+            <mat-label>Search company/user</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Enter name" #input>
+          </mat-form-field> 
+          <button mat-mini-fab color="warn" matTooltip="Apply Filter" class="mx-auto" aria-label="Example icon button with a menu icon" >
+            <mat-icon>filter_list</mat-icon>
+          </button>
+          <button mat-mini-fab color="warn" matTooltip="add device" class="mx-auto"  (click)="openDialog()"   aria-label="Example icon button with a menu icon" >
             <mat-icon>add</mat-icon>
           </button>
-          <button mat-icon-button matTooltip="delete" color="dark">
-            <mat-icon>delete</mat-icon>
-          </button>
-        </td>
-      </ng-container> -->
+      </div>
+    </div>
+    </div>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <section class="example-container" tabindex="0">
+
+    <table mat-table [dataSource]="dataSource">
+    
+
+        <!-- type Column -->
+        <ng-container matColumnDef="DeviceUID">
+          <th mat-header-cell *matHeaderCellDef >DeviceUID</th>
+          <td mat-cell *matCellDef="let row" >{{row.DeviceUID}}</td>
+        </ng-container>
+
+        <!-- label Column -->
+        <ng-container matColumnDef="TriggerValue">
+          <th mat-header-cell *matHeaderCellDef>TriggerValue</th>
+          <td mat-cell *matCellDef="let row" >{{row.TriggerValue}}</td>
+        </ng-container>
+
+          <!-- type Column -->
+          <ng-container matColumnDef="CompanyEmail">
+            <th mat-header-cell *matHeaderCellDef >CompanyEmail</th>
+            <td mat-cell *matCellDef="let row" >{{row.CompanyEmail}}</td>
+          </ng-container>
+    
+          <!-- label Column -->
+          <ng-container matColumnDef="ip_address">
+            <th mat-header-cell *matHeaderCellDef>ip_address</th>
+            <td mat-cell *matCellDef="let row" >{{row.ip_address}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="company_name">
+            <th mat-header-cell *matHeaderCellDef>company_name</th>
+            <td mat-cell *matCellDef="let row" >{{row.company_name}}</td>
+          </ng-container>
+
+        <!-- company_name Column -->
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef >status</th>
+          <td mat-cell *matCellDef="let row" >{{row.status}}</td>
+        </ng-container>
+
+        <!-- company_location Column -->
+        <ng-container matColumnDef="company_location" >
+          <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear >
+            company_location
+          </th>
+          <td mat-cell *matCellDef="let row">{{row.company_location}}</td>
+        </ng-container>
+
+            <!-- ip col  -->
+        <ng-container matColumnDef="timestamp">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear >
+            timestamp
+          </th>
+          <td mat-cell *matCellDef="let row" >{{row.timestamp}}</td>
+        </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    
+    </table>
+    </section>
   
-  </table>
-   </section>
- 
-<mat-paginator   [pageSize]="10" aria-label="Select page of GitHub search results"></mat-paginator>
+  <mat-paginator   [pageSize]="10" aria-label="Select page of GitHub search results"></mat-paginator>
+  </div>
 </div>
-
+<!-- <div *ngIf="loading">
+  <mat-spinner></mat-spinner>
+</div> -->

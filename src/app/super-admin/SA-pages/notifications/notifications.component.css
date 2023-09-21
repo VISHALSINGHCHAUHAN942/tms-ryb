@@ -1,53 +1,61 @@
 .content{
-    padding-top: 10vh; padding-bottom: 5vh;padding-left: 5vh;padding-right:10vh
+  padding-top: 8vh; padding-bottom: 5vh;padding-left: 5vh;
 }
-
 .container{
-  margin-top:5vh;
+margin-top:5vh;
 }
 .mat-tab { overflow: hidden!important}
-   
-    tr:nth-child(even){
-    background-color: whitesmoke;
-    }
-      
-    tr:nth-child(odd){
-    background-color: whitesmoke;
-    }
-    th{
-    text-align: center;
-    }
+ 
+  tr:nth-child(even){
+  background-color: whitesmoke;
+  }
     
-    td{
-    text-align: center;
-    }
+  tr:nth-child(odd){
+  background-color: whitesmoke;
+  }
+  th{
+  text-align: center;
+  }
+  
+  td{
+  text-align: center;
+  }
+  
+  .mat-table-sticky {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: white; 
+  }
+  
+  .example-table-container {
+    position: relative;
+    min-height: 200px;
+    max-height: 500px;
+    overflow: auto;
+    width: 550px;
+    max-width: 100%;
+  }
+  .example-container {
+    height: 500px;
+    overflow: auto;
+  }
+  .container{
+    margin-bottom:2.5rem;
+  }
+  .demo-button-container {
+    padding-bottom: 16px;
     
-    .mat-table-sticky {
-      position: sticky;
-      top: 0;
-      z-index: 1;
-      background-color: white; 
-    }
-    
-    .example-table-container {
-      position: relative;
-      min-height: 200px;
-      max-height: 500px;
-      overflow: auto;
-      width: 550px;
-      max-width: 100%;
-    }
-    .example-container {
-      height: 500px;
-      overflow: auto;
-    }
-    .container{
-      margin-bottom:2.5rem;
-    }
-    .demo-button-container {
-      padding-bottom: 16px;
-    }
+  }
 
-    .demo-button + .demo-button {
-      margin-left: 8px;
+  .demo-button + .demo-button {
+    margin-left: 8px;
+   background-color:#263238; 
+   color: white;
+  }
+  @media(max-width:501px){
+    .text-hide{
+      display: none;
     }
+  }
+ 

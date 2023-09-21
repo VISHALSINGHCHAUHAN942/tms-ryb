@@ -3,27 +3,21 @@ import {MatPaginator} from '@angular/material/paginator';
 
 import {MatTableDataSource,} from '@angular/material/table';
 import { AddDeviceComponent } from './add-device/add-device.component';
-import {MatDialog, MatDialogModule} from '@angular/material/dialog';
-import {MatButtonModule} from '@angular/material/button';
+import {MatDialog, MatDialogConfig, MatDialogModule} from '@angular/material/dialog';
 import { SuperAdminService } from '../../super-admin.service';
+import{ SaService } from '../../sa.service';
 
 
 export interface PeriodicElement{
-//   create_time: any;
-//   type: any;
-//   name:any;
-//   company_name:any;
-//   company_location:any;
-//  label:any;
-//   state:any;
-//   color:any;
-//   device_ip:any;
-//   isSelected?: boolean; 
-id:any;
-deviceuid:any;
-ip_address:any;
-status:any;
-timestamp:any;
+  DeviceUID:any;
+  TriggerValue:any;
+  CompanyEmail:any;
+  ip_address:any;
+  status:any;
+  timestamp:any;
+  company_name:any;
+  company_location:any;
+  
 }
 
 const Data: PeriodicElement[] = [
@@ -35,32 +29,50 @@ const Data: PeriodicElement[] = [
 
 })
 export class DeviceComponent {
+  loading: boolean = true; 
   currentTime: Date = new Date();
-  displayedColumns: string[] = ['id','deviceuid','ip_address','status','timestamp'];
+  displayedColumns: string[] = ['DeviceUID','TriggerValue','CompanyEmail','ip_address','status','timestamp','company_name','company_location'];
   dataSource = new MatTableDataSource<PeriodicElement>([]);
+  private dataRefreshInterval: any; 
+
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
 
-  constructor(private service :SuperAdminService,public dialog: MatDialog) {}
+  constructor(public saService: SaService, private service :SuperAdminService,public dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.service. getDeviceData().then(data => {
-      this.dataSource.data = data.logs;
-      this.dataSource.paginator = this.paginator;
-      console.log(data);
-      // currentTime: Date = new Date();
-      setInterval(() => {
-        this.currentTime = new Date();
-      }, 1000);
-    });
+    this.getDeviceDetail();
+    this.saService.isPageLoading(true);
   }
-
+  
+  getDeviceDetail(){
+    this.service.getDeviceData().subscribe(
+      (devices) =>{
+        this.dataSource = devices.logs;
+        this.dataSource.paginator = this.paginator;
+        this.saService.isPageLoading(false);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-  openDialog() {
-        this.dialog.open(AddDeviceComponent);
+
+       openDialog(): void {
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.width = '500px';
+        dialogConfig.height = 'auto';
+        dialogConfig.maxWidth = '90vw';
+        const dialogRef = this.dialog.open(AddDeviceComponent, dialogConfig);
+        dialogRef.afterClosed().subscribe(deviceAdded => {});
       }
-}
+ 
+ }
+
+      
+    
 

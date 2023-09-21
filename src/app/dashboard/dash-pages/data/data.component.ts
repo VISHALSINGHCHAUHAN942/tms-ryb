@@ -39,6 +39,7 @@ export class DataComponent implements OnInit {
 
   ngOnInit() {
     const sessionData = sessionStorage.getItem('data');
+    console.log(sessionData);
     const sessionDataStatus = sessionStorage.getItem('dataStatus');
     const sessionDevice = sessionStorage.getItem('device');
     if (sessionData && sessionDataStatus && sessionDevice) {

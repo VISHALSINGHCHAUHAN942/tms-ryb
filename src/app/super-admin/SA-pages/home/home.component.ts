@@ -1,7 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild,ElementRef } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import * as Highcharts from 'highcharts';
+import { SuperAdminService } from '../../super-admin.service';
+import{ SaService } from '../../sa.service';
+import { Router } from '@angular/router';
 
 export interface PeriodicElement {
   Sno:any;
@@ -37,17 +41,47 @@ const ELEMENT_DATA2: PeriodicElement2[] = [
 
 })
 export class HomeComponent implements OnInit {
+
+  navigatetodeviceComponent(){
+    this.router.navigate(['sa/devices']);
+  }
+  navigatetoUserComponent(){
+    this.router.navigate(['sa/users']);
+  }
+
+  selectedColor: string = 'white';
+
+  changeCardColor(color: string): void {
+    this.selectedColor = color;
+  }
+  
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
+ 
 
   displayedColumns: string[] = ['Sno','name','Lastviewed'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
+  totalUsers: number = 0;
+  totalOnlineUsers: number = 0;
+  totalOfflineUsers: number = 0;
+  totalDevices: number = 0;
+  totalActiveDevices: number = 0;
+  totalInactiveDevices: number = 0;
+  userData: any = {}; 
+  devicedata:any = {};
+
+
+  constructor(public router:Router,public saService: SaService, private service :SuperAdminService,public dialog: MatDialog) {}
 
   displayedColumns2: string[] = ['Device','value','dash_Progress'];
   dataSource2 = new MatTableDataSource(ELEMENT_DATA2);
   ngOnInit(): void {
+    //finctio to get user details
+    this.getUsercount();
+    this.gettotaldevicecount();
     this.dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
     this.dataSource.paginator = this.paginator;
     this.createChart();
+    this.saService.isPageLoading(true);
   }
     temperatureData = [
       { x: new Date(2023, 7, 21), y: 50 },
@@ -104,6 +138,29 @@ export class HomeComponent implements OnInit {
         ] as any
       } as Highcharts.Options);
     }
+    
+     
+  
+   gettotaldevicecount(){
+    this.service.getDevicecount().subscribe(
+      (devices) =>{
+        this.devicedata = devices;
+      console.log(devices);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+   }
+ 
+    getUsercount(){
+      this.service.getUSerInfo().then(data => {
+        this.userData = data.logs[0];
+        this.saService.isPageLoading(false);
+      })
+    }
+
+
 }
 
 

@@ -1,57 +1,44 @@
-<!-- <mat-card style="height: 100%; width: 100%"></mat-card> -->
-<div class="row bg-dark" style="height: 60px">
-    <div class="col-lg-4 col-md-4 col-sm-12 mt-3 mx-auto">
-      <h3 class="text-light">Add new devices</h3>
-    </div>
-    <div class="col-lg-2 col-md-2 col-sm-12 mt-2 d-flex justify-content-evenly">
-      
-      <button mat-mini-fab color="warn" matTooltip="Go to user manual" aria-label="Example icon button with a filter list icon">
-        <mat-icon>help</mat-icon>
-      </button>
-      <button mat-mini-fab color="warn"  matTooltip="Cancel" aria-label="Example icon button with a filter list icon" [mat-dialog-close]="true">
-        <mat-icon>cancel</mat-icon>
-      </button>
-    </div>
+<div class="container-fluid">
+	<div class="row model-head mb-2">
+	  <div class="col-lg-12 col-md-12 col-sm-12 pt-1">
+		<div class="model-title">Add Device to Dashboard</div>
+	  </div>
+	</div>
+	<form (ngSubmit)="onSubmit()" class="row">
+	  <div class="col-md-6 mb-2">
+		<mat-form-field class="from-field">
+		  <mat-label>Device Name</mat-label>
+		  <input matInput type="text" [(ngModel)]="formData.DeviceName" name="DeviceName" required>
+		  <mat-error *ngIf="!formData.DeviceName">Device Name is Required.</mat-error>
+		</mat-form-field>
+	  </div>
+	  <div class="col-md-6 mb-2">
+		<mat-form-field class="from-field">
+		  <mat-label>Device Trigger</mat-label>
+		  <input matInput type="number" placeholder="35" [(ngModel)]="formData.TriggerValue" name="TriggerValue" required>
+		  <mat-error *ngIf="!formData.TriggerValue">Device Trigger is Required.</mat-error>
+		</mat-form-field>
+	  </div>
+	  <div class="col-md-12 mb-2">
+		<mat-form-field class="from-field">
+		  <mat-label>Device Unique Id</mat-label>
+		  <input matInput type="text" [(ngModel)]="formData.DeviceUID" name="DeviceUID" required>
+		  <mat-error *ngIf="!formData.DeviceUID">Device Unique ID is Required.</mat-error>
+		</mat-form-field>
+	  </div>
+	  <div class="col-md-12 mb-2">
+		<mat-form-field class="from-field">
+		  <mat-label>Device Location</mat-label>
+		  <input matInput type="text" [(ngModel)]="formData.DeviceLocation" name="DeviceLocation" required>
+		  <mat-error *ngIf="!formData.DeviceLocation">Device Location is Required.</mat-error>
+		</mat-form-field>
+	  </div>
+	  <div class="col-md-6 justify-content-end d-flex mb-2">
+		<button mat-raised-button >Close</button>
+	  </div>
+	  <div class="col-md-6 mb-2">
+		<button mat-raised-button color="primary" (click)="onSubmit()" type="submit">Save</button>
+	  </div>
+	</form>
   </div>
-  
-  <mat-dialog-content class="mat-typography" >
-    <div class="row mt-5">
-      <mat-form-field appearance="fill" >
-        <mat-label>Device Name</mat-label>
-        <input matInput placeholder="Name is required">
-        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-      </mat-form-field>
-  
-      <mat-form-field>
-        <mat-label>Select Device type</mat-label>
-        <mat-select>
-          <mat-option value="one">alarm</mat-option>
-          <mat-option value="two">alarm</mat-option>
-        </mat-select>
-      </mat-form-field>
-  
-      <mat-form-field appearance="fill" >
-        <mat-label>Device IP</mat-label>
-        <input matInput placeholder="Name is required">
-        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-      </mat-form-field>
-  
-      <mat-form-field appearance="fill" >
-        <mat-label>Label</mat-label>
-        <input matInput placeholder="Label">
-        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-      </mat-form-field>
-  
-      <mat-form-field appearance="fill">
-        <mat-label>Discription</mat-label>
-        <textarea matInput></textarea>
-      </mat-form-field>
-    </div>
-  </mat-dialog-content>
-  
-  <mat-dialog-actions align="end">
-    <button mat-raised-button [mat-dialog-close]="true" >Cancel</button>
-    <button mat-raised-button [mat-dialog-close]="true" cdkFocusInitial color="warn">Add</button>
-  </mat-dialog-actions>
-
   

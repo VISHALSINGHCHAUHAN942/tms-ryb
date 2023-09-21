@@ -51,7 +51,16 @@ import {MatSelectModule} from '@angular/material/select';
 import { AlarmsComponent } from './SA-pages/alarms/alarms.component';
 import { ApitrackerComponent } from './SA-pages/apitracker/apitracker.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-
+import { ReactiveFormsModule } from '@angular/forms';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { SendNotificationComponent } from './SA-pages/notifications/send-notification/send-notification.component';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { PageLoadingComponent } from './sa-loading/page-loading/page-loading.component';
+import { Graph1Component } from './SA-pages/api-usage/graph1/graph1.component';
+import { Graph2Component } from './SA-pages/api-usage/graph2/graph2.component';
+import { Graph3Component } from './SA-pages/api-usage/graph3/graph3.component';
+import { Graph4Component } from './SA-pages/api-usage/graph4/graph4.component';
+import { DatePipe } from '@angular/common';
 
 
 
@@ -87,7 +96,6 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     UserDesktopComponent,
     CompanyDesktopComponent,
     CompanyMobileComponent,
-
     ApiUsageComponent,
     NotificationsComponent,
     AuditLogsComponent,
@@ -96,6 +104,12 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     AddDeviceComponent,
     AlarmsComponent,
     ApitrackerComponent,
+    SendNotificationComponent,
+    PageLoadingComponent,
+    Graph1Component,
+    Graph2Component,
+    Graph3Component,
+    Graph4Component,
   ],
   imports: [
    
@@ -124,7 +138,13 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatPaginatorModule,
     MatTableModule,
     MatSelectModule,
-    MatProgressSpinnerModule
-  ]
+    MatProgressSpinnerModule,
+    ReactiveFormsModule,
+    MatSnackBarModule,
+    MatSlideToggleModule
+  ],
+  providers:[
+    DatePipe
+    ]
 })
 export class SuperAdminModule { }

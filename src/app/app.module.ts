@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MqttModule, IMqttServiceOptions } from 'ngx-mqtt';
 
 
+
 const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
   hostname: 'broker.emqx.io',
   port: 8083,
@@ -27,7 +28,8 @@ const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    MqttModule.forRoot(MQTT_SERVICE_OPTIONS)
+    MqttModule.forRoot(MQTT_SERVICE_OPTIONS),
+    
   ],
   providers: [EncrptService],
   bootstrap: [AppComponent]

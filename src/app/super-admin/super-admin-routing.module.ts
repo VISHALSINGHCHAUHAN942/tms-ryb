@@ -10,6 +10,10 @@ import { NotificationsComponent } from './SA-pages/notifications/notifications.c
 import { AuditLogsComponent } from './SA-pages/audit-logs/audit-logs.component';
 import { AlarmsComponent } from './SA-pages/alarms/alarms.component';
 import { ApitrackerComponent } from './SA-pages/apitracker/apitracker.component';
+import { Graph1Component } from './SA-pages/api-usage/graph1/graph1.component';
+import { Graph2Component } from './SA-pages/api-usage/graph2/graph2.component';
+import { Graph3Component } from './SA-pages/api-usage/graph3/graph3.component';
+import { Graph4Component } from './SA-pages/api-usage/graph4/graph4.component';
 
 
 const routes: Routes = [
@@ -22,6 +26,10 @@ const routes: Routes = [
 	 {path:'Notification', component:NotificationsComponent},
 	 {path:'Audit-Logs',component:AuditLogsComponent},
 	 {path:'Alarms',component:AlarmsComponent},
+	 {path:'graph1',component:Graph1Component},
+	 {path:'graph2',component:Graph2Component},
+	 {path:'graph3',component:Graph3Component},
+	 {path:'graph4',component:Graph4Component},
 
 	{ path: '', redirectTo: 'home', pathMatch: 'full' }
 ];

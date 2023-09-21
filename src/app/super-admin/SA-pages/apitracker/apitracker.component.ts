@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { SuperAdminService } from '../../super-admin.service';
+import{ SaService } from '../../sa.service';
 
 export interface Data {
   id: any;
@@ -27,7 +28,6 @@ export interface Data {
 })
 export class ApitrackerComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
-  isLoading: boolean = true;
 
   displayedColumns: string[] = [
     'id',
@@ -47,15 +47,20 @@ export class ApitrackerComponent implements OnInit {
   ];
   dataSource: MatTableDataSource<Data>;
 
-  constructor(private service: SuperAdminService) {
+  constructor(public saService: SaService, private service: SuperAdminService) {
     this.dataSource = new MatTableDataSource<Data>([]); // Initialize with an empty array
   }
   currentTime: Date = new Date();
   ngOnInit(): void {
+    this.getAPIData();
+    this.saService.isPageLoading(true);
+  }
+
+  getAPIData(){
     this.service.getApiTrackerData().then((data) => {
       this.dataSource.data = data.logs; // Assign data to the MatTableDataSource
       this.dataSource.paginator = this.paginator;
-      this.isLoading = false; 
+      this.saService.isPageLoading(false);
       setInterval(() => {
         this.currentTime = new Date();
       }, 1000);

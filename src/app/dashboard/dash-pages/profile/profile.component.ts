@@ -103,7 +103,6 @@ export class ProfileComponent implements OnInit{
         duration: 2000
         });
     }
-
   }
   updateCompany() {
     const CompanyData = {
@@ -168,5 +167,4 @@ export class ProfileComponent implements OnInit{
       });
   }
 }
-
 }
