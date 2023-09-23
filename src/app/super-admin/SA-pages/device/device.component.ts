@@ -1,6 +1,5 @@
 import {Component, ViewChild, AfterViewInit, OnInit} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
-
 import {MatTableDataSource,} from '@angular/material/table';
 import { AddDeviceComponent } from './add-device/add-device.component';
 import {MatDialog, MatDialogConfig, MatDialogModule} from '@angular/material/dialog';

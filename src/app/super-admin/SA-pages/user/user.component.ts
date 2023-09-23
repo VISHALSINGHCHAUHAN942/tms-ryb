@@ -8,6 +8,7 @@ import { EdituserComponent } from './edituser/edituser.component';
 import { EditCompanyComponent } from '../company/edit-company/edit-company.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import{ SaService } from '../../sa.service';
+import Swal from 'sweetalert2';
 
 // userId: number;
 // userName: string;
@@ -64,7 +65,46 @@ export class UserComponent implements OnInit{
       this.saService.isPageLoading(false);
     });
   }
-
+opendeletedeviceSwal(element: any){
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "You won't be able to revert this!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      this.deleteUser(element);
+      Swal.fire(
+        'Deleted!',
+        'Your file has been deleted.',
+        'success'
+      )
+    }
+  })
+}
+openbloackuserSwal(element: any){
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "You won't be able to revert this!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, block it!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      this.toggleBlockUser(element);
+      Swal.fire(
+        'block',
+        'This user has been blocked.',
+        'success'
+      )
+    }
+  })
+}
 
  
    //function for delete user 

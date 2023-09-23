@@ -75,7 +75,6 @@ export class SuperAdminService {
     return this.http.delete(`${this.API_URL}/removeUser/${userId}`);
   }
 
-  // Update user details
   updateCompanyDetails(UserId: string, UserData: any): Observable<any> {
     return this.http.put(`${this.API_URL}/companyDetails/${UserId}`, UserData);
   }

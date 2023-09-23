@@ -28,7 +28,7 @@ export class Graph1Component implements OnInit
    createChart() {
     Highcharts.chart('newchart', {
         chart: {
-            type: 'spline',
+            type: 'column',
             plotBorderColor: 'black',
             plotBorderWidth: 1
         },
