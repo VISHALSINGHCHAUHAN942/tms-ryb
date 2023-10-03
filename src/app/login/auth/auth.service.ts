@@ -67,6 +67,14 @@ export class AuthService {
     return sessionStorage.getItem('CompanyEmail');
   }
 
+  setCompanyName(CompanyName: string){
+    sessionStorage.setItem('CompanyName', CompanyName);
+  }
+
+  getCompanyName(): string | null {
+    return sessionStorage.getItem('CompanyName');
+  }
+
   setToken(token: string): void {
     this.token = token;
     sessionStorage.setItem('token', token); // Store the token in the session storage
@@ -99,6 +107,9 @@ export class AuthService {
 
             const CompanyEmail = user.CompanyEmail;
             this.setCompanyEmail(CompanyEmail);
+
+            const CompanyName = user.CompanyName;
+            this.setCompanyName(CompanyName);
 
             const userId = user.UserId;
             sessionStorage.setItem('UserId', userId);

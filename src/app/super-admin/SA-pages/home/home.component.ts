@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild,ElementRef } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import * as Highcharts from 'highcharts';
 import { SuperAdminService } from '../../super-admin.service';
 import{ SaService } from '../../sa.service';
 import { Router } from '@angular/router';
@@ -80,7 +79,6 @@ export class HomeComponent implements OnInit {
     this.gettotaldevicecount();
     this.dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
     this.dataSource.paginator = this.paginator;
-    this.createChart();
     this.saService.isPageLoading(true);
   }
     temperatureData = [
@@ -96,48 +94,7 @@ export class HomeComponent implements OnInit {
       { x: new Date(2023, 7, 30), y: 74 },
       { x: new Date(2023, 8, 1), y: 22 },
     ]; 
-    createChart() {
-      Highcharts.chart('curvedLine', {
-          chart: {
-              type: 'column',
-              plotBorderColor: 'black',
-              plotBorderWidth: 1,
-              height: 320,
-          },
-          title: {
-              text: ''
-          },
-          credits: {
-              enabled: false
-          },
-          xAxis: {
-              title: {
-                  text: ''
-              },
-              type: 'datetime', // Use datetime x-axis
-              timezoneOffset: 330
-          },
-          yAxis: {
-              title: {
-                  text: ''
-              },
-              min: 0,
-              max: 100,
-              gridLineWidth: 0
-          },
-          series: [{
-              name: 'Temperature',
-              color: 'rgba(173, 129, 235, 0.8)', // Light purple color
-              data: this.temperatureData // Data organized by day
-          },  
-          // {
-          //     name: 'Humidity',
-          //     color: 'rgba(130, 187, 255, 0.8)', // Light blue color
-          //     data: this.humidityData // Data organized by day
-          // }
-        ] as any
-      } as Highcharts.Options);
-    }
+   
     
      
   
@@ -145,7 +102,6 @@ export class HomeComponent implements OnInit {
     this.service.getDevicecount().subscribe(
       (devices) =>{
         this.devicedata = devices;
-      console.log(devices);
       },
       (error) => {
         console.log(error);

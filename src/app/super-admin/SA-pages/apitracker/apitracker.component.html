@@ -11,9 +11,9 @@
         </div>
 
         <div class="col col-lg-3 col-md-6 col-sm-6 d-flex justify-content-center">
-          <mat-form-field appearance="fill" class="demo-button">
+          <mat-form-field appearance="fill">
             <mat-label>Search company/user</mat-label>
-            <input matInput placeholder="Enter name" #input>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Enter name" #input>
           </mat-form-field>
           <!-- <button mat-mini-fab class="demo-button"  aria-label="Example icon button with a menu icon">
             <mat-icon>add</mat-icon>
@@ -29,12 +29,8 @@
 
 
   <div class="container">
-    
-    <div *ngIf="dataSource.data.length > 0">
-      <mat-progress-bar mode="query" color="warn"></mat-progress-bar>
-    </div>
-    
-    <section class="example-container mat-elevation-z8" tabindex="0">
+
+    <section class="example-container" tabindex="0">
       <table mat-table [dataSource]="dataSource" >
                           
         <!-- Weight Column -->

@@ -58,7 +58,7 @@ export class ApitrackerComponent implements OnInit {
 
   getAPIData(){
     this.service.getApiTrackerData().then((data) => {
-      this.dataSource.data = data.logs; // Assign data to the MatTableDataSource
+      this.dataSource.data = data.data; // Assign data to the MatTableDataSource
       this.dataSource.paginator = this.paginator;
       this.saService.isPageLoading(false);
       setInterval(() => {
@@ -66,6 +66,7 @@ export class ApitrackerComponent implements OnInit {
       }, 1000);
     });
   }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();

@@ -61,6 +61,7 @@ import { Graph2Component } from './SA-pages/api-usage/graph2/graph2.component';
 import { Graph3Component } from './SA-pages/api-usage/graph3/graph3.component';
 import { Graph4Component } from './SA-pages/api-usage/graph4/graph4.component';
 import { DatePipe } from '@angular/common';
+import { EditAlarmsComponent } from './SA-pages/alarms/edit-alarms/edit-alarms.component';
 
 
 
@@ -110,6 +111,7 @@ import { DatePipe } from '@angular/common';
     Graph2Component,
     Graph3Component,
     Graph4Component,
+    EditAlarmsComponent,
   ],
   imports: [
    

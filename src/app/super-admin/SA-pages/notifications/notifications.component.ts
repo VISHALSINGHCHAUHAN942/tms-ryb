@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { SuperAdminService } from '../../super-admin.service';
 import { SendNotificationComponent } from './send-notification/send-notification.component';
 import{ SaService } from '../../sa.service';
+import { FormControl } from '@angular/forms';
 
 export interface PeriodicElement {
  id:any;
@@ -88,10 +89,7 @@ export class NotificationsComponent implements OnInit{
   displayedColumns3: string[] = ['check','create_time', 'type','subject','message','actions'];
   dataSource3!: MatTableDataSource<Template>;
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
+
   constructor(public saService: SaService, private service :SuperAdminService,public dialog: MatDialog) {}
   ngOnInit(): void {
     this.saService.isPageLoading(true);
@@ -114,6 +112,12 @@ export class NotificationsComponent implements OnInit{
       this.saService.isPageLoading(false);
     });
   }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+
   bulk(event: any): void {
     this.tick = event.checked;
     this.dataSource.data.forEach((row: PeriodicElement) => {

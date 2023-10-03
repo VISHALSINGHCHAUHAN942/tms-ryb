@@ -12,14 +12,16 @@ export class SuperAdminService {
 
   private readonly API_URL = 'http://ec2-3-108-57-100.ap-south-1.compute.amazonaws.com:3000';
 
+  private readonly AuditLogs_Url = 'http://ec2-3-108-57-100.ap-south-1.compute.amazonaws.com:3000/logs'
+
   // Get table data
-  getTableData(): Promise<any> {
-    return this.http.get(`${this.API_URL}/logs`).toPromise();
+  getAuditlogsData(): Promise<any> {
+    return this.http.get(`${this.AuditLogs_Url}/10hour`).toPromise();
   }
 
   // Get API tracker data
   getApiTrackerData(): Promise<any> {
-    return this.http.get(`${this.API_URL}/apilogs`).toPromise();
+    return this.http.get(`${this.API_URL}/apilogs/10hour`).toPromise();
   }
 
   // Get device data
@@ -67,7 +69,7 @@ export class SuperAdminService {
 
   // Add a device
   addDevice(DeviceData: any): Observable<any> {
-    return this.http.post('http://ec2-3-108-57-100.ap-south-1.compute.amazonaws.com:3000/addDevice', DeviceData);
+   return this.http.post('http://ec2-3-108-57-100.ap-south-1.compute.amazonaws.com:3000/addDevice', DeviceData);
   }
 
   // Delete a user
@@ -83,6 +85,26 @@ export class SuperAdminService {
     return this.http.put(`${this.API_URL}/users/${UserId}/block`, action);
   }
   gettransportGraphData(): Observable<any> {
-    return this.http.get(`${this.API_URL}/transport`);
+    return this.http.get(`${this.API_URL}/transport/1day`);
   }
+  gettransportGraph2Data(): Observable<any> {
+    return this.http.get(`${this.API_URL}/Jsfunction/1day`);
+  }
+  gettransportGraph3Data(): Observable<any> {
+    return this.http.get(`${this.API_URL}/alarmsActivity/1day`);
+  }
+  updateDeviceTrigger(deviceId: string, triggerData:any): Observable<any> {
+    return this.http.put(`${this.API_URL}/editDeviceTrigger/${deviceId}`, triggerData);
+  }
+  addDeviceTrigger(triggerData: any):Observable<any> {
+    return this.http.post(`${this.API_URL}/addDeviceTrigger`, triggerData);
+  }
+  // getCompanyEmail(): string | null {
+  //   return sessionStorage.getItem('CompanyEmail');
+  // }
+  // getCompanyName(): string | null {
+  //   return sessionStorage.getItem('CompanyName');
+  // }
+
+  
 }

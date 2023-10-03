@@ -30,7 +30,7 @@ const Data: PeriodicElement[] = [
 export class DeviceComponent {
   loading: boolean = true; 
   currentTime: Date = new Date();
-  displayedColumns: string[] = ['DeviceUID','TriggerValue','CompanyEmail','ip_address','status','timestamp','company_name','company_location'];
+  displayedColumns: string[] = ['EntryId','DeviceUID','DeviceLocation','DeviceName','CompanyEmail','CompanyName','IssueDate','status','phone_number','email','type','endDate'];
   dataSource = new MatTableDataSource<PeriodicElement>([]);
   private dataRefreshInterval: any; 
 
@@ -47,7 +47,8 @@ export class DeviceComponent {
   getDeviceDetail(){
     this.service.getDeviceData().subscribe(
       (devices) =>{
-        this.dataSource = devices.logs;
+        console.log(devices);
+        this.dataSource.data = devices.logs;
         this.dataSource.paginator = this.paginator;
         this.saService.isPageLoading(false);
       },
@@ -60,6 +61,7 @@ export class DeviceComponent {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+
 
        openDialog(): void {
         const dialogConfig = new MatDialogConfig();

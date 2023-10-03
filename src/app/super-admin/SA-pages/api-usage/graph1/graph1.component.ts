@@ -10,25 +10,26 @@ import { SuperAdminService } from 'src/app/super-admin/super-admin.service';
 })
 export class Graph1Component implements OnInit 
 {
-
   constructor(public router:Router,private service:SuperAdminService ){};
   temperatureData = []; 
 
   ngOnInit(): void {
     this.service.gettransportGraphData().subscribe((data: any) => {
       console.log(data);
-      this.temperatureData = data.logs.map((entry: any) => ({
-        x: new Date(entry.IssueDate).getTime(), 
-        y: entry.Values
+      this.temperatureData = data.data.map((entry: any) => ({
+        x: new Date(entry.timestamp).getTime(), 
+        y: entry.request_count
       }));
       this.createChart(); 
     });
   }
+  //def-1d
+  // int-7d,30d,1year
 
    createChart() {
     Highcharts.chart('newchart', {
         chart: {
-            type: 'column',
+            type: 'spline',
             plotBorderColor: 'black',
             plotBorderWidth: 1
         },

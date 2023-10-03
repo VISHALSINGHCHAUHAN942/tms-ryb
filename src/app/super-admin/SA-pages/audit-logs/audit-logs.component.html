@@ -9,17 +9,20 @@
             <h1>Audit logs</h1>
           </div>
 
-          <div class="col col-lg-3 col-md-6 col-sm-6 d-flex justify-content-center">
-            <mat-form-field appearance="fill" class="demo-button">
-              <mat-label>Search</mat-label>
-              <input matInput placeholder="Enter name" #input>
+          <div class="col col-lg-6 col-md-12 col-sm-12 d-flex justify-content-center">
+            <mat-form-field>
+              <mat-label>Select Time Interval</mat-label>
+              <mat-select [(ngModel)]="selectedValue" >
+                <mat-option value="10hour">10 Hours</mat-option>
+                <mat-option value="24hour">24 Hours</mat-option>
+                <!-- Add more options as needed -->
+              </mat-select>
             </mat-form-field>
-            <!-- <button mat-mini-fab class="demo-button" aria-label="Example icon button with a menu icon">
-              <mat-icon>add</mat-icon>
-            </button>
-            <button mat-mini-fab class="demo-button" aria-label="Example icon button with a menu icon">
-              <mat-icon>refresh</mat-icon>
-            </button> -->
+            <mat-form-field appearance="fill">
+              <mat-label>Search company/user</mat-label>
+              <input matInput (keyup)="applyFilter($event)" placeholder="Enter name" #input>
+            </mat-form-field> 
+         
           </div>
         </div>
       </div>
@@ -29,7 +32,7 @@
 
     <div class="container">
       
-      <section class="example-container mat-elevation-z8" tabindex="0">
+      <section class="example-container" tabindex="0">
         <table mat-table [dataSource]="dataSource" >
 
           <!-- ID Column -->

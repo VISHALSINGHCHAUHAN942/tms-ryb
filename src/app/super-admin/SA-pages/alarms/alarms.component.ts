@@ -3,9 +3,10 @@ import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { SuperAdminService } from '../../super-admin.service';
 import{ SaService } from '../../sa.service';
+import { EditAlarmsComponent } from './edit-alarms/edit-alarms.component';
 
 export interface PeriodicElement {
   id :any;
@@ -28,9 +29,10 @@ const ELEMENT_DATA: PeriodicElement[] = [];
 })
 export class AlarmsComponent implements OnInit{
   
-  displayedColumns: string[] = ['id','created_time','device_name','device_ip','type','severity','assignee','status','details'];
+  displayedColumns: string[] = ['DeviceUID','TriggerValue','CompanyEmail','status','timestamp','company_name','DeviceName','type','actions'];
   dataSource = new MatTableDataSource<PeriodicElement>([]);
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
+  
 
   constructor(public saService: SaService, private service: SuperAdminService,public dialog: MatDialog) {}
 
@@ -44,11 +46,23 @@ export class AlarmsComponent implements OnInit{
       this.dataSource.data = data.logs;
       this.dataSource.paginator = this.paginator;
       this.saService.isPageLoading(false);
-      console.log(data);
     });
   }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+
+  openEditAlarmsDialog(user: any): void {
+    // console.log(user);
+     const dialogConfig = new MatDialogConfig();
+     dialogConfig.width = '300px';
+     dialogConfig.height = 'auto';
+     dialogConfig.maxWidth = '90vw';
+     dialogConfig.data = { user }; 
+     const dialogRef = this.dialog.open(EditAlarmsComponent, dialogConfig);
+     dialogRef.afterClosed().subscribe(EditAlarmsComponent => {   
+       this.getAlarms();
+      });
+   }
 }

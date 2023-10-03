@@ -17,12 +17,20 @@
           <div class="row mt-2">
             <div class="col-lg-12 col-sm-12 col-md-12">
               <div class="demo-button-container d-flex justify-content-end">
-            <button mat-raised-button  style=" background-color:#263238; color: white;" matTooltip="make all as read" class="demo-button mt-3 mr-2"><mat-icon>done_all</mat-icon>make as done </button>
-            <button mat-raised-button class="demo-button mt-3" ><mat-icon>search</mat-icon>Search</button>
-            <!-- <mat-form-field appearance="fill" class="demo-button">
-              <mat-label>Search</mat-label>
-              <input matInput placeholder="Enter name" #input>
-            </mat-form-field> -->
+            <mat-form-field>
+              <mat-label>select type</mat-label>
+              <select matNativeControl >
+                
+                <option value="volvo">ALL</option>
+                <option value="saab">Unread</option>
+              </select>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Search company/user</mat-label>
+              <input matInput (keyup)="applyFilter($event)" placeholder="Enter name" #input>
+            </mat-form-field> 
+       
           </div>
           <section class="example-container" tabindex="0">
           <table mat-table [dataSource]="dataSource" class="col-sm-12 col-md-12 col-lg-12">

@@ -23,6 +23,7 @@ export interface AuditLog {
   styleUrls: ['./audit-logs.component.css']
 })
 export class AuditLogsComponent implements OnInit {
+  selectedValue: string = '10hour';
   displayedColumns: string[] = ['id', 'timestamp', 'ip', 'entity_type', 'entity_name', 'username', 'user_type', 'request_type', 'status', 'details'];
   dataSource = new MatTableDataSource<AuditLog>([]);
    currentTime: Date = new Date();
@@ -36,10 +37,9 @@ export class AuditLogsComponent implements OnInit {
   }
 
   getAuditLogs(){
-    this.service.getTableData().then(data => {
-      this.dataSource.data = data.logs;
+    this.service.getAuditlogsData().then(data => {
+      this.dataSource.data = data.data;
       this.dataSource.paginator = this.paginator;
-      console.log(data);
       this.saService.isPageLoading(false);
       setInterval(() => {
         this.currentTime = new Date();
@@ -50,4 +50,16 @@ export class AuditLogsComponent implements OnInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+  // onMatSelectChange() {
+  //   this.service.updateApiUrl(this.selectedValue);
+  //   // Call your service method to fetch data with the updated URL
+  //   this.service.getAuditlogsData().then((data) => {
+  //     // Handle the data response here
+  //   });
+  // }
+  //
+
+  // apilogs-def-10
+  // logs-def-30
+    
 }

@@ -59,8 +59,8 @@ export class UserComponent implements OnInit{
   //function to get data from api
   getUserData(){
     this.service.getUserDetails().then(data => {
-      console.log(data);
       this.dataSource.data = data.userDetails;
+      
       this.dataSource.paginator = this.paginator;
       this.saService.isPageLoading(false);
     });

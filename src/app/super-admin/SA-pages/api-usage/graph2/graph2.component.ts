@@ -1,73 +1,35 @@
 import { Component,OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import * as Highcharts from 'highcharts';
+import { SuperAdminService } from 'src/app/super-admin/super-admin.service';
 
 @Component({
   selector: 'app-graph2',
   templateUrl: './graph2.component.html',
   styleUrls: ['./graph2.component.css']
 })
-export class Graph2Component implements OnInit{
-  constructor(public router:Router){};
-  temperatureData = [
-    { x: new Date(2023, 7, 21), y: 50 },
-    { x: new Date(2023, 7, 22), y: 82 },
-    { x: new Date(2023, 7, 23), y: 10 },
-    { x: new Date(2023, 7, 24), y: 74 },
-    { x: new Date(2023, 7, 25), y: 22 },
-    { x: new Date(2023, 7, 26), y: 10 },
-    { x: new Date(2023, 7, 27), y: 74 },
-    { x: new Date(2023, 7, 28), y: 22 },
-    { x: new Date(2023, 7, 29), y: 10 },
-    { x: new Date(2023, 7, 30), y: 74 },
-    { x: new Date(2023, 8, 1), y: 22 },
-  ]; 
-  PressureData = [
-    { x: new Date(2023, 7, 21), y: 20 },
-    { x: new Date(2023, 7, 22), y: 82 },
-    { x: new Date(2023, 7, 23), y: 10 },
-    { x: new Date(2023, 7, 24), y: 74 },
-    { x: new Date(2023, 7, 25), y: 22 },
-    { x: new Date(2023, 7, 26), y: 10 },
-    { x: new Date(2023, 7, 27), y: 74 },
-    { x: new Date(2023, 7, 28), y: 22 },
-    { x: new Date(2023, 7, 29), y: 10 },
-    { x: new Date(2023, 7, 30), y: 74 },
-    { x: new Date(2023, 8, 1), y: 22 },
-  ];
+export class Graph2Component  implements OnInit 
+{
 
-  humidityData = [
-    { x: new Date(2023, 7, 21), y: 30 },
-    { x: new Date(2023, 7, 22), y: 92 },
-    { x: new Date(2023, 7, 23), y: 40 },
-    { x: new Date(2023, 7, 24), y: 84 },
-    { x: new Date(2023, 7, 25), y: 32 },
-    { x: new Date(2023, 7, 26), y: 30 },
-    { x: new Date(2023, 7, 27), y: 84 },
-    { x: new Date(2023, 7, 28), y: 12 },
-    { x: new Date(2023, 7, 29), y: 10 },
-    { x: new Date(2023, 7, 30), y: 94 },
-    { x: new Date(2023, 7, 31), y: 94 },
-    { x: new Date(2023, 8, 1), y: 22 },
-    { x: new Date(2023, 8, 2), y: 22 },
-    { x: new Date(2023, 8, 3), y: 22 },
-    { x: new Date(2023, 8, 4), y: 22 },
-    { x: new Date(2023, 8, 5), y: 22 },
-    { x: new Date(2023, 8, 6), y: 22 },
-    { x: new Date(2023, 8, 7), y: 22 },
-    { x: new Date(2023, 8, 8), y: 22 },
+  constructor(public router:Router,private service:SuperAdminService ){};
+  temperatureData = []; 
 
-  ];
-   ngOnInit(): void {
-    this.createChart(); 
-   }
+  ngOnInit(): void {
+    this.service.gettransportGraph2Data().subscribe((data: any) => {
+      this.temperatureData = data.data.map((entry: any) => ({
+        x: new Date(entry.timestamp).getTime(), 
+        y: entry.request_count
+      }));
+      this.createChart(); 
+    });
+  }
+
    createChart() {
     Highcharts.chart('newchart', {
         chart: {
             type: 'column',
             plotBorderColor: 'black',
-            plotBorderWidth: 1,
-            height: 550
+            plotBorderWidth: 1
         },
         title: {
             text: ''
@@ -87,7 +49,6 @@ export class Graph2Component implements OnInit{
                 text: ''
             },
             min: 0,
-            max: 100,
             gridLineWidth: 0
         },
         series: [{

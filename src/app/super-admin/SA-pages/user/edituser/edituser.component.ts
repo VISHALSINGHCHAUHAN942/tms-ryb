@@ -13,7 +13,6 @@ export class EdituserComponent implements OnInit {
   UserId: any;
   user: any;
 
-  // Create a FormGroup to manage your form controls
   userForm: FormGroup;
 
   constructor(

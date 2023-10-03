@@ -3,8 +3,6 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { SuperAdminService } from '../../super-admin.service';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
-
-import { AddDeviceComponent } from '../device/add-device/add-device.component';
 import { EditCompanyComponent } from './edit-company/edit-company.component';
 import{ SaService } from '../../sa.service';
 
