@@ -37,8 +37,9 @@ export class AuditLogsComponent implements OnInit {
   }
 
   getAuditLogs(){
-    this.service.getAuditlogsData().then(data => {
-      this.dataSource.data = data.data;
+    this.service.getAuditlogsData().then(logsdata => {
+      console.log(logsdata);
+      this.dataSource.data = logsdata.data;
       this.dataSource.paginator = this.paginator;
       this.saService.isPageLoading(false);
       setInterval(() => {
@@ -50,14 +51,7 @@ export class AuditLogsComponent implements OnInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-  // onMatSelectChange() {
-  //   this.service.updateApiUrl(this.selectedValue);
-  //   // Call your service method to fetch data with the updated URL
-  //   this.service.getAuditlogsData().then((data) => {
-  //     // Handle the data response here
-  //   });
-  // }
-  //
+
 
   // apilogs-def-10
   // logs-def-30

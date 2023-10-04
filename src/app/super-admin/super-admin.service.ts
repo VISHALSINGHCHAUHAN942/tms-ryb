@@ -16,7 +16,7 @@ export class SuperAdminService {
 
   // Get table data
   getAuditlogsData(): Promise<any> {
-    return this.http.get(`${this.AuditLogs_Url}/10hour`).toPromise();
+    return this.http.get(`${this.API_URL}/logs/10hour`).toPromise();
   }
 
   // Get API tracker data
@@ -59,7 +59,7 @@ export class SuperAdminService {
 
   // Get device count
   getDevicecount(): Observable<any> {
-    return this.http.get(`${this.API_URL}/devicecount`);
+    return this.http.get(`${this.API_URL}/devInfo`);
   }
 
   // Get device info
@@ -85,7 +85,7 @@ export class SuperAdminService {
     return this.http.put(`${this.API_URL}/users/${UserId}/block`, action);
   }
   gettransportGraphData(): Observable<any> {
-    return this.http.get(`${this.API_URL}/transport/1day`);
+    return this.http.get(`${this.API_URL}/transports/1day`);
   }
   gettransportGraph2Data(): Observable<any> {
     return this.http.get(`${this.API_URL}/Jsfunction/1day`);

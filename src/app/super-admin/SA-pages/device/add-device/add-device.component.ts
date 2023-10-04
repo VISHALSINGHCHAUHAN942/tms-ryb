@@ -19,8 +19,9 @@ export class AddDeviceComponent {
   TriggerValue:string = '';
    CompanyEmail:string = '';
    CompanyName:string = '';
-  sms:string = '';
-  Email:string = '';
+   SMS:string = '';
+  email:string = '';
+  type:string = '';
  
   
   formData: any = {};
@@ -43,8 +44,7 @@ export class AddDeviceComponent {
   });
   }
   
- //  CompanyEmail = this.service.getCompanyEmail();
- //  CompanyName = this.service.getCompanyName();
+
   
 
   onSaveClick(): void {
@@ -55,19 +55,19 @@ export class AddDeviceComponent {
         DeviceName: this.deviceName,
         CompanyEmail: this.CompanyEmail,
         CompanyName: this.CompanyName,
-        SMS: this.sms,
-        email:this.Email,
+        SMS: this.SMS,
+        email:this.email,
+        type:this.type,
       }
       const triggerData = {
-        DeviceUID: this.deviceUid,
         TriggerValue: this.TriggerValue,
+        DeviceUID: this.deviceUid,
         CompanyEmail: this.CompanyEmail
       }
       this.service.addDevice(deviceData).subscribe(
         () =>{
          this.service.addDeviceTrigger(triggerData).subscribe(
            () => {
-
               this.snackBar.open('Device Added Successful!', 'Dismiss', {
                 duration: 2000
               });

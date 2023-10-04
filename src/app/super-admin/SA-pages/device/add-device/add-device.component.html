@@ -44,17 +44,29 @@
 	  <div class="col-md-6 mb-2">
 		<mat-form-field class="from-field">
 		  <mat-label>PhoneNumber</mat-label>
-		  <input matInput type="text" [(ngModel)]="formData.sms" name="sms" required>
-		  <mat-error *ngIf="!formData.sms">PhoneNumber is Required.</mat-error>
+		  <input matInput type="text" [(ngModel)]="formData.SMS" name="SMS" required>
+		  <mat-error *ngIf="!formData.SMS">PhoneNumber is Required.</mat-error>
 		</mat-form-field>
 	  </div>
 	  <div class="col-md-6 mb-2">
 		<mat-form-field class="from-field">
 		  <mat-label>Email</mat-label>
-		  <input matInput type="text" [(ngModel)]="formData.Email" name="Email">
-		  <mat-error *ngIf="!formData.Email">Email is Required.</mat-error>
+		  <input matInput type="text" [(ngModel)]="formData.email" name="email">
+		  <mat-error *ngIf="!formData.email">Email is Required.</mat-error>
 		</mat-form-field>
 	  </div>
+
+	  <div class="col-md-6 mb-2">
+		<mat-form-field class="from-field">
+		  <mat-label>User Type</mat-label>
+		  <mat-select [(ngModel)]="formData.type" name="type">
+			<mat-option value="Admin">Admin</mat-option>
+			<mat-option value="Super Admin">Super Admin</mat-option>
+		  </mat-select>
+		  <mat-error *ngIf="!formData.type">User Type is Required.</mat-error>
+		</mat-form-field>
+	  </div>
+	  
 
 
 

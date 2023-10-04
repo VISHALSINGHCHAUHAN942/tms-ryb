@@ -14,6 +14,10 @@ export class AddDeviceComponent implements OnInit{
   userId!: string | null;
   CompanyEmail! :string;
   CompanyName!:string;
+  UserType!: string;
+  ContactNo!: string;
+  PersonalEmail!: string;
+
   errorMessage = '';
   TriggerValue = new FormControl('', [Validators.required, Validators.pattern(/^\d*\.?\d+$/), Validators.min(0), Validators.max(100)]);
   DeviceName = new FormControl('', [Validators.required]);
@@ -58,7 +62,10 @@ export class AddDeviceComponent implements OnInit{
         DeviceLocation: this.DeviceLocation.value,
         DeviceName: this.DeviceName.value,
         CompanyEmail: this.CompanyEmail,
-        CompanyName: this.CompanyName
+        CompanyName: this.CompanyName,
+        type : this.UserType,
+        SMS:this.ContactNo,
+        email:this.PersonalEmail
       }
       
       const triggerData = {
@@ -102,8 +109,12 @@ export class AddDeviceComponent implements OnInit{
     if(this.userId){
       this.DashDataService.userDetails(this.userId).subscribe(
         (users) => {
+          console.log(users);
           this.CompanyEmail = users[0].CompanyEmail;
           this.CompanyName = users[0].CompanyName;
+          this.UserType = users[0].UserType;
+          this.ContactNo = users[0].ContactNo;
+          this.PersonalEmail = users[0].PersonalEmail;
         },
         (error) =>{
           this.snackBar.open(

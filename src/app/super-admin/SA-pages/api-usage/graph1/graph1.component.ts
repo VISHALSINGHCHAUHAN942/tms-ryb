@@ -56,12 +56,18 @@ export class Graph1Component implements OnInit
         series: [{
             name: 'Temperature',
             color: {
-              linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
+              linearGradient: {
+                x1: 0,
+                x2: 0,
+                y1: 0,
+                y2: 1
+              },
               stops: [
-                [0, 'rgba(255, 0, 0, 1)'], // Start color (red)
-                [1, 'rgba(130, 187, 255, 0.8)'] // End c
+                [0, 'rgba(0, 0, 255, 1)'],    // Start color (blue)
+                [1, 'rgba(0, 255, 255, 0.3)'] // End color (cyan)
               ]
-          },// Light purple color
+            },
+          // Light purple color
             data: this.temperatureData // Data organized by day
         },  
        

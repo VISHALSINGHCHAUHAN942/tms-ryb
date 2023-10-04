@@ -30,7 +30,7 @@ const Data: PeriodicElement[] = [
 export class DeviceComponent {
   loading: boolean = true; 
   currentTime: Date = new Date();
-  displayedColumns: string[] = ['EntryId','DeviceUID','DeviceLocation','DeviceName','CompanyEmail','CompanyName','IssueDate','status','phone_number','email','type','endDate'];
+  displayedColumns: string[] = ['EntryId','DeviceUID','DeviceLocation','DeviceName','CompanyEmail','CompanyName','IssueDate','status','SMS','email','type','endDate'];
   dataSource = new MatTableDataSource<PeriodicElement>([]);
   private dataRefreshInterval: any; 
 

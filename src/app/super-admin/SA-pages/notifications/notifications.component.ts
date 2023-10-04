@@ -9,7 +9,7 @@ import { FormControl } from '@angular/forms';
 
 export interface PeriodicElement {
  id:any;
- useremail:any;
+ created_time:any;
  message:any;
  status:any;
  timestamp:any;
@@ -79,8 +79,9 @@ export class NotificationsComponent implements OnInit{
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
 
   tick = false; 
+  selectedReadStatus: number | null = null;
 
-  displayedColumns: string[] = ['id','useremail', 'message','status','timestamp','type'];
+  displayedColumns: string[] = ['id','created_time', 'message','type','subject','recipient','isRead'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
   displayedColumns2: string[] = ['check','create_time', 'type','subject','message','actions'];
@@ -107,15 +108,20 @@ export class NotificationsComponent implements OnInit{
 
   getNotification(){
     this.service.getNotification().then(data =>{
+      console.log(data);
       this.dataSource.data = data.logs;
       this.dataSource.paginator = this.paginator;
       this.saService.isPageLoading(false);
     });
   }
+ 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+  
+
+
 
 
   bulk(event: any): void {

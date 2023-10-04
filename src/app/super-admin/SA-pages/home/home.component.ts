@@ -95,22 +95,21 @@ export class HomeComponent implements OnInit {
       { x: new Date(2023, 8, 1), y: 22 },
     ]; 
    
-    
-     
-  
    gettotaldevicecount(){
     this.service.getDevicecount().subscribe(
       (devices) =>{
-        this.devicedata = devices;
+        this.devicedata = devices.logs[0];
       },
       (error) => {
         console.log(error);
       }
     );
    }
- 
+
+
     getUsercount(){
-      this.service.getUSerInfo().then(data => {
+      this.service.getUSerInfo().then
+      (data => {
         this.userData = data.logs[0];
         this.saService.isPageLoading(false);
       })
