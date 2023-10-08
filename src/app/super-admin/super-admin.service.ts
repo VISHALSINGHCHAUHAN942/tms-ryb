@@ -12,11 +12,13 @@ export class SuperAdminService {
 
   private readonly API_URL = 'http://ec2-3-108-57-100.ap-south-1.compute.amazonaws.com:3000';
 
-  private readonly AuditLogs_Url = 'http://ec2-3-108-57-100.ap-south-1.compute.amazonaws.com:3000/logs'
 
-  // Get table data
-  getAuditlogsData(): Promise<any> {
-    return this.http.get(`${this.API_URL}/logs/10hour`).toPromise();
+ // Get table data
+  // getAuditlogsData(): Promise<any> {
+  //   return this.http.get(`${this.API_URL}/logs/10hour`).toPromise();
+  // }
+  getAuditlogsData(duration: string): Promise<any> {
+    return this.http.get(`${this.API_URL}/logs/${duration}`).toPromise();
   }
 
   // Get API tracker data
@@ -99,12 +101,6 @@ export class SuperAdminService {
   addDeviceTrigger(triggerData: any):Observable<any> {
     return this.http.post(`${this.API_URL}/addDeviceTrigger`, triggerData);
   }
-  // getCompanyEmail(): string | null {
-  //   return sessionStorage.getItem('CompanyEmail');
-  // }
-  // getCompanyName(): string | null {
-  //   return sessionStorage.getItem('CompanyName');
-  // }
 
   
 }

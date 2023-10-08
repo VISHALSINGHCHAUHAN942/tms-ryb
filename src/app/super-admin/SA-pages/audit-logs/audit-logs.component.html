@@ -9,20 +9,12 @@
             <h1>Audit logs</h1>
           </div>
 
-          <div class="col col-lg-6 col-md-12 col-sm-12 d-flex justify-content-center">
-            <mat-form-field>
-              <mat-label>Select Time Interval</mat-label>
-              <mat-select [(ngModel)]="selectedValue" >
-                <mat-option value="10hour">10 Hours</mat-option>
-                <mat-option value="24hour">24 Hours</mat-option>
-                <!-- Add more options as needed -->
-              </mat-select>
-            </mat-form-field>
+          <div class="col col-lg-6 col-md-12 col-sm-12 d-flex justify-content-end">
+
             <mat-form-field appearance="fill">
               <mat-label>Search company/user</mat-label>
               <input matInput (keyup)="applyFilter($event)" placeholder="Enter name" #input>
             </mat-form-field> 
-         
           </div>
         </div>
       </div>

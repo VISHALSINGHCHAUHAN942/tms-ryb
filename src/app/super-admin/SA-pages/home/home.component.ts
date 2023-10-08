@@ -5,6 +5,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { SuperAdminService } from '../../super-admin.service';
 import{ SaService } from '../../sa.service';
 import { Router } from '@angular/router';
+import {MatIconModule} from '@angular/material/icon';
+import {MatTableModule} from '@angular/material/table';
 
 export interface PeriodicElement {
   Sno:any;
@@ -32,6 +34,7 @@ const ELEMENT_DATA2: PeriodicElement2[] = [
   { Device:'assets',value:'19/100' },
   { Device:'users',value:'19/100' },
 ];
+
 
 @Component({
   selector: 'app-home',

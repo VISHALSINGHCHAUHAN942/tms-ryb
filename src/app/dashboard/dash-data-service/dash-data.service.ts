@@ -96,4 +96,7 @@ export class DashDataService {
   addUser(userRegister: any): Observable<any> {
     return this.http.post(`${this.API_URL}/register-dashboard`, userRegister);
   }
+  getDevicecount(): Observable<any> {
+    return this.http.get(`${this.API_URL}/devInfo`);
+  }
 }

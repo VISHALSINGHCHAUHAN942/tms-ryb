@@ -23,8 +23,7 @@ export class Graph1Component implements OnInit
       this.createChart(); 
     });
   }
-  //def-1d
-  // int-7d,30d,1year
+
 
    createChart() {
     Highcharts.chart('newchart', {

@@ -16,9 +16,7 @@ export interface PeriodicElement{
   timestamp:any;
   company_name:any;
   company_location:any;
-  
 }
-
 const Data: PeriodicElement[] = [
 ];
 @Component({
@@ -57,6 +55,11 @@ export class DeviceComponent {
       }
     );
   }
+
+
+
+  
+  
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -74,6 +77,8 @@ export class DeviceComponent {
  
  }
 
+
+ 
       
     
 
