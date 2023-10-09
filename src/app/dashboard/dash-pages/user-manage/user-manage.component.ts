@@ -97,13 +97,17 @@ export class UserManageComponent implements OnInit, OnDestroy {
           });
 
           this.dataSource2 = devices.devices.map((device: DeviceData) => {
-            device.Status = device.is_active === 1 ? 'Online' : 'Offline';
+            if (device.status === "online" || device.status === "heating") {
+              device.Status = 'Online';
+            } else {
+              device.Status = 'Offline';
+            }
             return device;
-          });
+          });          
 
           this.totalDevices = this.dataSource2.length;
-          this.totalActiveDevices = this.dataSource2.filter(devices => devices.is_active === 1).length;
-          this.totalInactiveDevices = this.dataSource2.filter(devices => devices.is_active === 0 ).length;
+          this.totalActiveDevices = this.dataSource2.filter(devices => devices.status === "online").length;
+          this.totalInactiveDevices = this.dataSource2.filter(devices => devices.status === "offline" ).length;
           this.dashService.isPageLoading(false);
         },
         (error) => {
@@ -151,4 +155,5 @@ export interface DeviceData {
   is_active: number;
   Status: string;
   formattedIssueDate: string | null;
+  status: String;
 }

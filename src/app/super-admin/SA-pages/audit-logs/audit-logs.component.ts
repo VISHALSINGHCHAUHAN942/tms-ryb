@@ -65,7 +65,6 @@ export class AuditLogsComponent implements OnInit {
 
   getAuditLogs() {
     this.service.getAuditlogsData(this.TimeSelected).then(logsdata => {
-      console.log(logsdata);
       const mappedLogs: MappedAuditLog[] = logsdata.data.map((log: AuditLog) => {
         return {
           id: log.id,

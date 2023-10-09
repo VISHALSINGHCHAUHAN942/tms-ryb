@@ -113,7 +113,6 @@ openbloackuserSwal(element: any){
     const userId = user.UserId; 
     this.service.deleteUser(userId).subscribe(
         (response) => {
-            console.log('User deleted:', response);
             this.snackBar.open('User deleted successfully', 'Close', {
                 duration: 2000, 
             });
@@ -143,7 +142,7 @@ toggleBlockUser(user: PeriodicElement) {
 
   this.service.toggleBlockUser(userId, requestData).subscribe(
     (response) => {
-      console.log(`${action} User:`, response);
+    //   console.log(`${action} User:`, response);
       this.getUserData();
 
       this.snackBar.open(`${action}ed successfully`, 'Close', {

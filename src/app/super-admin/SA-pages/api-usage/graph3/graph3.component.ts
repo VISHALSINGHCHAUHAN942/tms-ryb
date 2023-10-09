@@ -16,18 +16,19 @@ export class Graph3Component  implements OnInit
 
   ngOnInit(): void {
     this.service.gettransportGraph3Data().subscribe((data: any) => {
+      console.log(data);
       this.temperatureData = data.data.map((entry: any) => ({
         x: new Date(entry.timestamp).getTime(), 
         y: entry.request_count
       }));
-      this.createChart(); 
+      this.javascript(); 
     });
   }
 
-   createChart() {
-    Highcharts.chart('newchart', {
+  javascript() {
+    Highcharts.chart('javascript', {
         chart: {
-            type: 'column',
+            type: 'spline',
             plotBorderColor: 'black',
             plotBorderWidth: 1
         },

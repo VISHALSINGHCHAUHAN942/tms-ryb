@@ -20,14 +20,14 @@ export class Graph2Component  implements OnInit
         x: new Date(entry.timestamp).getTime(), 
         y: entry.request_count
       }));
-      this.createChart(); 
+      this.ruleEngine(); 
     });
   }
 
-   createChart() {
-    Highcharts.chart('newchart', {
+   ruleEngine() {
+    Highcharts.chart('ruleEngine', {
         chart: {
-            type: 'column',
+            type: 'spline',
             plotBorderColor: 'black',
             plotBorderWidth: 1
         },

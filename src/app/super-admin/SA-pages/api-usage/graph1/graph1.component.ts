@@ -15,18 +15,17 @@ export class Graph1Component implements OnInit
 
   ngOnInit(): void {
     this.service.gettransportGraphData().subscribe((data: any) => {
-      console.log(data);
       this.temperatureData = data.data.map((entry: any) => ({
         x: new Date(entry.timestamp).getTime(), 
         y: entry.request_count
       }));
-      this.createChart(); 
+      this.transport(); 
     });
   }
 
 
-   createChart() {
-    Highcharts.chart('newchart', {
+   transport() {
+    Highcharts.chart('transport', {
         chart: {
             type: 'spline',
             plotBorderColor: 'black',
