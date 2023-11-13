@@ -101,6 +101,8 @@ export class SuperAdminService {
   addDeviceTrigger(triggerData: any):Observable<any> {
     return this.http.post(`${this.API_URL}/addDeviceTrigger`, triggerData);
   }
+
+
  //Api usage
   gettransportApiCount(): Observable<any> {
     return this.http.get(`${this.API_URL}/transportdata`);

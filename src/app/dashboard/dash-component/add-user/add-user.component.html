@@ -30,7 +30,8 @@
     		<mat-form-field class="from-field">
 		        <mat-label>Contact No</mat-label>
 		        <input matInput [formControl]="ContactNo" required>
-		        <mat-error *ngIf="ContactNo.invalid">Contact No is Required.</mat-error>
+		        <mat-error *ngIf="ContactNo.hasError('required')">Contact No is Required.</mat-error>
+				  <mat-error *ngIf="ContactNo.hasError('pattern')">Contact No must be a 10-digit</mat-error>
 		    </mat-form-field>
     	</div>
     	<div class="col-md-6 mb-2">

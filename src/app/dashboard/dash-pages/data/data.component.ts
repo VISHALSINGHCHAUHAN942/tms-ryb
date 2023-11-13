@@ -333,6 +333,7 @@ export class DataComponent implements OnInit {
                 this.DeviceTrigger = deviceTriggerResult[0].TriggerValue;
                 this.loading1 = false;
               }
+             
             );
           }
         );
@@ -367,7 +368,9 @@ export class DataComponent implements OnInit {
   refresh(){
     const deviceId = sessionStorage.getItem('device');
     if(deviceId){
-      this.fetchDeviceInfo(deviceId);
+      this.fetchDeviceInfo(deviceId);     
     }
+    
+    
   }
 }

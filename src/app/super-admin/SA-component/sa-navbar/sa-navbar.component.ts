@@ -57,7 +57,13 @@ export class SANavbarComponent implements OnInit {
     this.router.navigate(['sa/devices']);
   }
   notifications(){
-    this.router.navigate(['sa/companies']);
+    this.router.navigate(['sa/Notification']);
+  }
+  settings(){
+    this.router.navigate(['sa/settings']);
+  }
+  profile(){
+    this.router.navigate(['sa/profile']);
   }
   toggleFullScreen() {
     if (!this.isFullScreen) {

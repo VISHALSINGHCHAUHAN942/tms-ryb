@@ -15,13 +15,19 @@ export class AddUserComponent implements OnInit{
   FirstName = new FormControl('', [Validators.required]);
   LastName = new FormControl('', [Validators.required]);
   PersonalEmail = new FormControl('', [Validators.required, Validators.email]);
-  ContactNo = new FormControl('', [Validators.required]);
+  // ContactNo = new FormControl('', [Validators.required]);
   UserType = new FormControl('', [Validators.required]);
   Location = new FormControl('', [Validators.required]);
   Designation = new FormControl('', [Validators.required]);
   CompanyEmail!: string;
   CompanyName!: string;
   userId!: string | null;
+
+  ContactNo = new FormControl('', [
+    Validators.required,
+    Validators.pattern(/^[0-9]*$/),
+
+  ]);
 
   @HostListener('window:resize')
   onWindowResize() {

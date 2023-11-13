@@ -14,7 +14,7 @@ export class FilterComponent {
 
   CompanyEmail!: string | null;
   selectedDevice!: FormControl;
-   selectedDeviceInterval!: FormControl;
+  selectedDeviceInterval!: FormControl;
   deviceOptions: any[] = [];
   selectedRadioButton: string = 'Last';
   startDate!: Date;

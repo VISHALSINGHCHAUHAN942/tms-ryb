@@ -6,6 +6,7 @@ import {  MatDialogRef } from '@angular/material/dialog';
 import { DeviceComponent } from '../device.component';
 
 
+
 @Component({
   selector: 'app-add-device',
   templateUrl: './add-device.component.html',
@@ -25,20 +26,8 @@ export class AddDeviceComponent {
   
   formData: any = {};
 
-  constructor(private service: SuperAdminService, private snackBar: MatSnackBar,private AuthService:AuthService,
-    public dialogRef: MatDialogRef<DeviceComponent>,
-  ) {}
+  constructor(private service: SuperAdminService, private snackBar: MatSnackBar,private AuthService:AuthService, public dialogRef: MatDialogRef<DeviceComponent>) {}
 
-  onSubmit() {
-  this.service.addDevice(this.formData).subscribe(response => {
-    const message = 'API Response:' + JSON.stringify(response);
-    this.snackBar.open(message, 'Close',{
-      duration: 5000, 
-      horizontalPosition: 'center',
-      verticalPosition: 'bottom', 
-    });
-  });
-  }
 
   onSaveClick(): void {
     if(this.formData.valid){
@@ -53,37 +42,40 @@ export class AddDeviceComponent {
         type:this.type,
       }
       const triggerData = {
-        TriggerValue: this.TriggerValue,
         DeviceUID: this.deviceUid,
-        CompanyEmail: this.CompanyEmail
+        TriggerValue: this.TriggerValue,
+        CompanyEmail: this.CompanyEmail,
       }
-      this.service.addDevice(deviceData).subscribe(
-        () =>{
-         this.service.addDeviceTrigger(triggerData).subscribe(
-           () => {
-              this.snackBar.open('Device Added Successful!', 'Dismiss', {
-                duration: 2000
-              });
-              this.dialogRef.close();
-            },
-            (error) => {
-              this.snackBar.open(
-                error.error.message || 'Failed to set Trigger. Please try again.',
-                'Dismiss',
-                { duration: 2000 }
-              );
-            }
-        );
-      },
-      (error) => {
-        this.snackBar.open(
-            error.error.message || 'Failed to add Device. Please try again.',
+
+
+     
+  this.service.addDevice(deviceData).subscribe(
+    () =>{
+      this.service.addDeviceTrigger(triggerData).subscribe(
+        () => {
+          this.snackBar.open('Device Added Successful!', 'Dismiss', {
+            duration: 2000
+          });
+          this.dialogRef.close();
+        },
+        (error) => {
+          this.snackBar.open(
+            error.error.message || 'Failed to set Trigger. Please try again.',
             'Dismiss',
             { duration: 2000 }
           );
-        this.dialogRef.close();
-      });
-    }
+        }
+    );
+  },
+  (error) => {
+    this.snackBar.open(
+        error.error.message || 'Failed to add Device. Please try again.',
+        'Dismiss',
+        { duration: 2000 }
+      );
+    this.dialogRef.close();
+  });
+ }
   }
 }
 

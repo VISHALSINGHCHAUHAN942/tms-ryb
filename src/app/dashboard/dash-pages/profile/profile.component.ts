@@ -32,6 +32,7 @@ export class ProfileComponent implements OnInit{
   cancelPersonal: boolean = false;
   cancelPassword: boolean = false;
 
+
   ngOnInit() {
     this.fetchUserData();
     this.dashService.isPageLoading(true);

@@ -69,7 +69,9 @@ export class DeviceComponent {
         dialogConfig.height = 'auto';
         dialogConfig.maxWidth = '90vw';
         const dialogRef = this.dialog.open(AddDeviceComponent, dialogConfig);
-        dialogRef.afterClosed().subscribe(deviceAdded => {});
+        dialogRef.afterClosed().subscribe(deviceAdded => {
+          this.getDeviceDetail();
+        });
       }
 
       refreshData() {
@@ -90,7 +92,7 @@ export class DeviceComponent {
           case 'online':
             return { color: 'green' };
           default:
-            return {}; // No additional styling for other statuses
+            return {}; 
         }
       }
  

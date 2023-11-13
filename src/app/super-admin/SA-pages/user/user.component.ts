@@ -136,14 +136,12 @@ openbloackuserSwal(element: any){
 toggleBlockUser(user: PeriodicElement) {
   const userId = user.UserId;
 
-  // Determine the action based on the current Block status
   const action = user.Block === 0 ? 'block' : 'unblock';
 
-  const requestData = { action: action }; // Create JSON data
+  const requestData = { action: action };
 
   this.service.toggleBlockUser(userId, requestData).subscribe(
     (response) => {
-    //   console.log(`${action} User:`, response);
       this.getUserData();
 
       this.snackBar.open(`${action}ed successfully`, 'Close', {

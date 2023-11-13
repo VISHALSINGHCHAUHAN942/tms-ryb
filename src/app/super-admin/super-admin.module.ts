@@ -64,16 +64,6 @@ import { DatePipe } from '@angular/common';
 import { EditAlarmsComponent } from './SA-pages/alarms/edit-alarms/edit-alarms.component';
 
 
-
-
-
-
-
-
-
-
-
-
 @NgModule({
   declarations: [
     SANavbarComponent,
@@ -143,7 +133,8 @@ import { EditAlarmsComponent } from './SA-pages/alarms/edit-alarms/edit-alarms.c
     MatProgressSpinnerModule,
     ReactiveFormsModule,
     MatSnackBarModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    
   ],
   providers:[
     DatePipe

@@ -4,7 +4,7 @@
 		<div class="model-title">Add Device </div>
 	  </div>
 	</div>
-	<form (ngSubmit)="onSubmit()" class="row">
+	<form class="row">
 	  <div class="col-md-6 mb-2">
 		<mat-form-field class="from-field">
 		  <mat-label>Device Name</mat-label>
@@ -45,9 +45,10 @@
 		<mat-form-field class="from-field">
 		  <mat-label>PhoneNumber</mat-label>
 		  <input matInput type="text" [(ngModel)]="formData.SMS" name="SMS" required>
-		  <mat-error *ngIf="!formData.SMS">PhoneNumber is Required.</mat-error>
+		  <mat-error *ngIf="!formData.SMS">PhoneNumber is Required</mat-error>
 		</mat-form-field>
 	  </div>
+	  
 	  <div class="col-md-6 mb-2">
 		<mat-form-field class="from-field">
 		  <mat-label>Email</mat-label>
@@ -78,7 +79,7 @@
 		<button mat-raised-button  mat-dialog-close>Close</button>
 	  </div>
 	  <div class="col-md-6 mb-2">
-		<button mat-raised-button color="primary" (click)="onSubmit()" type="submit"  [mat-dialog-close]="true" >Save</button>
+		<button mat-raised-button color="primary" (click)="onSaveClick()" type="submit"  [mat-dialog-close]="true" >Save</button>
 	  </div>
 	</div>
 	</form>

@@ -14,6 +14,7 @@ import { Graph1Component } from './SA-pages/api-usage/graph1/graph1.component';
 import { Graph2Component } from './SA-pages/api-usage/graph2/graph2.component';
 import { Graph3Component } from './SA-pages/api-usage/graph3/graph3.component';
 import { Graph4Component } from './SA-pages/api-usage/graph4/graph4.component';
+import { ProfileComponent } from '../dashboard/dash-pages/profile/profile.component';
 
 
 const routes: Routes = [
@@ -30,6 +31,7 @@ const routes: Routes = [
 	 {path:'graph2',component:Graph2Component},
 	 {path:'graph3',component:Graph3Component},
 	 {path:'graph4',component:Graph4Component},
+	 {path:'profile',component:ProfileComponent},
 
 	{ path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
