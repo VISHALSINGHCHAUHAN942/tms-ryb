@@ -23,6 +23,7 @@ export class AddDeviceComponent implements OnInit{
   DeviceName = new FormControl('', [Validators.required]);
   DeviceUID = new FormControl('', [Validators.required]);
   DeviceLocation = new FormControl('', [Validators.required]);
+  DeviceParameters = new FormControl('', [Validators.required]);
 
   @HostListener('window:resize')
   onWindowResize() {
@@ -65,7 +66,8 @@ export class AddDeviceComponent implements OnInit{
         CompanyName: this.CompanyName,
         type : this.UserType,
         SMS:this.ContactNo,
-        email:this.PersonalEmail
+        email:this.PersonalEmail,
+       // deviceparameters: this.DeviceParameters
       }
       
       const triggerData = {
